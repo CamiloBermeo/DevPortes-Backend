@@ -1,4 +1,4 @@
-package com.devPortes.users.infrastructure.entities;
+package com.devPortes.users.infrastructure.output.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

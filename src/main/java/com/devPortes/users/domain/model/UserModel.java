@@ -7,18 +7,38 @@ public class UserModel {
     String phoneNumber;
     String email;
     String passwordHash;
+    RoleEnum role;
 
     public UserModel (){}
-    public UserModel(Long id, String name, String identityDocument, String phoneNumber, String email, String passwordHash) {
+    public UserModel(Long id, String name, String identityDocument, String phoneNumber, String email, String passwordHash, RoleEnum role) {
         this.id = id;
-        this.name = name;
+        this.name = validarNombre(name);
         this.identityDocument = identityDocument;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.passwordHash = passwordHash;
+        this.role = role;
+    }
+
+    public String validarNombre(String name){
+        String nuevoNombre = name.toLowerCase();
+        return nuevoNombre;
     }
 
 
+
+
+
+
+
+
+    public RoleEnum getRole() {
+        return role;
+    }
+
+    public void setRole(RoleEnum role) {
+        this.role = role;
+    }
 
     public Long getId() {
         return id;
