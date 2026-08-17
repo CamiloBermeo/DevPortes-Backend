@@ -1,8 +1,9 @@
 package com.devPortes.users.infrastructure.input.controllers;
 
-import com.devPortes.users.application.ports.input.IUserInput;
+import com.devPortes.users.application.ports.input.INewUserInput;
 import com.devPortes.users.infrastructure.input.dtos.NewUserRequestDto;
 import com.devPortes.users.infrastructure.input.dtos.NewUserResponseDto;
+import com.devPortes.users.infrastructure.input.mapper.UserInMapper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,11 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth/v1")
 @RequiredArgsConstructor
 public class AuthController {
-    private final IUserInput iUserInput;
+    private final INewUserInput iNewUserInput;
 
     @PutMapping("register")
     public ResponseEntity<NewUserResponseDto> register(@Valid @RequestBody NewUserRequestDto dto){
-        NewUserResponseDto newUserResponse = iUserInput.newUser(dto);
+        NewUserResponseDto newUserResponse = iNewUserInput.execute(UserInMapper.toCommand(dto));
     return ResponseEntity.ok(newUserResponse);
     }
 

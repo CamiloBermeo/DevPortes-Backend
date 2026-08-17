@@ -28,6 +28,8 @@ public class UserEntity {
     String email;
     @Column
     String passwordHash;
+    @Column
+    String role;
 
 
 }

@@ -12,24 +12,13 @@ public class UserModel {
     public UserModel (){}
     public UserModel(Long id, String name, String identityDocument, String phoneNumber, String email, String passwordHash, RoleEnum role) {
         this.id = id;
-        this.name = validarNombre(name);
+        this.name = name;
         this.identityDocument = identityDocument;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.passwordHash = passwordHash;
         this.role = role;
     }
-
-    public String validarNombre(String name){
-        String nuevoNombre = name.toLowerCase();
-        return nuevoNombre;
-    }
-
-
-
-
-
-
 
 
     public RoleEnum getRole() {
