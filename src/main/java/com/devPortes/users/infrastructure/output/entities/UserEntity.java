@@ -1,5 +1,6 @@
 package com.devPortes.users.infrastructure.output.entities;
 
+import com.devPortes.users.domain.model.RoleEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -29,7 +30,7 @@ public class UserEntity {
     @Column
     String passwordHash;
     @Column
-    String role;
+    RoleEnum role;
 
 
 }

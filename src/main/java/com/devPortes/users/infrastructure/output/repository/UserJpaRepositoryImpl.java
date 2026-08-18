@@ -21,4 +21,10 @@ public class UserJpaRepositoryImpl implements IUserRepository {
 
         return entity.map(UserOutMapper::toModel);
     }
+
+    @Override
+    public UserModel save(UserModel user) {
+        UserEntity entity = UserOutMapper.toEntity(user);
+        return UserOutMapper.toModel(jpa.save(entity));
+    }
 }

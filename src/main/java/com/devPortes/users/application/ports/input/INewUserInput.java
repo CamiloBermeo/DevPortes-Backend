@@ -5,5 +5,5 @@ import com.devPortes.users.domain.model.UserModel;
 import com.devPortes.users.infrastructure.input.dtos.NewUserResponseDto;
 //entrada desde la infrastructure a application
 public interface INewUserInput {
-    NewUserResponseDto execute (NewUserCommand userCommand);
+    NewUserResult execute (NewUserCommand userCommand);
 }

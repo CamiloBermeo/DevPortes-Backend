@@ -1,8 +1,13 @@
 package com.devPortes.users.application.services;
 
+import com.devPortes.configuration.security.CustomUserDetails;
+import com.devPortes.configuration.security.TokenService;
 import com.devPortes.users.application.commands.NewUserCommand;
 import com.devPortes.users.application.ports.input.INewUserInput;
+import com.devPortes.users.application.ports.input.NewUserResult;
+import com.devPortes.users.application.ports.output.IUserRepository;
 import com.devPortes.users.domain.exceptions.ExistingUserDataBaseException;
+import com.devPortes.users.domain.model.RoleEnum;
 import com.devPortes.users.infrastructure.input.dtos.NewUserResponseDto;
 import com.devPortes.users.domain.model.UserModel;
 import lombok.RequiredArgsConstructor;
@@ -14,9 +19,11 @@ import org.springframework.stereotype.Service;
 public class NewUserService implements INewUserInput {
     private final FindUserByEmailService findUserByEmail;
     private final PasswordEncoder passwordEncoder;
+    private final IUserRepository userRepository;
+    private final TokenService tokenService;
 
     @Override
-    public NewUserResponseDto execute(NewUserCommand command) {
+    public NewUserResult execute(NewUserCommand command) {
 
         //1. verifico que el usuario no este registrado previamente
         findUserByEmail.execute(command.email())
@@ -25,7 +32,20 @@ public class NewUserService implements INewUserInput {
                 });
 
         String passwordHash = passwordEncoder.encode(command.password());
+        RoleEnum role = RoleEnum.valueOf(command.role());
 
-        return null;
+        UserModel user = UserModel.create(
+                command.name(),
+                command.identityDocument(),
+                command.phoneNumber(),
+                command.email(),
+                passwordHash,
+                role
+        );
+
+        UserModel saveUser = userRepository.save(user);
+        String token = tokenService.generateToken(new CustomUserDetails(saveUser));
+
+        return new NewUserResult(saveUser.getName(), token);
     }
 }

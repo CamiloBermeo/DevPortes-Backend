@@ -7,16 +7,27 @@ import com.devPortes.users.infrastructure.output.entities.UserEntity;
 
 public class UserOutMapper {
 
+    public static UserEntity toEntity(UserModel model){
+        UserEntity entity = new UserEntity();
+        entity.setName(model.getName());
+        entity.setIdentityDocument(model.getIdentityDocument());
+        entity.setPhoneNumber(model.getPhoneNumber());
+        entity.setEmail(model.getEmail());
+        entity.setPasswordHash(model.getPasswordHash());
+        entity.setRole(model.getRole());
+        return entity;
+    }
+
     public static UserModel toModel(UserEntity entity){
-        UserModel userModel = new UserModel();
-        userModel.setId(entity.getId());
-        userModel.setName(entity.getName());
-        userModel.setIdentityDocument(entity.getIdentityDocument());
-        userModel.setPhoneNumber(entity.getPhoneNumber());
-        userModel.setEmail(entity.getEmail());
-        userModel.setPasswordHash(entity.getPasswordHash());
-        userModel.setRole(RoleEnum.valueOf(entity.getRole()));
-        return userModel;
+        return UserModel.reconstitute(
+                entity.getId(),
+                entity.getName(),
+                entity.getIdentityDocument(),
+                entity.getPhoneNumber(),
+                entity.getEmail(),
+                entity.getPasswordHash(),
+                entity.getRole()
+        );
     }
 
 }
