@@ -3,9 +3,9 @@ spring:
     name: devPortes-Backend
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/golaya_db?serverTimezone=America/Bogota
+    url: jdbc:postgresql://localhost:5432/golaya_db
     username: postgres
-    password: golaya_mau_cam_dei_fel_and
+    password: Chitiva_09
     driver-class-name: org.postgresql.Driver
     hikari:
       maximum-pool-size: 10
@@ -17,7 +17,7 @@ spring:
   jpa:
     open-in-view: false
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
     show-sql: true
     properties:
       hibernate:
@@ -28,7 +28,7 @@ spring:
 logging:
   level:
     root: INFO
-    com.fasterEnvios: DEBUG
+    com.devPortes: DEBUG
 
     org.hibernate.SQL: DEBUG
     org.springframework.jdbc.core.JdbcTemplate: DEBUG
@@ -46,5 +46,5 @@ logging:
 api:
   security:
     token:
-      secret: ${JWT_SECRET}
+      secret: ${JWT_SECRET:123456789}
       expiration: 86400
