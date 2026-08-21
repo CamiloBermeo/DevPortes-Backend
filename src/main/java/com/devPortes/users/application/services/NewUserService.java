@@ -32,7 +32,7 @@ public class NewUserService implements INewUserInput {
                 });
 
         String passwordHash = passwordEncoder.encode(command.password());
-        RoleEnum role = RoleEnum.valueOf(command.role());
+        RoleEnum role = RoleEnum.valueOf(command.role() == null ?"CLIENTE":"ADMIN");
 
         UserModel user = UserModel.create(
                 command.name(),

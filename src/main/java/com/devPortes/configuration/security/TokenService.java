@@ -27,6 +27,15 @@ public class TokenService {
                 .sign(algorithm);
 
     }
+    public String getSubject(String token){
+        Algorithm algorithm = Algorithm.HMAC256(token);
+        return JWT.require(algorithm)
+                .withIssuer("devportes")
+                .build()
+                .verify(token)
+                .getSubject();
+    }
+
 
     private Instant expirationDate(){
         return LocalDateTime.now().plusMinutes(30).toInstant(ZoneOffset.systemDefault().getRules().getOffset(LocalDateTime.now()));

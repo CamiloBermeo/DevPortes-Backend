@@ -9,6 +9,7 @@ public class UserOutMapper {
 
     public static UserEntity toEntity(UserModel model){
         UserEntity entity = new UserEntity();
+        entity.setId(model.getId());
         entity.setName(model.getName());
         entity.setIdentityDocument(model.getIdentityDocument());
         entity.setPhoneNumber(model.getPhoneNumber());
