@@ -13,6 +13,5 @@ public record NewUserRequestDto(
         @Email
         String email,
         @NotBlank(message = "Debes ingresar una contraseña correcta")
-        String password,
-        String role) {
+        String password) {
 }

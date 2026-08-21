@@ -12,8 +12,7 @@ public class UserInMapper {
                 dto.identityDocument(),
                 dto.phoneNumber(),
                 dto.email(),
-                dto.password(),
-                dto.role()
+                dto.password()
         );
 
     }

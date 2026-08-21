@@ -32,7 +32,6 @@ public class NewUserService implements INewUserInput {
                 });
 
         String passwordHash = passwordEncoder.encode(command.password());
-        RoleEnum role = RoleEnum.valueOf(command.role() == null ?"CLIENTE":"ADMIN");
 
         UserModel user = UserModel.create(
                 command.name(),
@@ -40,7 +39,7 @@ public class NewUserService implements INewUserInput {
                 command.phoneNumber(),
                 command.email(),
                 passwordHash,
-                role
+                null
         );
 
         UserModel saveUser = userRepository.save(user);

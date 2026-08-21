@@ -1,8 +1,6 @@
 package com.devPortes.users.infrastructure.output.mapper;
 
-import com.devPortes.users.domain.model.RoleEnum;
 import com.devPortes.users.domain.model.UserModel;
-import com.devPortes.users.infrastructure.input.dtos.NewUserRequestDto;
 import com.devPortes.users.infrastructure.output.entities.UserEntity;
 
 public class UserOutMapper {
@@ -15,6 +13,8 @@ public class UserOutMapper {
         entity.setPhoneNumber(model.getPhoneNumber());
         entity.setEmail(model.getEmail());
         entity.setPasswordHash(model.getPasswordHash());
+        entity.setClassification(model.getClassification());
+        entity.setReserveAmount(model.getReservationAmount());
         entity.setRole(model.getRole());
         return entity;
     }
@@ -27,6 +27,8 @@ public class UserOutMapper {
                 entity.getPhoneNumber(),
                 entity.getEmail(),
                 entity.getPasswordHash(),
+                entity.getClassification(),
+                entity.getReserveAmount(),
                 entity.getRole()
         );
     }

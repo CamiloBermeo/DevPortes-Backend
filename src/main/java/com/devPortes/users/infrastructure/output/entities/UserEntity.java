@@ -1,5 +1,6 @@
 package com.devPortes.users.infrastructure.output.entities;
 
+import com.devPortes.users.domain.model.ClasificationEnum;
 import com.devPortes.users.domain.model.RoleEnum;
 import jakarta.persistence.*;
 import lombok.*;
@@ -24,13 +25,13 @@ public class UserEntity {
     String email;
     @Column
     String passwordHash;
+    @Enumerated(EnumType.STRING)
     @Column(nullable = true)
-    String classification;
+    ClasificationEnum classification;
     @Column(nullable = true)
-    String reserveAmount;
+    int reserveAmount;
     @Enumerated(EnumType.STRING)
     @Column
     RoleEnum role;
-
 
 }

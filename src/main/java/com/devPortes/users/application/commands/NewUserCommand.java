@@ -7,7 +7,6 @@ public record NewUserCommand(
         String identityDocument,
         String phoneNumber,
         String email,
-        String password,
-        String role
+        String password
 ) {
 }
