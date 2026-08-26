@@ -1,7 +1,8 @@
-package com.devPortes.configuration.security;
+package com.devPortes.users.infrastructure.input.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.devPortes.users.application.ports.output.ITokenOutputPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -12,12 +13,13 @@ import java.time.ZoneOffset;
 
 @Component
 @RequiredArgsConstructor
-public class TokenService {
+public class TokenImpl implements ITokenOutputPort {
 
     @Value("${api.security.token.secret}")
     private String secret ;
 
-    public String generateToken(CustomUserDetails customUserDetails){
+    @Override
+    public String generateNewToken(CustomUserDetails customUserDetails){
         Algorithm algorithm = Algorithm.HMAC256(secret);
 
         return JWT.create()
@@ -27,6 +29,8 @@ public class TokenService {
                 .sign(algorithm);
 
     }
+
+    @Override
     public String getSubject(String token){
         Algorithm algorithm = Algorithm.HMAC256(token);
         return JWT.require(algorithm)

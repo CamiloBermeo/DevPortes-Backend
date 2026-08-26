@@ -4,7 +4,7 @@ import com.devPortes.users.domain.model.UserModel;
 
 import java.util.Optional;
 
-public interface IFindUserByEmail {
+public interface IFindUserByEmailInputUseCase {
     Optional<UserModel> execute(String email);
 
 }

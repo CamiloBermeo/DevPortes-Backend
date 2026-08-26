@@ -4,7 +4,7 @@ import com.devPortes.users.domain.model.UserModel;
 
 import java.util.Optional;
 
-public interface IUserRepository {
+public interface IUserRepositoryOutputPort {
 
     Optional<UserModel> findByEmail(String email);
     UserModel save(UserModel user);

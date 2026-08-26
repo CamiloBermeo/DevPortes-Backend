@@ -1,4 +1,4 @@
-package com.devPortes.configuration.security;
+package com.devPortes.users.infrastructure.input.security;
 
 import com.devPortes.users.domain.model.UserModel;
 import lombok.Getter;

@@ -1,26 +1,24 @@
 package com.devPortes.users.application.services;
 
-import com.devPortes.configuration.security.CustomUserDetails;
-import com.devPortes.configuration.security.TokenService;
+import com.devPortes.users.application.ports.output.ITokenOutputPort;
+import com.devPortes.users.infrastructure.input.security.CustomUserDetails;
 import com.devPortes.users.application.commands.NewUserCommand;
-import com.devPortes.users.application.ports.input.INewUserInput;
+import com.devPortes.users.application.ports.input.INewUserInputUseCase;
 import com.devPortes.users.application.ports.input.NewUserResult;
-import com.devPortes.users.application.ports.output.IUserRepository;
+import com.devPortes.users.application.ports.output.IPasswordEncoderPort;
+import com.devPortes.users.application.ports.output.IUserRepositoryOutputPort;
 import com.devPortes.users.domain.exceptions.ExistingUserDataBaseException;
-import com.devPortes.users.domain.model.RoleEnum;
-import com.devPortes.users.infrastructure.input.dtos.NewUserResponseDto;
 import com.devPortes.users.domain.model.UserModel;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class NewUserService implements INewUserInput {
-    private final FindUserByEmailService findUserByEmail;
-    private final PasswordEncoder passwordEncoder;
-    private final IUserRepository userRepository;
-    private final TokenService tokenService;
+public class NewUserServiceUseCase implements INewUserInputUseCase {
+    private final FindUserByEmailInputUseCaseService findUserByEmail;
+    private final IPasswordEncoderPort iPasswordEncoderPort;
+    private final IUserRepositoryOutputPort userRepository;
+    private final ITokenOutputPort iTokenOutputPort;
 
     @Override
     public NewUserResult execute(NewUserCommand command) {
@@ -31,7 +29,7 @@ public class NewUserService implements INewUserInput {
                     throw new ExistingUserDataBaseException(userModelSave.getEmail());
                 });
 
-        String passwordHash = passwordEncoder.encode(command.password());
+        String passwordHash = iPasswordEncoderPort.encodePassword(command.password());
 
         UserModel user = UserModel.create(
                 command.name(),
@@ -43,7 +41,7 @@ public class NewUserService implements INewUserInput {
         );
 
         UserModel saveUser = userRepository.save(user);
-        String token = tokenService.generateToken(new CustomUserDetails(saveUser));
+        String token = iTokenOutputPort.generateNewToken(new CustomUserDetails(saveUser));
 
         return new NewUserResult(saveUser.getName(), token);
     }

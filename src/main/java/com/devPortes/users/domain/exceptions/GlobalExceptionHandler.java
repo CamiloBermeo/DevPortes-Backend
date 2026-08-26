@@ -18,6 +18,10 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorDetails> handleFindDataBaseNotFoundException(RuntimeException exception) {
         return buildResponse(exception, HttpStatus.NOT_FOUND);
     }
+    @ExceptionHandler(InvalidCredentialException.class)
+    public ResponseEntity<ErrorDetails> handleCredentialException(RuntimeException exception) {
+        return buildResponse(exception, HttpStatus.UNAUTHORIZED);
+    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ValidationErrorDetails> handleValidation(MethodArgumentNotValidException exception) {

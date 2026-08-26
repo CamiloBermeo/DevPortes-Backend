@@ -1,7 +1,7 @@
 package com.devPortes.users.application.services;
 
-import com.devPortes.users.application.ports.input.IFindUserByEmail;
-import com.devPortes.users.application.ports.output.IUserRepository;
+import com.devPortes.users.application.ports.input.IFindUserByEmailInputUseCase;
+import com.devPortes.users.application.ports.output.IUserRepositoryOutputPort;
 import com.devPortes.users.domain.model.UserModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,8 +10,8 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class FindUserByEmailService implements IFindUserByEmail {
-    private final IUserRepository findUserByEmail;
+public class FindUserByEmailInputUseCaseService implements IFindUserByEmailInputUseCase {
+    private final IUserRepositoryOutputPort findUserByEmail;
 
     @Override
     public Optional<UserModel> execute (String email){

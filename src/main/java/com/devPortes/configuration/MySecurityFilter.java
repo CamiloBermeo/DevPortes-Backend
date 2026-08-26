@@ -1,8 +1,12 @@
-package com.devPortes.configuration.security;
+package com.devPortes.configuration;
 
-import com.devPortes.users.application.ports.input.IFindUserByEmail;
+import com.devPortes.users.application.ports.input.IFindUserByEmailInputUseCase;
+import com.devPortes.users.application.ports.output.ITokenOutputPort;
+import com.devPortes.users.application.ports.output.IUserRepositoryOutputPort;
 import com.devPortes.users.domain.exceptions.UserNotFoundException;
 import com.devPortes.users.domain.model.UserModel;
+import com.devPortes.users.infrastructure.input.security.CustomUserDetails;
+import com.devPortes.users.infrastructure.input.security.TokenImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,8 +22,8 @@ import java.io.IOException;
 @Component
 @RequiredArgsConstructor
 public class MySecurityFilter extends OncePerRequestFilter {
-    private final TokenService tokenService;
-    private final IFindUserByEmail iFindUserByEmail;
+    private final ITokenOutputPort iTokenOutputPort;
+    private final IUserRepositoryOutputPort iUserRepositoryOutputPort;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -27,8 +31,8 @@ public class MySecurityFilter extends OncePerRequestFilter {
             String token = recoverToken(request);
 
             if (token != null) {
-                String subject = tokenService.getSubject(token);
-                UserModel user = iFindUserByEmail.execute(subject)
+                String subject = iTokenOutputPort.getSubject(token);
+                UserModel user = iUserRepositoryOutputPort.findByEmail(subject)
                         .orElseThrow(() -> new UserNotFoundException(subject));
 
                 CustomUserDetails customUserDetails = new CustomUserDetails(user);
