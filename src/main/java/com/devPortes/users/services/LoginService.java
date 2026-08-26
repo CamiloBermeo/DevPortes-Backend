@@ -1,7 +1,7 @@
 package com.devPortes.users.services;
 
-import com.devPortes.users.dtos.LoginDataRequestDto;
-import com.devPortes.users.dtos.TokenDataDto;
+import com.devPortes.users.dto.LoginDataRequestDto;
+import com.devPortes.users.dto.TokenDataDto;
 import com.devPortes.users.exceptions.InvalidCredentialException;
 import com.devPortes.users.model.UserModel;
 import com.devPortes.users.repository.UserJpaRepositoryImpl;

@@ -1,4 +1,4 @@
-package com.devPortes.users.dtos;
+package com.devPortes.users.dto;
 
 public record NewUserResponseDto(
         Long id,

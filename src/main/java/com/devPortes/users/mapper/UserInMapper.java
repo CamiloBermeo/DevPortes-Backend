@@ -1,8 +1,7 @@
 package com.devPortes.users.mapper;
 
-import com.devPortes.users.dtos.LoginDataRequestDto;
-import com.devPortes.users.dtos.NewUserRequestDto;
-import com.devPortes.users.dtos.NewUserResponseDto;
+import com.devPortes.users.dto.NewUserRequestDto;
+import com.devPortes.users.dto.NewUserResponseDto;
 import com.devPortes.users.model.UserModel;
 
 public class UserInMapper {

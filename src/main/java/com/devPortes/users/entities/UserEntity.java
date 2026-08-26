@@ -1,5 +1,6 @@
 package com.devPortes.users.entities;
 
+import com.devPortes.reservations.entities.ReservationEntity;
 import com.devPortes.users.model.ClasificationEnum;
 import com.devPortes.users.model.RoleEnum;
 import jakarta.persistence.*;
@@ -14,24 +15,34 @@ import lombok.*;
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    @Column
-    String name;
-    @Column
-    String identityDocument;
-    @Column
-    String phoneNumber;
-    @Column
-    String email;
-    @Column
-    String passwordHash;
+    private Long id;
+
+    @Column(nullable = false)
+    private String name;
+
+    @Column(name = "identity_document", nullable = false, unique = true)
+    private String identityDocument;
+
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    @Column(name = "password_hash", nullable = false)
+    private String passwordHash;
+
+    @Column(name = "reservation_amount",nullable = false, unique = true)
+    private int reservationAmount;
+
     @Enumerated(EnumType.STRING)
-    @Column(nullable = true)
-    ClasificationEnum classification;
-    @Column(nullable = true)
-    int reserveAmount;
+    private ClasificationEnum classification;
+
     @Enumerated(EnumType.STRING)
-    @Column
-    RoleEnum role;
+    @Column(nullable = false)
+    private RoleEnum role;
+
+    @Column(nullable = false)
+    private boolean state;
 
 }

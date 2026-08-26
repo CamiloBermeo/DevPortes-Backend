@@ -1,4 +1,4 @@
-package com.devPortes.fields.domain.model;
+package com.devPortes.fields.model;
 
 public class Field {
 

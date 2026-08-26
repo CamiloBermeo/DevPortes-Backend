@@ -1,6 +1,6 @@
 package com.devPortes.users.controllers;
 
-import com.devPortes.users.dtos.*;
+import com.devPortes.users.dto.*;
 import com.devPortes.users.mapper.UserInMapper;
 import com.devPortes.users.security.CustomUserDetails;
 import com.devPortes.users.services.LoginService;

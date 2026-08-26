@@ -1,7 +1,7 @@
 package com.devPortes.users.services;
 
-import com.devPortes.users.dtos.NewUserRequestDto;
-import com.devPortes.users.dtos.NewUserResponseDto;
+import com.devPortes.users.dto.NewUserRequestDto;
+import com.devPortes.users.dto.NewUserResponseDto;
 import com.devPortes.users.mapper.UserInMapper;
 import com.devPortes.users.repository.UserJpaRepositoryImpl;
 import com.devPortes.users.security.BCryptPasswordEncoderAdapter;
@@ -34,6 +34,7 @@ public class NewUserService{
         UserModel user = UserInMapper.toModel(dto, passwordHash);
 
         UserModel saveUser = userRepository.save(user);
+
         String token = tokenImpl.generateNewToken(new CustomUserDetails(saveUser));
 
         return UserInMapper.toNewUserDto(saveUser, token);

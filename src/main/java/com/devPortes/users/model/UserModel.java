@@ -1,24 +1,26 @@
 package com.devPortes.users.model;
 
+import com.devPortes.reservations.model.Reservation;
 import com.devPortes.users.exceptions.EmailInvalidException;
 import com.devPortes.users.exceptions.IdentityDocumentInvalidException;
 import com.devPortes.users.exceptions.PasswordHashInvalidException;
 
 public class UserModel {
-    Long id;
-    String name;
-    String identityDocument;
-    String phoneNumber;
-    String email;
-    String passwordHash;
-    ClasificationEnum classification;
-    int reservationAmount;
-    RoleEnum role;
+    private Long id;
+    private String name;
+    private String identityDocument;
+    private String phoneNumber;
+    private String email;
+    private String passwordHash;
+    private ClasificationEnum classification;
+    private int reservationAmount;
+    private RoleEnum role;
+    private boolean state;
 
     public UserModel() {
     }
 
-    private UserModel(Long id, String name, String identityDocument, String phoneNumber, String email, String passwordHash, ClasificationEnum classification, int reservationAmount, RoleEnum role) {
+    private UserModel(Long id, String name, String identityDocument, String phoneNumber, String email, String passwordHash, ClasificationEnum classification, int reservationAmount, RoleEnum role,boolean state) {
         this.id = id;
         this.name = name;
         this.identityDocument = identityDocument;
@@ -28,6 +30,7 @@ public class UserModel {
         this.classification = classification;
         this.reservationAmount = reservationAmount;
         this.role = role;
+        this.state = state;
     }
 
     //Este metodo crea un nuevo model el cual sera usado como principal, hace validaciones y logica pura de Java
@@ -52,12 +55,12 @@ public class UserModel {
             role = RoleEnum.CLIENTE;
         }
 
-        return new UserModel(null, name, identityDocument, phoneNumber, email,passwordHash, ClasificationEnum.ESTANDAR,0, role);
+        return new UserModel(null,name, identityDocument, phoneNumber, email,passwordHash, ClasificationEnum.ESTANDAR,0, role, true);
     }
 
     //Este metodo construye un model que viene de base de datos, ya que no necesita validaciones ni nada porque se supone que ya esta bien construido y guardado en db
-    public static UserModel reconstitute(Long id, String name, String identityDocument, String phoneNumber, String email, String passwordHash, ClasificationEnum classification, int reservationAmount, RoleEnum role) {
-        return new UserModel(id, name, identityDocument, phoneNumber, email, passwordHash,  classification,  reservationAmount, role);
+    public static UserModel reconstitute(Long id,String name, String identityDocument, String phoneNumber, String email, String passwordHash, ClasificationEnum classification, int reservationAmount, RoleEnum role, boolean state) {
+        return new UserModel(id, name, identityDocument, phoneNumber, email, passwordHash,  classification,  reservationAmount, role, state);
     }
 
     public RoleEnum getRole() {
@@ -77,10 +80,6 @@ public class UserModel {
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getIdentityDocument() {
@@ -103,4 +102,7 @@ public class UserModel {
         return passwordHash;
     }
 
+    public boolean isState() {
+        return state;
+    }
 }

@@ -1,5 +1,6 @@
 package com.devPortes.users.mapper;
 
+import com.devPortes.reservations.mapper.ReservationInMapper;
 import com.devPortes.users.model.UserModel;
 import com.devPortes.users.entities.UserEntity;
 
@@ -14,7 +15,7 @@ public class UserOutMapper {
         entity.setEmail(model.getEmail());
         entity.setPasswordHash(model.getPasswordHash());
         entity.setClassification(model.getClassification());
-        entity.setReserveAmount(model.getReservationAmount());
+        entity.setReservationAmount(model.getReservationAmount());
         entity.setRole(model.getRole());
         return entity;
     }
@@ -28,8 +29,9 @@ public class UserOutMapper {
                 entity.getEmail(),
                 entity.getPasswordHash(),
                 entity.getClassification(),
-                entity.getReserveAmount(),
-                entity.getRole()
+                entity.getReservationAmount(),
+                entity.getRole(),
+                entity.isState()
         );
     }
 
