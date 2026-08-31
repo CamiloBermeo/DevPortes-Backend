@@ -1,6 +1,7 @@
 package com.devPortes.reservations.model;
 
 import com.devPortes.payments.model.PaymentMethod;
+import com.devPortes.reservations.entities.EstadoReservationEnum;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -16,12 +17,12 @@ public class Reservation {
     private int totalHours;
     private BigDecimal totalPay;
     private String reservationCode;
-    private boolean state;
+    private EstadoReservationEnum state;
 
-    public Reservation() {
+    public Reservation(){
     }
 
-    public Reservation(Long id, PaymentMethod paymentMethod, LocalDateTime reservationDate, LocalTime startTime, LocalTime endTime, int totalHours, BigDecimal totalPay, String reservationCode, boolean state) {
+    public Reservation(Long id, PaymentMethod paymentMethod, LocalDateTime reservationDate, LocalTime startTime, LocalTime endTime, int totalHours, BigDecimal totalPay, String reservationCode, EstadoReservationEnum state) {
         this.id = id;
         this.paymentMethod = paymentMethod;
         this.reservationDate = reservationDate;
@@ -33,10 +34,13 @@ public class Reservation {
         this.state = state;
     }
 
-    public Reservation create (PaymentMethod paymentMethod, LocalDateTime reservationDate, LocalTime startTime, LocalTime endTime, int totalHours, BigDecimal totalPay, String reservationCode, boolean state){
+    public Reservation create (PaymentMethod paymentMethod, LocalDateTime reservationDate, LocalTime startTime, LocalTime endTime, int totalHours, BigDecimal totalPay, String reservationCode, EstadoReservationEnum state){
+
+
+
         return new Reservation(null, paymentMethod, reservationDate, startTime, endTime, totalHours, totalPay, reservationCode, state);
     }
-    public Reservation reconstitute(Long id, PaymentMethod paymentMethod, LocalDateTime reservationDate, LocalTime startTime, LocalTime endTime, int totalHours, BigDecimal totalPay, String reservationCode, boolean state){
+    public Reservation reconstitute(Long id, PaymentMethod paymentMethod, LocalDateTime reservationDate, LocalTime startTime, LocalTime endTime, int totalHours, BigDecimal totalPay, String reservationCode, EstadoReservationEnum state){
         return new Reservation (id, paymentMethod, reservationDate, startTime, endTime, totalHours, totalPay, reservationCode, state);
     }
 
@@ -72,7 +76,7 @@ public class Reservation {
         return reservationCode;
     }
 
-    public boolean isState() {
+    public EstadoReservationEnum getState() {
         return state;
     }
 }

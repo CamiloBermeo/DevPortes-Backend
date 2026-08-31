@@ -46,12 +46,12 @@ public class ReservationEntity {
     @Column(name = "total_hours", nullable = false)
     private int totalHours;
 
-    @Column(name = "total_pay", nullable = false)
+    @Column(name = "total_pay", nullable = false, precision = 10, scale = 2)
     private BigDecimal totalPay;
 
     @Column(name = "reservation_code", nullable = false, unique = true)
     private String reservationCode;
 
     @Column(nullable = false)
-    private boolean state;
+    private EstadoReservationEnum state;
 }
