@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.util.List;
 
 @ControllerAdvice
-public class GlobalExceptionHandler {
+public class LocationGlobalExceptionHandler {
 
     @ExceptionHandler(ExistingLocationDataBaseException.class)
     public ResponseEntity<ErrorDetails> handleFindDataBaseExistingException(RuntimeException exception) {

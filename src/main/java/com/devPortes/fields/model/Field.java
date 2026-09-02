@@ -5,10 +5,11 @@ import java.util.List;
 public class Field {
 
     private Long id;
-    private String url_img;
+    private String urlImg;
     private String name;
     private String capacity;
-    private String category;
+    private String sport;
+    private String surface;
     private String description;
     private List<String> details;
     private String hourlyRate;
@@ -16,27 +17,28 @@ public class Field {
 
     public Field() {}
 
-    public Field(Long id, String url_img, String name, String capacity, String category,
+    public Field(Long id, String urlImg, String name, String capacity, String sport,String surface,
                  String description, List<String> details, String hourlyRate, boolean state) {
         this.id = id;
-        this.url_img = url_img;
+        this.urlImg = urlImg;
         this.name = name;
         this.capacity = capacity;
-        this.category = category;
+        this.sport = sport;
+        this.surface = surface;
         this.description = description;
         this.details = details;
         this.hourlyRate = hourlyRate;
         this.state = state;
     }
 
-    public static Field create (String url_img, String name, String capacity, String category,
+    public static Field create (String urlImg, String name, String capacity, String sport, String surface,
                          String description, List<String> details, String hourlyRate, boolean state){
-        return new Field( null ,url_img,  name,  capacity, category,
+        return new Field( null ,urlImg,  name,  capacity, sport,surface,
                  description, details, hourlyRate, state);
     }
-    public static Field reconstitute (Long id ,String url_img, String name, String capacity, String category,
+    public static Field reconstitute (Long id ,String urlImg, String name, String capacity, String sport,String surface,
                          String description, List<String> details, String hourlyRate,  boolean state){
-        return new Field( id ,url_img,  name,  capacity, category,
+        return new Field( id ,urlImg,  name,  capacity, sport,surface,
                 description, details, hourlyRate, state);
     }
 
@@ -44,8 +46,8 @@ public class Field {
         return id;
     }
 
-    public String getUrl_img() {
-        return url_img;
+    public String getUrlImg() {
+        return urlImg;
     }
 
     public String getName() {
@@ -56,8 +58,12 @@ public class Field {
         return capacity;
     }
 
-    public String getCategory() {
-        return category;
+    public String getSport() {
+        return sport;
+    }
+
+    public String getSurface() {
+        return surface;
     }
 
     public String getDescription() {

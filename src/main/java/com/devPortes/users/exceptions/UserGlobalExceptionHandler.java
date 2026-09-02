@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.util.List;
 
 @ControllerAdvice
-public class GlobalExceptionHandler {
+public class UserGlobalExceptionHandler {
 
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<ErrorDetails> handleFindDataBaseNotFoundException(RuntimeException exception) {

@@ -1,7 +1,7 @@
 package com.devPortes.users.repository;
 
 import com.devPortes.users.model.UserModel;
-import com.devPortes.users.entities.UserEntity;
+import com.devPortes.users.entities.ClientEntity;
 import com.devPortes.users.mapper.UserOutMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -15,13 +15,13 @@ public class UserJpaRepositoryImpl {
 
     public Optional<UserModel> findByEmail(String email) {
 
-        Optional<UserEntity> entity = jpa.findByEmail(email);
+        Optional<ClientEntity> entity = jpa.findByEmail(email);
 
         return entity.map(UserOutMapper::toModel);
     }
 
     public UserModel save(UserModel user) {
-        UserEntity entity = UserOutMapper.toEntity(user);
+        ClientEntity entity = UserOutMapper.toEntity(user);
         return UserOutMapper.toModel(jpa.save(entity));
     }
 }

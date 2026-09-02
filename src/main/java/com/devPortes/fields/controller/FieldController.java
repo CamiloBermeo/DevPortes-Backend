@@ -1,6 +1,7 @@
 package com.devPortes.fields.controller;
 
 import com.devPortes.fields.dto.FieldsCompleteResponseDto;
+import com.devPortes.fields.dto.NewFieldRequestDto;
 import com.devPortes.fields.dto.NewFieldResponseDto;
 import com.devPortes.fields.service.AllFieldsUseCase;
 import jakarta.validation.Valid;
@@ -19,7 +20,7 @@ public class FieldController {
 
     @PostMapping("new-field")
     public ResponseEntity<NewFieldResponseDto> newField(@Valid @RequestBody NewFieldRequestDto dto){
-
+    return null;
     }
 
     @GetMapping("fields")

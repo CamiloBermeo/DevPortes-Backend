@@ -1,18 +1,17 @@
 package com.devPortes.users.entities;
 
-import com.devPortes.reservations.entities.ReservationEntity;
 import com.devPortes.users.model.ClasificationEnum;
 import com.devPortes.users.model.RoleEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "users")
+@Table(name = "clients")
 @Getter
 @Setter
 @RequiredArgsConstructor
-@EqualsAndHashCode(of = "id")
-public class UserEntity {
+@EqualsAndHashCode()
+public class ClientEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

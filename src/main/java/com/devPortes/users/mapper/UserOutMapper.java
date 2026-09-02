@@ -1,13 +1,12 @@
 package com.devPortes.users.mapper;
 
-import com.devPortes.reservations.mapper.ReservationInMapper;
 import com.devPortes.users.model.UserModel;
-import com.devPortes.users.entities.UserEntity;
+import com.devPortes.users.entities.ClientEntity;
 
 public class UserOutMapper {
 
-    public static UserEntity toEntity(UserModel model){
-        UserEntity entity = new UserEntity();
+    public static ClientEntity toEntity(UserModel model){
+        ClientEntity entity = new ClientEntity();
         entity.setId(model.getId());
         entity.setName(model.getName());
         entity.setIdentityDocument(model.getIdentityDocument());
@@ -20,7 +19,7 @@ public class UserOutMapper {
         return entity;
     }
 
-    public static UserModel toModel(UserEntity entity){
+    public static UserModel toModel(ClientEntity entity){
         return UserModel.reconstitute(
                 entity.getId(),
                 entity.getName(),

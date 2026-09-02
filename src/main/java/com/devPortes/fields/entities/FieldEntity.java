@@ -29,9 +29,11 @@ public class FieldEntity {
     @Column(nullable = false)
     private String capacity;
     @Column(nullable = false)
-    private String category;
+    private String sport;
     @Column(nullable = false)
     private String description;
+    @Column(nullable = false)
+    private String surface;
     @Column(nullable = false)
     private List<String> details;
     @Column(name = "hourly_rate", nullable = false, precision = 10, scale = 2)

@@ -1,9 +1,7 @@
 package com.devPortes.reservations.entities;
 
 import com.devPortes.fields.entities.FieldEntity;
-import com.devPortes.payments.entities.PaymentMethodEntity;
-import com.devPortes.payments.model.PaymentMethod;
-import com.devPortes.users.entities.UserEntity;
+import com.devPortes.users.entities.ClientEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,11 +22,7 @@ public class ReservationEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
-    private UserEntity userEntity;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "payment_method_id", nullable = false)
-    private PaymentMethodEntity paymentMethod;
+    private ClientEntity clientEntity;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "field_id", nullable = false)
@@ -48,9 +42,6 @@ public class ReservationEntity {
 
     @Column(name = "total_pay", nullable = false, precision = 10, scale = 2)
     private BigDecimal totalPay;
-
-    @Column(name = "reservation_code", nullable = false, unique = true)
-    private String reservationCode;
 
     @Column(nullable = false)
     private EstadoReservationEnum state;
