@@ -11,9 +11,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class NewLocationUseCase {
+public class NewLocationUseCase implements INewLocationUseCase{
     private final LocationRepositoryAdapter locationRepositoryAdapter;
 
+    @Override
     public NewLocationResponseDto execute (NewLocationRequestDto dto){
         Location location = LocationInMapper.toModel(dto);
 

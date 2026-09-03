@@ -14,7 +14,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class LocationRepositoryAdapter {
 
-    private final LocationJpaRepository jpa;
+    private final ILocationJpaRepository jpa;
 
     public Optional<Location> findByName(String name){
         Optional<LocationEntity> entity = jpa.findByName(name);

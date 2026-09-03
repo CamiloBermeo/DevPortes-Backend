@@ -9,9 +9,10 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class FindUserByEmailService {
+public class FindUserByEmailUseCase implements IFindUserByEmailUseCase{
     private final UserJpaRepositoryAdapter userRepository;
 
+    @Override
     public Optional<UserModel> execute (String email){
         return userRepository.findByEmail(email);
     }

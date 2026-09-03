@@ -14,17 +14,17 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class NewUserService{
-    private final FindUserByEmailService findUserByEmail;
+public class NewUserUseCase implements INewUserUseCase{
+    private final IFindUserByEmailUseCase iFindUserByEmail;
     private final BCryptPasswordEncoderAdapter bCryptPasswordEncoder;
     private final UserJpaRepositoryAdapter userRepository;
     private final TokenImpl tokenImpl;
 
-
+    @Override
     public NewUserResponseDto execute(NewUserRequestDto dto) {
 
         //1. verifico que el usuario no este registrado previamente
-        findUserByEmail.execute(dto.email())
+        iFindUserByEmail.execute(dto.email())
                 .ifPresent(userModelSave -> {
                     throw new ExistingUserDataBaseException(userModelSave.getEmail());
                 });

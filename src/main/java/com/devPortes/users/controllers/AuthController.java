@@ -3,8 +3,10 @@ package com.devPortes.users.controllers;
 import com.devPortes.users.dto.*;
 import com.devPortes.users.mapper.UserInMapper;
 import com.devPortes.users.security.CustomUserDetails;
-import com.devPortes.users.services.LoginService;
-import com.devPortes.users.services.NewUserService;
+import com.devPortes.users.services.ILoginUseCase;
+import com.devPortes.users.services.INewUserUseCase;
+import com.devPortes.users.services.LoginUseCase;
+import com.devPortes.users.services.NewUserUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,19 +18,19 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/v1/auth")
 @RequiredArgsConstructor
 public class AuthController {
-    private final NewUserService newUserService;
-    private final LoginService loginService;
+    private final INewUserUseCase iNewUserUseCase;
+    private final ILoginUseCase iLoginUseCase;
 
     @PostMapping("register")
     public ResponseEntity<NewUserResponseDto> register(@Valid @RequestBody NewUserRequestDto dto) {
-        NewUserResponseDto newUserResult = newUserService.execute(dto);
+        NewUserResponseDto newUserResult = iNewUserUseCase.execute(dto);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(newUserResult);
     }
 
     @PostMapping("login")
     public ResponseEntity<TokenDataDto> login(@Valid @RequestBody LoginDataRequestDto dto){
-        TokenDataDto tokenResponse = loginService.execute(dto);
+        TokenDataDto tokenResponse = iLoginUseCase.execute(dto);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(tokenResponse);
     }

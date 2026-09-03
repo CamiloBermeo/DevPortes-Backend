@@ -5,7 +5,7 @@ import com.devPortes.fields.exceptions.FindRepositoryNotFoundException;
 import com.devPortes.fields.mapper.FieldOutMapper;
 import com.devPortes.fields.model.Field;
 import com.devPortes.location.entities.LocationEntity;
-import com.devPortes.location.repository.LocationJpaRepository;
+import com.devPortes.location.repository.ILocationJpaRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -15,8 +15,8 @@ import java.util.List;
 @Repository
 @RequiredArgsConstructor
 public class FieldJpaRepositoryAdapter {
-    private  final FieldJpaRepository jpa;
-    private final LocationJpaRepository locationJpa;
+    private  final IFieldJpaRepository jpa;
+    private final ILocationJpaRepository locationJpa;
 
     public List<Field> findAll(){
         List<FieldEntity> saveFields = jpa.findAll();

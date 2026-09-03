@@ -14,12 +14,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class LoginService {
+public class LoginUseCase implements ILoginUseCase{
     private final BCryptPasswordEncoderAdapter bCryptPasswordEncoder;
     private final UserJpaRepositoryAdapter userRepository;
     private final TokenImpl tokenService;
 
-
+    @Override
     public TokenDataDto execute(LoginDataRequestDto dto) {
 
         UserModel saveUser = userRepository.findByEmail(dto.email())

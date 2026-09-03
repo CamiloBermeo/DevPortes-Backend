@@ -12,10 +12,11 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ListLocationsUseCase {
+public class ListLocationsUseCase implements IListLocationsUseCase{
 
     private final LocationRepositoryAdapter locationRepository;
 
+    @Override
     public ListLocationsResponseDto execute() {
         List<Location> locations = locationRepository.findAll();
         List<LocationCompleteResponseDto> locationsResponse = LocationInMapper.toLocationsResponseListDto(locations);
