@@ -10,10 +10,10 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class FieldJpaRepositoryImpl{
-    private  final FieldJpaRepository jpa;
+public class FieldJpaRepositoryImpl {
+    private final IFieldJpaRepository jpa;
 
-    public List<Field> findAll(){
+    public List<Field> findAll() {
         List<FieldEntity> saveFields = jpa.findAll();
         return FieldOutMapper.toModelList(saveFields);
     }

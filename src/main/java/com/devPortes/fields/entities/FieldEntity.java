@@ -1,6 +1,6 @@
 package com.devPortes.fields.entities;
 
-import com.devPortes.location.model.Location;
+import com.devPortes.location.entities.LocationEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,9 +20,9 @@ public class FieldEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "location_id", nullable = false)
-    private final Location location;
+    private final LocationEntity location;
 
-    @Column(name = "url_img",nullable = false)
+    @Column(name = "url_img", nullable = false)
     private String urlImg;
     @Column(nullable = false)
     private String name;
@@ -40,6 +40,5 @@ public class FieldEntity {
     private String hourlyRate;
     @Column(nullable = false)
     private boolean state;
-
 
 }
