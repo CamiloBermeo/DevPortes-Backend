@@ -19,13 +19,13 @@ public class Reservation {
     private LocalTime endTime;
     private int totalHours;
     private BigDecimal totalPay;
-    private String reservationCode;
+    private BigDecimal remainingPayment;
     private EstadoReservationEnum state;
 
     public Reservation(){
     }
 
-    public Reservation(Long id, UserModel user, Field field, LocalDateTime reservationDate, LocalTime startTime, LocalTime endTime, int totalHours, BigDecimal totalPay, String reservationCode, EstadoReservationEnum state) {
+    public Reservation(Long id, UserModel user, Field field, LocalDateTime reservationDate, LocalTime startTime, LocalTime endTime, int totalHours, BigDecimal totalPay,BigDecimal remainingPayment,  EstadoReservationEnum state) {
         this.id = id;
         this.user = user;
         this.field = field;
@@ -34,17 +34,17 @@ public class Reservation {
         this.endTime = endTime;
         this.totalHours = totalHours;
         this.totalPay = totalPay;
-        this.reservationCode = reservationCode;
+        this.remainingPayment=remainingPayment;
         this.state = state;
     }
 
-    public Reservation create (UserModel user,Field field, LocalDateTime reservationDate, LocalTime startTime, LocalTime endTime, int totalHours, BigDecimal totalPay, String reservationCode, EstadoReservationEnum state){
+    public Reservation create (UserModel user,Field field, LocalDateTime reservationDate, LocalTime startTime, LocalTime endTime, int totalHours, BigDecimal totalPay, BigDecimal remainingPayment, EstadoReservationEnum state){
 
 
-        return new Reservation(null,user, field,  reservationDate, startTime, endTime, totalHours, totalPay, reservationCode, state);
+        return new Reservation(null,user, field,  reservationDate, startTime, endTime, totalHours, totalPay, remainingPayment, state);
     }
-    public Reservation reconstitute(Long id,UserModel user, Field field,  LocalDateTime reservationDate, LocalTime startTime, LocalTime endTime, int totalHours, BigDecimal totalPay, String reservationCode, EstadoReservationEnum state){
-        return new Reservation (id, user,field,reservationDate, startTime, endTime, totalHours, totalPay, reservationCode, state);
+    public Reservation reconstitute(Long id,UserModel user, Field field,  LocalDateTime reservationDate, LocalTime startTime, LocalTime endTime, int totalHours, BigDecimal totalPay, BigDecimal remainingPayment, EstadoReservationEnum state){
+        return new Reservation (id, user,field,reservationDate, startTime, endTime, totalHours, totalPay, remainingPayment, state);
     }
 
     public Long getId() {
@@ -80,8 +80,8 @@ public class Reservation {
         return totalPay;
     }
 
-    public String getReservationCode() {
-        return reservationCode;
+    public BigDecimal getRemainingPayment() {
+        return remainingPayment;
     }
 
     public EstadoReservationEnum getState() {

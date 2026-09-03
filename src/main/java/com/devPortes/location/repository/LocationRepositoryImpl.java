@@ -26,6 +26,10 @@ public class LocationRepositoryImpl {
         LocationEntity entity = LocationOutMapper.toEntity(locationModel);
         return LocationOutMapper.toModel(jpa.save(entity));
     }
+    public Optional<Location> findById(Long id){
+        Optional<LocationEntity> entity = jpa.findById(id);
+        return entity.map(LocationOutMapper::toModel);
+    }
 
     public List<Location> findAll(){
         return LocationOutMapper.toModelList(jpa.findAll());

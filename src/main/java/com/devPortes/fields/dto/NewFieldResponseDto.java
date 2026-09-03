@@ -1,4 +1,21 @@
 package com.devPortes.fields.dto;
 
-public record NewFieldResponseDto() {
+import java.util.List;
+
+public record NewFieldResponseDto(
+
+         Long id,
+         Long locationId,
+         String nameLocation,
+         String urlImg,
+         String name,
+         String capacity,
+         String sport,
+         String surface,
+         String description,
+         List<String>details,
+         String hourlyRate
+
+
+) {
 }

@@ -43,6 +43,10 @@ public class ReservationEntity {
     @Column(name = "total_pay", nullable = false, precision = 10, scale = 2)
     private BigDecimal totalPay;
 
+    @Column(name = "remaining_payment", nullable = false, precision = 10, scale = 2)
+    private BigDecimal remainingPayment;
+
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private EstadoReservationEnum state;
 }

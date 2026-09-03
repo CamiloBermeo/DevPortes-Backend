@@ -1,5 +1,6 @@
-package com.devPortes.location.exceptions;
+package com.devPortes.fields.exceptions;
 
+import com.devPortes.users.exceptions.UserGlobalExceptionHandler;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -8,17 +9,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.util.List;
 
 @ControllerAdvice
-public class LocationGlobalExceptionHandler {
+public class FieldGlobalExceptionHandler{
 
-    @ExceptionHandler(ExistingLocationDataBaseException.class)
-    public ResponseEntity<ErrorDetails> handleFindDataBaseExistingException(RuntimeException exception) {
-        return buildResponse(exception, HttpStatus.CONFLICT);
+    @ExceptionHandler(ExternalServiceException.class)
+    public ResponseEntity<ErrorDetails> handleExternalServiceException(RuntimeException ex) {
+        return buildResponse(ex, HttpStatus.BAD_GATEWAY);
     }
 
-    @ExceptionHandler(LocationNotFoundException.class)
-    public ResponseEntity<ErrorDetails> handleFindDataBaseNotFoundException(RuntimeException exception) {
-        return buildResponse(exception, HttpStatus.NOT_FOUND);
-    }
 
     public record ValidationErrorDetails(int status, List<String> messages) {
         public ValidationErrorDetails(int status, List<String> messages) {
@@ -43,5 +40,4 @@ public class LocationGlobalExceptionHandler {
         ErrorDetails error = new ErrorDetails(status.value(), exception.getMessage());
         return new ResponseEntity<>(error, status);
     }
-
 }

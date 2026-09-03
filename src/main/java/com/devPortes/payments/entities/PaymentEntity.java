@@ -35,6 +35,9 @@ public class PaymentEntity {
     private BigDecimal totalAmount;
     @Column(name = "payment_date")
     private LocalDateTime paymentDate;
+    @Column(name = "fixed_percentage")
+    private double fixedPercentage;
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private PaymentStateEnum state;
     @Column(nullable = false)

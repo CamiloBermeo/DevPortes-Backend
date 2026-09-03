@@ -11,9 +11,10 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class AllFieldsUseCase {
+public class AllFieldsUseCase implements IAllFieldsUseCase{
     private final FieldJpaRepositoryImpl fieldJpaRepository;
 
+    @Override
     public List<FieldsCompleteResponseDto> execute(){
         List<Field> fields = fieldJpaRepository.findAll();
 
