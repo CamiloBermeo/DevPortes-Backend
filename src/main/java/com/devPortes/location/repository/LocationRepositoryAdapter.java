@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class LocationRepositoryImpl {
+public class LocationRepositoryAdapter {
 
     private final LocationJpaRepository jpa;
 

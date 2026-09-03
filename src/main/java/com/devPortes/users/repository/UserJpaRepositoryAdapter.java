@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class UserJpaRepositoryImpl {
+public class UserJpaRepositoryAdapter {
     private final IUserJpaRepository jpa;
 
     public Optional<UserModel> findByEmail(String email) {

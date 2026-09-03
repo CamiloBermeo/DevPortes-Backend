@@ -6,17 +6,15 @@ import com.devPortes.fields.mapper.FieldOutMapper;
 import com.devPortes.fields.model.Field;
 import com.devPortes.location.entities.LocationEntity;
 import com.devPortes.location.repository.LocationJpaRepository;
-import com.devPortes.location.repository.LocationRepositoryImpl;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class FieldJpaRepositoryImpl{
+public class FieldJpaRepositoryAdapter {
     private  final FieldJpaRepository jpa;
     private final LocationJpaRepository locationJpa;
 

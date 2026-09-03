@@ -2,7 +2,7 @@ package com.devPortes.configuration;
 
 import com.devPortes.users.exceptions.UserNotFoundException;
 import com.devPortes.users.model.UserModel;
-import com.devPortes.users.repository.UserJpaRepositoryImpl;
+import com.devPortes.users.repository.UserJpaRepositoryAdapter;
 import com.devPortes.users.security.CustomUserDetails;
 import com.devPortes.users.security.TokenImpl;
 import jakarta.servlet.FilterChain;
@@ -21,7 +21,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class MySecurityFilter extends OncePerRequestFilter {
     private final TokenImpl tokenService;
-    private final UserJpaRepositoryImpl userRepository;
+    private final UserJpaRepositoryAdapter userRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {

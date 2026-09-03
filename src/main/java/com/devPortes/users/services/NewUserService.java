@@ -3,7 +3,7 @@ package com.devPortes.users.services;
 import com.devPortes.users.dto.NewUserRequestDto;
 import com.devPortes.users.dto.NewUserResponseDto;
 import com.devPortes.users.mapper.UserInMapper;
-import com.devPortes.users.repository.UserJpaRepositoryImpl;
+import com.devPortes.users.repository.UserJpaRepositoryAdapter;
 import com.devPortes.users.security.BCryptPasswordEncoderAdapter;
 import com.devPortes.users.security.CustomUserDetails;
 import com.devPortes.users.exceptions.ExistingUserDataBaseException;
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 public class NewUserService{
     private final FindUserByEmailService findUserByEmail;
     private final BCryptPasswordEncoderAdapter bCryptPasswordEncoder;
-    private final UserJpaRepositoryImpl userRepository;
+    private final UserJpaRepositoryAdapter userRepository;
     private final TokenImpl tokenImpl;
 
 
