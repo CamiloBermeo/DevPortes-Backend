@@ -4,7 +4,7 @@ import com.devPortes.users.exceptions.EmailInvalidException;
 import com.devPortes.users.exceptions.IdentityDocumentInvalidException;
 import com.devPortes.users.exceptions.PasswordHashInvalidException;
 
-public class Admin {
+public class Admin implements IAuthenticated{
     private Long id;
     private String name;
     private String identityDocument;
@@ -58,10 +58,11 @@ public class Admin {
         return new Admin(id, name, identityDocument, phoneNumber, email, passwordHash,  role, state);
     }
 
+    @Override
     public Long getId() {
         return id;
     }
-
+    @Override
     public String getName() {
         return name;
     }
@@ -73,15 +74,15 @@ public class Admin {
     public String getPhoneNumber() {
         return phoneNumber;
     }
-
+    @Override
     public String getEmail() {
         return email;
     }
-
+    @Override
     public String getPasswordHash() {
         return passwordHash;
     }
-
+    @Override
     public RoleEnum getRole() {
         return role;
     }

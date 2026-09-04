@@ -1,11 +1,15 @@
 package com.devPortes.users.mapper;
 
-import com.devPortes.users.model.UserModel;
+import com.devPortes.users.entities.AdminEntity;
+import com.devPortes.users.model.Admin;
+import com.devPortes.users.model.Client;
 import com.devPortes.users.entities.ClientEntity;
+import com.devPortes.users.model.IAuthenticated;
+import com.devPortes.users.model.RoleEnum;
 
 public class UserOutMapper {
 
-    public static ClientEntity toEntity(UserModel model){
+    public static ClientEntity toClientEntity(Client model){
         ClientEntity entity = new ClientEntity();
         entity.setId(model.getId());
         entity.setName(model.getName());
@@ -19,8 +23,8 @@ public class UserOutMapper {
         return entity;
     }
 
-    public static UserModel toModel(ClientEntity entity){
-        return UserModel.reconstitute(
+    public static Client toClientCompleteModel(ClientEntity entity){
+        return Client.reconstitute(
                 entity.getId(),
                 entity.getName(),
                 entity.getIdentityDocument(),
@@ -29,6 +33,19 @@ public class UserOutMapper {
                 entity.getPasswordHash(),
                 entity.getClassification(),
                 entity.getReservationAmount(),
+                entity.getRole(),
+                entity.isState()
+        );
+    }
+
+    public static Admin toAdminCompleteModel(AdminEntity entity){
+        return Admin.reconstitute(
+                entity.getId(),
+                entity.getName(),
+                entity.getIdentityDocument(),
+                entity.getPhoneNumber(),
+                entity.getEmail(),
+                entity.getPasswordHash(),
                 entity.getRole(),
                 entity.isState()
         );

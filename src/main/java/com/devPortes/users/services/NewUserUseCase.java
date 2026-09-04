@@ -7,7 +7,7 @@ import com.devPortes.users.repository.UserJpaRepositoryAdapter;
 import com.devPortes.users.security.BCryptPasswordEncoderAdapter;
 import com.devPortes.users.security.CustomUserDetails;
 import com.devPortes.users.exceptions.ExistingUserDataBaseException;
-import com.devPortes.users.model.UserModel;
+import com.devPortes.users.model.Client;
 import com.devPortes.users.security.TokenImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,16 +24,16 @@ public class NewUserUseCase implements INewUserUseCase{
     public NewUserResponseDto execute(NewUserRequestDto dto) {
 
         //1. verifico que el usuario no este registrado previamente
-        iFindUserByEmail.execute(dto.email())
+        iFindUserByEmail.findClientByEmail(dto.email())
                 .ifPresent(userModelSave -> {
                     throw new ExistingUserDataBaseException(userModelSave.getEmail());
                 });
 
         String passwordHash = bCryptPasswordEncoder.encodePassword(dto.password());
 
-        UserModel user = UserInMapper.toModel(dto, passwordHash);
+        Client user = UserInMapper.toModel(dto, passwordHash);
 
-        UserModel saveUser = userRepository.save(user);
+        Client saveUser = userRepository.save(user);
 
         String token = tokenImpl.generateNewToken(new CustomUserDetails(saveUser));
 

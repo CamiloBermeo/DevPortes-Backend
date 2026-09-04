@@ -22,6 +22,7 @@ public class FieldOutMapper {
         entity.setHourlyRate(model.getHourlyRate());
         entity.setUrlImg(model.getUrlImg());
         entity.setLocation(locationEntity);
+        entity.setState(model.getState());
         return entity;
     }
 

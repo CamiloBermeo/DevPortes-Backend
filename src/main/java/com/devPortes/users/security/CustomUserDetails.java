@@ -1,6 +1,7 @@
 package com.devPortes.users.security;
 
-import com.devPortes.users.model.UserModel;
+import com.devPortes.users.model.Client;
+import com.devPortes.users.model.IAuthenticated;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,9 +16,9 @@ import java.util.List;
 @Getter
 public class CustomUserDetails implements UserDetails {
 
-    private final UserModel user;
+    private final IAuthenticated user;
 
-    private Collection<? extends GrantedAuthority> mapAuthorities(UserModel user){
+    private Collection<? extends GrantedAuthority> mapAuthorities(IAuthenticated user){
         List<SimpleGrantedAuthority> roles = new ArrayList<>();
         roles.add(new SimpleGrantedAuthority("ROLE_" + user.getRole()));
         return roles;
@@ -28,7 +29,7 @@ public class CustomUserDetails implements UserDetails {
         return this.mapAuthorities(user);
     }
 
-    public UserModel getUser() {
+    public IAuthenticated getUser() {
         return this.user;
     }
 

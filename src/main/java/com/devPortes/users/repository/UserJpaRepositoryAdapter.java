@@ -1,8 +1,11 @@
 package com.devPortes.users.repository;
 
-import com.devPortes.users.model.UserModel;
+import com.devPortes.users.entities.AdminEntity;
+import com.devPortes.users.model.Admin;
+import com.devPortes.users.model.Client;
 import com.devPortes.users.entities.ClientEntity;
 import com.devPortes.users.mapper.UserOutMapper;
+import com.devPortes.users.model.IAuthenticated;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -11,17 +14,24 @@ import java.util.Optional;
 @Repository
 @RequiredArgsConstructor
 public class UserJpaRepositoryAdapter {
-    private final IUserJpaRepository jpa;
+    private final IClientJpaRepository clientJpa;
+    private final IAdminJpaRepository adminJpa;
 
-    public Optional<UserModel> findByEmail(String email) {
-
-        Optional<ClientEntity> entity = jpa.findByEmail(email);
-
-        return entity.map(UserOutMapper::toModel);
+    public Optional<IAuthenticated> findByEmail(String email) {
+        Optional<Client> client = clientJpa.findByEmail(email).map(UserOutMapper::toClientCompleteModel);
+        if (client.isPresent()) {
+            return Optional.of(client.get());
+        }
+        return adminJpa.findByEmail(email).map(UserOutMapper::toAdminCompleteModel);
     }
 
-    public UserModel save(UserModel user) {
-        ClientEntity entity = UserOutMapper.toEntity(user);
-        return UserOutMapper.toModel(jpa.save(entity));
+    public Optional<Client> findClientByEmail(String email) {
+        return clientJpa.findByEmail(email).map(UserOutMapper::toClientCompleteModel);
+    }
+
+
+    public Client save(Client user) {
+        ClientEntity entity = UserOutMapper.toClientEntity(user);
+        return UserOutMapper.toClientCompleteModel(clientJpa.save(entity));
     }
 }

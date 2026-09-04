@@ -1,9 +1,13 @@
 package com.devPortes.users.services;
 
-import com.devPortes.users.model.UserModel;
+
+import com.devPortes.users.model.Client;
+import com.devPortes.users.model.IAuthenticated;
 
 import java.util.Optional;
 
 public interface IFindUserByEmailUseCase {
-    Optional<UserModel> execute (String email);
+    Optional<IAuthenticated> execute (String email);
+    Optional<Client> findClientByEmail (String email);
+
 }

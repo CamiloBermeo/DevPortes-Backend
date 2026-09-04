@@ -2,12 +2,13 @@ package com.devPortes.users.mapper;
 
 import com.devPortes.users.dto.NewUserRequestDto;
 import com.devPortes.users.dto.NewUserResponseDto;
-import com.devPortes.users.model.UserModel;
+import com.devPortes.users.model.Client;
+import com.devPortes.users.model.IAuthenticated;
 
 public class UserInMapper {
 
-    public static UserModel toModel(NewUserRequestDto dto, String passwordHash){
-        return UserModel.create(
+    public static Client toModel(NewUserRequestDto dto, String passwordHash){
+        return Client.create(
                 dto.name(),
                 dto.identityDocument(),
                 dto.phoneNumber(),
@@ -17,7 +18,7 @@ public class UserInMapper {
         );
 
     }
-    public static NewUserResponseDto toNewUserDto (UserModel user, String token){
+    public static NewUserResponseDto toNewUserDto (Client user, String token){
         return new NewUserResponseDto(
                 user.getId(),
                 user.getName(),
@@ -26,7 +27,7 @@ public class UserInMapper {
         );
     }
 
-    public static NewUserResponseDto toDtoProfile(UserModel user){
+    public static NewUserResponseDto toDtoProfile(IAuthenticated user){
         return new NewUserResponseDto(
                 user.getId(),
                 user.getName(),

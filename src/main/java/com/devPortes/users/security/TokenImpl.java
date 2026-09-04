@@ -29,7 +29,7 @@ public class TokenImpl {
     }
 
     public String getSubject(String token){
-        Algorithm algorithm = Algorithm.HMAC256(token);
+        Algorithm algorithm = Algorithm.HMAC256(secret);
         return JWT.require(algorithm)
                 .withIssuer("devportes")
                 .build()

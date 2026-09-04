@@ -1,7 +1,8 @@
 package com.devPortes.configuration;
 
 import com.devPortes.users.exceptions.UserNotFoundException;
-import com.devPortes.users.model.UserModel;
+import com.devPortes.users.model.Client;
+import com.devPortes.users.model.IAuthenticated;
 import com.devPortes.users.repository.UserJpaRepositoryAdapter;
 import com.devPortes.users.security.CustomUserDetails;
 import com.devPortes.users.security.TokenImpl;
@@ -30,7 +31,7 @@ public class MySecurityFilter extends OncePerRequestFilter {
 
             if (token != null) {
                 String subject = tokenService.getSubject(token);
-                UserModel user = userRepository.findByEmail(subject)
+                IAuthenticated user = userRepository.findByEmail(subject)
                         .orElseThrow(() -> new UserNotFoundException(subject));
 
                 CustomUserDetails customUserDetails = new CustomUserDetails(user);

@@ -3,7 +3,8 @@ package com.devPortes.users.services;
 import com.devPortes.users.dto.LoginDataRequestDto;
 import com.devPortes.users.dto.TokenDataDto;
 import com.devPortes.users.exceptions.InvalidCredentialException;
-import com.devPortes.users.model.UserModel;
+import com.devPortes.users.model.Client;
+import com.devPortes.users.model.IAuthenticated;
 import com.devPortes.users.repository.UserJpaRepositoryAdapter;
 import com.devPortes.users.security.BCryptPasswordEncoderAdapter;
 import com.devPortes.users.security.CustomUserDetails;
@@ -22,7 +23,7 @@ public class LoginUseCase implements ILoginUseCase{
     @Override
     public TokenDataDto execute(LoginDataRequestDto dto) {
 
-        UserModel saveUser = userRepository.findByEmail(dto.email())
+        IAuthenticated saveUser = userRepository.findByEmail(dto.email())
                 .orElseThrow(InvalidCredentialException::new);
 
         boolean isMatch = bCryptPasswordEncoder.matchesPasswords(

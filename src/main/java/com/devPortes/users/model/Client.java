@@ -1,11 +1,10 @@
 package com.devPortes.users.model;
 
-import com.devPortes.reservations.model.Reservation;
 import com.devPortes.users.exceptions.EmailInvalidException;
 import com.devPortes.users.exceptions.IdentityDocumentInvalidException;
 import com.devPortes.users.exceptions.PasswordHashInvalidException;
 
-public class UserModel {
+public class Client implements IAuthenticated{
     private Long id;
     private String name;
     private String identityDocument;
@@ -17,10 +16,10 @@ public class UserModel {
     private RoleEnum role;
     private boolean state;
 
-    public UserModel() {
+    public Client() {
     }
 
-    private UserModel(Long id, String name, String identityDocument, String phoneNumber, String email, String passwordHash, ClasificationEnum classification, int reservationAmount, RoleEnum role,boolean state) {
+    private Client(Long id, String name, String identityDocument, String phoneNumber, String email, String passwordHash, ClasificationEnum classification, int reservationAmount, RoleEnum role, boolean state) {
         this.id = id;
         this.name = name;
         this.identityDocument = identityDocument;
@@ -34,7 +33,7 @@ public class UserModel {
     }
 
     //Este metodo crea un nuevo model el cual sera usado como principal, hace validaciones y logica pura de Java
-    public static UserModel create(String name, String identityDocument, String phoneNumber, String email, String passwordHash, RoleEnum role) {
+    public static Client create(String name, String identityDocument, String phoneNumber, String email, String passwordHash, RoleEnum role) {
 
         if (identityDocument.length() < 10) {
             identityDocument = identityDocument.toLowerCase();
@@ -55,29 +54,31 @@ public class UserModel {
             role = RoleEnum.CLIENTE;
         }
 
-        return new UserModel(null,name, identityDocument, phoneNumber, email,passwordHash, ClasificationEnum.ESTANDAR,0, role, true);
+        return new Client(null,name, identityDocument, phoneNumber, email,passwordHash, ClasificationEnum.ESTANDAR,0, role, true);
     }
 
     //Este metodo construye un model que viene de base de datos, ya que no necesita validaciones ni nada porque se supone que ya esta bien construido y guardado en db
-    public static UserModel reconstitute(Long id,String name, String identityDocument, String phoneNumber, String email, String passwordHash, ClasificationEnum classification, int reservationAmount, RoleEnum role, boolean state) {
-        return new UserModel(id, name, identityDocument, phoneNumber, email, passwordHash,  classification,  reservationAmount, role, state);
+    public static Client reconstitute(Long id, String name, String identityDocument, String phoneNumber, String email, String passwordHash, ClasificationEnum classification, int reservationAmount, RoleEnum role, boolean state) {
+        return new Client(id, name, identityDocument, phoneNumber, email, passwordHash,  classification,  reservationAmount, role, state);
     }
-
-    public RoleEnum getRole() {
-        return role;
-    }
-
-    public ClasificationEnum getClassification() {
-        return classification;
-    }
-
-    public int getReservationAmount() {
-        return reservationAmount;
-    }
+    @Override
     public Long getId() {
         return id;
     }
+    @Override
+    public String getEmail() {
+        return email;
+    }
+    @Override
+    public String getPasswordHash() {
+        return passwordHash;
+    }
 
+    @Override
+    public RoleEnum getRole() {
+        return role;
+    }
+    @Override
     public String getName() {
         return name;
     }
@@ -90,16 +91,12 @@ public class UserModel {
         return phoneNumber;
     }
 
-    public String getEmail() {
-        return email;
+    public ClasificationEnum getClassification() {
+        return classification;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPasswordHash() {
-        return passwordHash;
+    public int getReservationAmount() {
+        return reservationAmount;
     }
 
     public boolean isState() {
