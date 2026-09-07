@@ -12,6 +12,8 @@ import com.devPortes.location.service.IFindLocationByIdUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class NewFieldUseCase implements INewFieldUseCase{
@@ -25,9 +27,9 @@ public class NewFieldUseCase implements INewFieldUseCase{
                 .orElseThrow(() -> new LocationNotFoundException(dto.locationId()));
 
         //guardo la imagen en cloudinary y retorno su url
-        String urlImg = iCloudinaryClient.saveImg(dto.img());
+        List<String> urlPictures = iCloudinaryClient.saveImg(dto.pictures());
 
-        Field field = FieldInMapper.toModel(dto, location, urlImg);
+        Field field = FieldInMapper.toModel(dto, location, urlPictures);
 
         return FieldInMapper.toFieldsCompleteResponseDto(
                 fieldJpaRepository.save(field));

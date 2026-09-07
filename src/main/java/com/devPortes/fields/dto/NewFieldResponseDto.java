@@ -7,7 +7,7 @@ public record NewFieldResponseDto(
          Long id,
          Long locationId,
          String nameLocation,
-         String urlImg,
+         List<String> urlPictures,
          String name,
          String capacity,
          String sport,

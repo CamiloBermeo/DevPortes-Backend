@@ -10,7 +10,7 @@ public record FieldsCompleteResponseDto(
 
         Long id,
         Long locationId,
-        String urlImg,
+        List<String> urlPictures,
         String name,
         String capacity,
         String sport,

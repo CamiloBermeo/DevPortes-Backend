@@ -20,7 +20,7 @@ public class FieldOutMapper {
         entity.setDescription(model.getDescription());
         entity.setDetails(model.getDetails());
         entity.setHourlyRate(model.getHourlyRate());
-        entity.setUrlImg(model.getUrlImg());
+        entity.setUrlPictures(model.getUrlPictures());
         entity.setLocation(locationEntity);
         entity.setState(model.getState());
         return entity;
@@ -30,7 +30,7 @@ public class FieldOutMapper {
         return Field.reconstitute(
                 entity.getId(),
                 LocationOutMapper.toModel(entity.getLocation()),
-                entity.getUrlImg(),
+                entity.getUrlPictures(),
                 entity.getName(),
                 entity.getCapacity(),
                 entity.getSport(),

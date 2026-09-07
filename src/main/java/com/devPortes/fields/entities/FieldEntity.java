@@ -25,8 +25,8 @@ public class FieldEntity {
     @JoinColumn(name = "location_id", nullable = false)
     private LocationEntity location;
 
-    @Column(name = "url_img", nullable = false)
-    private String urlImg;
+    @Column(name = "url_pictures", nullable = false)
+    private List<String> urlPictures;
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)

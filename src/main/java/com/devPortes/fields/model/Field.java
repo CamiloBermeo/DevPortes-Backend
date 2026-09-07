@@ -9,7 +9,7 @@ public class Field {
 
     private Long id;
     private Location location;
-    private String urlImg;
+    private List<String> urlPictures;
     private String name;
     private String capacity;
     private String sport;
@@ -21,11 +21,11 @@ public class Field {
 
     public Field() {}
 
-    public Field(Long id, Location location,String urlImg, String name, String capacity, String sport,String surface,
+    public Field(Long id, Location location,List<String> urlPictures, String name, String capacity, String sport,String surface,
                  String description, List<String> details, BigDecimal hourlyRate, FieldStateEnum state) {
         this.id = id;
         this.location=location;
-        this.urlImg = urlImg;
+        this.urlPictures = urlPictures;
         this.name = name;
         this.capacity = capacity;
         this.sport = sport;
@@ -36,18 +36,18 @@ public class Field {
         this.state = state;
     }
 
-    public static Field create (Location location,String urlImg, String name, String capacity, String sport, String surface,
+    public static Field create (Location location,List<String> urlPictures, String name, String capacity, String sport, String surface,
                          String description, List<String> details, BigDecimal hourlyRate){
 
         FieldStateEnum state = FieldStateEnum.DISPONIBLE;
 
 
-        return new Field( null ,location,urlImg,  name,  capacity, sport,surface,
+        return new Field( null ,location,urlPictures,  name,  capacity, sport,surface,
                  description, details, hourlyRate, state);
     }
-    public static Field reconstitute (Long id ,Location location,String urlImg, String name, String capacity, String sport,String surface,
+    public static Field reconstitute (Long id ,Location location,List<String> urlPictures, String name, String capacity, String sport,String surface,
                          String description, List<String> details, BigDecimal hourlyRate,  FieldStateEnum state){
-        return new Field( id ,location,urlImg,  name,  capacity, sport,surface,
+        return new Field( id ,location,urlPictures,  name,  capacity, sport,surface,
                 description, details, hourlyRate, state);
     }
 
@@ -59,8 +59,8 @@ public class Field {
         return location;
     }
 
-    public String getUrlImg() {
-        return urlImg;
+    public List<String> getUrlPictures() {
+        return urlPictures;
     }
 
     public String getName() {

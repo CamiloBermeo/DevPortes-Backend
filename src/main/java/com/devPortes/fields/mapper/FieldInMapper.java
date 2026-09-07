@@ -10,10 +10,10 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public class FieldInMapper {
-    public static Field toModel(NewFieldRequestDto dto, Location location, String urlImg){
+    public static Field toModel(NewFieldRequestDto dto, Location location, List<String> urlPictures){
         return Field.create(
                 location,
-                urlImg,
+                urlPictures,
                 dto.name(),
                 dto.capacity(),
                 dto.sport(),
@@ -27,7 +27,7 @@ public class FieldInMapper {
        return new FieldsCompleteResponseDto(
                model.getId(),
                model.getLocation().getId(),
-               model.getUrlImg(),
+               model.getUrlPictures(),
                model.getName(),
                model.getCapacity(),
                model.getSport(),
