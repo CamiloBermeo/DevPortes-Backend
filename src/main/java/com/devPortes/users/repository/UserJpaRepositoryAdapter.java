@@ -28,6 +28,9 @@ public class UserJpaRepositoryAdapter {
     public Optional<Client> findClientByEmail(String email) {
         return clientJpa.findByEmail(email).map(UserOutMapper::toClientCompleteModel);
     }
+    public Optional<Admin> findAdminByEmail(String email) {
+        return adminJpa.findByEmail(email).map(UserOutMapper::toAdminCompleteModel);
+    }
 
 
     public Client save(Client user) {

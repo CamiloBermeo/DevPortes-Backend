@@ -1,5 +1,6 @@
 package com.devPortes.users.services;
 
+import com.devPortes.users.model.Admin;
 import com.devPortes.users.model.Client;
 import com.devPortes.users.model.IAuthenticated;
 import com.devPortes.users.repository.UserJpaRepositoryAdapter;
@@ -21,6 +22,11 @@ public class FindUserByEmailUseCase implements IFindUserByEmailUseCase{
     @Override
     public Optional<Client> findClientByEmail(String email) {
         return userRepository.findClientByEmail(email);
+    }
+
+    @Override
+    public Optional<Admin> findAdminByEmail(String email) {
+        return userRepository.findAdminByEmail(email);
     }
 
 

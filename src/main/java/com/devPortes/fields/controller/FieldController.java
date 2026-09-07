@@ -30,7 +30,6 @@ public class FieldController {
 
     @GetMapping("fields")
     public ResponseEntity<List<FieldsCompleteResponseDto>> allFields(){
-        //falta completar el dto de respuesta
         List<FieldsCompleteResponseDto> fields = iAllFieldsUseCase.execute();
         return ResponseEntity.status(HttpStatus.OK)
                 .body(fields);

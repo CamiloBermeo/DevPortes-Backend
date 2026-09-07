@@ -23,11 +23,12 @@ public class NewUserUseCase implements INewUserUseCase{
     @Override
     public NewUserResponseDto execute(NewUserRequestDto dto) {
 
-        //1. verifico que el usuario no este registrado previamente
-        iFindUserByEmail.findClientByEmail(dto.email())
-                .ifPresent(userModelSave -> {
-                    throw new ExistingUserDataBaseException(userModelSave.getEmail());
-                });
+        //Verifico si el admin existe en la base de datos con el mismo email
+        //verifico que el usuario no este registrado previamente
+        if(iFindUserByEmail.findAdminByEmail(dto.email()).isPresent() &&
+                iFindUserByEmail.findClientByEmail(dto.email()).isPresent()){
+            throw new ExistingUserDataBaseException(dto.email());
+        }
 
         String passwordHash = bCryptPasswordEncoder.encodePassword(dto.password());
 
