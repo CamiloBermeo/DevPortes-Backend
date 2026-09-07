@@ -11,23 +11,35 @@ import com.devPortes.location.model.Location;
 import com.devPortes.location.service.IFindLocationByIdUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class NewFieldUseCase implements INewFieldUseCase{
+public class NewFieldUseCase implements INewFieldUseCase {
     private final ICloudinaryClient iCloudinaryClient;
     private final IFindLocationByIdUseCase iFindLocationById;
     private final FieldJpaRepositoryAdapter fieldJpaRepository;
+
     @Override
     public FieldsCompleteResponseDto execute(NewFieldRequestDto dto) {
+        //List<String> urlPictures = new ArrayList<>();
+        //String urlImg;
         //verifico que exista la ubicacion con el id
         Location location = iFindLocationById.execute(dto.locationId())
                 .orElseThrow(() -> new LocationNotFoundException(dto.locationId()));
 
-        //guardo la imagen en cloudinary y retorno su url
-        List<String> urlPictures = iCloudinaryClient.saveImg(dto.pictures());
+        //debo mandar las urls una por una a cloudinary porque no recibe list de imagenes
+        List<String> urlPictures = dto.pictures().stream()
+                .map(iCloudinaryClient::saveImg)
+                .toList();
+ /*
+        for(int i=0; i < dto.pictures().size() ;i++){
+            urlImg = iCloudinaryClient.saveImg(dto.pictures().get(i));
+            urlPictures.add(urlImg); }
+*/
 
         Field field = FieldInMapper.toModel(dto, location, urlPictures);
 
