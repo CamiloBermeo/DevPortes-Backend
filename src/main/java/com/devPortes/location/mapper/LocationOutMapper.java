@@ -20,6 +20,15 @@ public class LocationOutMapper {
         return entity;
 
     }
+    public static LocationEntity toEditEntity(LocationEntity saveEntity, Location model){
+        saveEntity.setName(model.getName());
+        saveEntity.setHeadquarters(model.getHeadquarters());
+        saveEntity.setAddress(model.getAddress());
+        saveEntity.setUrlQrAddress(model.getUrlQrAddress());
+        saveEntity.setDescription(model.getDescription());
+        saveEntity.setState(model.isState());
+        return saveEntity;
+    }
     public static Location toModel(LocationEntity entity){
         return Location.reconstitute(
                 entity.getId(),

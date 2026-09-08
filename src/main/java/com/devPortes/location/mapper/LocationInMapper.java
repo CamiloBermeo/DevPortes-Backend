@@ -3,6 +3,7 @@ package com.devPortes.location.mapper;
 import com.devPortes.location.dto.NewLocationRequestDto;
 import com.devPortes.location.dto.LocationCompleteResponseDto;
 import com.devPortes.location.dto.NewLocationResponseDto;
+import com.devPortes.location.dto.UpdateLocationRequestDto;
 import com.devPortes.location.model.Location;
 
 import java.util.List;
@@ -18,6 +19,15 @@ public class LocationInMapper {
                 dto.description()
         );
     }
+    public static Location toEditModel(UpdateLocationRequestDto dto){
+        return Location.edit(
+                dto.name(),
+                dto.headquarters(),
+                dto.address(),
+                dto.urlQrAddress(),
+                dto.description()
+        );
+    }
     public static NewLocationResponseDto toNewLocationDto(Location model){
         return new NewLocationResponseDto(
                 model.getId()
@@ -25,7 +35,13 @@ public class LocationInMapper {
     }
     public static LocationCompleteResponseDto toLocationCompleteDto(Location model){
         return new LocationCompleteResponseDto(
-                model.getId()
+                model.getId(),
+                model.getName(),
+                model.getHeadquarters(),
+                model.getAddress(),
+                model.getUrlQrAddress(),
+                model.getDescription(),
+                model.isState()
         );
     }
 

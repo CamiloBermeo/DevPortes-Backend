@@ -1,12 +1,10 @@
 package com.devPortes.location.dto;
 
-public record LocationCompleteResponseDto(
-        Long id,
+public record UpdateLocationRequestDto(
         String name,
         String headquarters,
         String address,
         String urlQrAddress,
-        String description,
-        boolean state
+        String description
 ) {
 }
