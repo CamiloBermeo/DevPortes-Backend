@@ -30,6 +30,7 @@ public class FieldJpaRepositoryAdapter {
     public Field save(Field model) {
         LocationEntity locationEntity = locationJpa.findById(model.getLocation().getId())
                 .orElseThrow(() -> new LocationRepositoryNotFoundException(model.getLocation().getId()));
+
         FieldEntity entity = FieldOutMapper.toEntity(model, locationEntity);
         return FieldOutMapper.toModel(jpa.save(entity));
     }

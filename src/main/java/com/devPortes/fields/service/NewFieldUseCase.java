@@ -25,21 +25,22 @@ public class NewFieldUseCase implements INewFieldUseCase {
 
     @Override
     public FieldsCompleteResponseDto execute(NewFieldRequestDto dto) {
-        //List<String> urlPictures = new ArrayList<>();
-        //String urlImg;
+        List<String> urlPictures = new ArrayList<>();
+        String urlImg;
+
         //verifico que exista la ubicacion con el id
         Location location = iFindLocationById.execute(dto.locationId())
                 .orElseThrow(() -> new LocationNotFoundException(dto.locationId()));
-
+/*
         //debo mandar las urls una por una a cloudinary porque no recibe list de imagenes
         List<String> urlPictures = dto.pictures().stream()
                 .map(iCloudinaryClient::saveImg)
                 .toList();
- /*
+ */
         for(int i=0; i < dto.pictures().size() ;i++){
             urlImg = iCloudinaryClient.saveImg(dto.pictures().get(i));
             urlPictures.add(urlImg); }
-*/
+
         Field field = FieldInMapper.toModel(dto, location, urlPictures);
 
         return FieldInMapper.toFieldsCompleteResponseDto(
