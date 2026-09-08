@@ -28,6 +28,15 @@ public class Location {
 
         return new Location(null ,nameEdit,headquarters, address, urlQrAddress, description,  true);
     }
+    public static Location edit(String name, String headquarters, String address, String urlQrAddress, String description){
+        String nameEdit = name.toLowerCase().trim();
+        return new Location(null, nameEdit, headquarters, address, urlQrAddress, description, true);
+    }
+
+    public static Location changeState(Long id, String name, String headquarters, String address, String urlQrAddress, String description, boolean state){
+        return new Location(id, name, headquarters, address, urlQrAddress, description, !state);
+    }
+
     public static Location reconstitute(Long id,String name ,String headquarters, String address, String urlQrAddress, String description, boolean state){
         return new Location(id ,name,headquarters, address, urlQrAddress, description,  state);
     }

@@ -26,6 +26,32 @@ public class LocationRepositoryAdapter {
         LocationEntity entity = LocationOutMapper.toEntity(locationModel);
         return LocationOutMapper.toModel(jpa.save(entity));
     }
+
+    @Transactional
+    public Location editLocation(Location locationModel, Long id) {
+        LocationEntity savedEntity = jpa.findById(id)
+                .orElseThrow(() -> new com.devPortes.location.exceptions.LocationRepositoryNotFoundException(id));
+        LocationEntity editedEntity = LocationOutMapper.toEditEntity(savedEntity, locationModel);
+        return LocationOutMapper.toModel(jpa.save(editedEntity));
+    }
+
+    @Transactional
+    public Location changeState(Long id, boolean currentState) {
+        LocationEntity savedEntity = jpa.findById(id)
+                .orElseThrow(() -> new com.devPortes.location.exceptions.LocationRepositoryNotFoundException(id));
+        Location locationModel = LocationOutMapper.toModel(savedEntity);
+        Location toggledLocation = Location.changeState(
+                locationModel.getId(),
+                locationModel.getName(),
+                locationModel.getHeadquarters(),
+                locationModel.getAddress(),
+                locationModel.getUrlQrAddress(),
+                locationModel.getDescription(),
+                locationModel.isState()
+        );
+        LocationEntity toggledEntity = LocationOutMapper.toEditEntity(savedEntity, toggledLocation);
+        return LocationOutMapper.toModel(jpa.save(toggledEntity));
+    }
     public Optional<Location> findById(Long id){
         Optional<LocationEntity> entity = jpa.findById(id);
         return entity.map(LocationOutMapper::toModel);
