@@ -1,5 +1,6 @@
 package com.devPortes.fields.mapper;
 
+import com.devPortes.fields.dto.EditFieldRequestDto;
 import com.devPortes.fields.dto.FieldsCompleteResponseDto;
 import com.devPortes.fields.dto.NewFieldRequestDto;
 import com.devPortes.fields.model.Field;
@@ -22,6 +23,21 @@ public class FieldInMapper {
                 dto.details(),
                 dto.hourlyRate()
         );
+    }
+    public static Field toEditModel (EditFieldRequestDto dto,Location location){
+        return Field.edit(
+                location,
+                dto.urlPictures(),
+                dto.name(),
+                dto.capacity(),
+                dto.sport(),
+                dto.surface(),
+                dto.description(),
+                dto.details(),
+                dto.hourlyRate(),
+                dto.state()
+        );
+
     }
     public static FieldsCompleteResponseDto toFieldsCompleteResponseDto (Field model){
        return new FieldsCompleteResponseDto(

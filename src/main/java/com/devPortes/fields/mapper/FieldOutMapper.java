@@ -25,6 +25,19 @@ public class FieldOutMapper {
         entity.setState(model.getState());
         return entity;
     }
+    public static FieldEntity toEditEntity(FieldEntity saveEntity, LocationEntity locationEntity,Field model){
+        saveEntity.setName(model.getName());
+        saveEntity.setCapacity(model.getCapacity());
+        saveEntity.setSport(model.getSport());
+        saveEntity.setSurface(model.getSurface());
+        saveEntity.setDescription(model.getDescription());
+        saveEntity.setDetails(model.getDetails());
+        saveEntity.setHourlyRate(model.getHourlyRate());
+        saveEntity.setUrlPictures(model.getUrlPictures());
+        saveEntity.setLocation(locationEntity);
+        saveEntity.setState(model.getState());
+        return saveEntity;
+    }
 
     public static Field toModel (FieldEntity entity){
         return Field.reconstitute(

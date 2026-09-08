@@ -19,12 +19,13 @@ public class Field {
     private BigDecimal hourlyRate;
     private FieldStateEnum state;
 
-    public Field() {}
+    public Field() {
+    }
 
-    public Field(Long id, Location location,List<String> urlPictures, String name, String capacity, String sport,String surface,
+    public Field(Long id, Location location, List<String> urlPictures, String name, String capacity, String sport, String surface,
                  String description, List<String> details, BigDecimal hourlyRate, FieldStateEnum state) {
         this.id = id;
-        this.location=location;
+        this.location = location;
         this.urlPictures = urlPictures;
         this.name = name;
         this.capacity = capacity;
@@ -36,18 +37,22 @@ public class Field {
         this.state = state;
     }
 
-    public static Field create (Location location,List<String> urlPictures, String name, String capacity, String sport, String surface,
-                         String description, List<String> details, BigDecimal hourlyRate){
+    public static Field create(Location location, List<String> urlPictures, String name, String capacity, String sport, String surface,
+                                 String description, List<String> details, BigDecimal hourlyRate) {
 
         FieldStateEnum state = FieldStateEnum.DISPONIBLE;
-
-
-        return new Field( null ,location,urlPictures,  name,  capacity, sport,surface,
-                 description, details, hourlyRate, state);
+        return new Field(null, location, urlPictures, name, capacity, sport, surface,
+                description, details, hourlyRate, state);
     }
-    public static Field reconstitute (Long id ,Location location,List<String> urlPictures, String name, String capacity, String sport,String surface,
-                         String description, List<String> details, BigDecimal hourlyRate,  FieldStateEnum state){
-        return new Field( id ,location,urlPictures,  name,  capacity, sport,surface,
+
+    public static Field edit(Location location, List<String> urlPictures, String name, String capacity, String sport, String surface,
+                                     String description, List<String> details, BigDecimal hourlyRate, FieldStateEnum state) {
+        return new Field(null, location, urlPictures, name, capacity, sport, surface,
+                description, details, hourlyRate, state);
+    }
+    public static Field reconstitute(Long id, Location location, List<String> urlPictures, String name, String capacity, String sport, String surface,
+                                     String description, List<String> details, BigDecimal hourlyRate, FieldStateEnum state) {
+        return new Field(id, location, urlPictures, name, capacity, sport, surface,
                 description, details, hourlyRate, state);
     }
 

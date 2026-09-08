@@ -15,7 +15,8 @@ public class LocationGlobalExceptionHandler {
         return buildResponse(exception, HttpStatus.CONFLICT);
     }
 
-    @ExceptionHandler(LocationNotFoundException.class)
+    @ExceptionHandler({LocationNotFoundException.class,
+    LocationRepositoryNotFoundException.class})
     public ResponseEntity<ErrorDetails> handleFindDataBaseNotFoundException(RuntimeException exception) {
         return buildResponse(exception, HttpStatus.NOT_FOUND);
     }

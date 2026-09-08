@@ -40,7 +40,6 @@ public class NewFieldUseCase implements INewFieldUseCase {
             urlImg = iCloudinaryClient.saveImg(dto.pictures().get(i));
             urlPictures.add(urlImg); }
 */
-
         Field field = FieldInMapper.toModel(dto, location, urlPictures);
 
         return FieldInMapper.toFieldsCompleteResponseDto(
