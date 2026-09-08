@@ -34,7 +34,7 @@ public class FieldJpaRepositoryAdapter {
         FieldEntity entity = FieldOutMapper.toEntity(model, locationEntity);
         return FieldOutMapper.toModel(jpa.save(entity));
     }
-
+    @Transactional
     public Optional<Field> findById(Long id) {
         Optional<FieldEntity> saveEntity = jpa.findById(id);
         return saveEntity.map(FieldOutMapper::toModel);

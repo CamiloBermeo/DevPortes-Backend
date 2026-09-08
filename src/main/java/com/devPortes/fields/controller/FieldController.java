@@ -29,9 +29,9 @@ public class FieldController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @PutMapping("edit")
-    public ResponseEntity<FieldsCompleteResponseDto> editField(@Valid @RequestParam Long id,
-                                                               @ModelAttribute EditFieldRequestDto dto) {
+    @PutMapping("edit/{id}")
+    public ResponseEntity<FieldsCompleteResponseDto> editField( @PathVariable Long id,
+                                                                @Valid @ModelAttribute EditFieldRequestDto dto) {
         FieldsCompleteResponseDto response = iEditField.execute(id, dto);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
     }

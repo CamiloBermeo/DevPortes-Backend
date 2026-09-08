@@ -27,7 +27,7 @@ public class FieldInMapper {
     public static Field toEditModel (EditFieldRequestDto dto,Location location){
         return Field.edit(
                 location,
-                dto.urlPictures(),
+                dto.UrlPictures(),
                 dto.name(),
                 dto.capacity(),
                 dto.sport(),

@@ -9,7 +9,7 @@ import java.util.List;
 public record EditFieldRequestDto(
         Long locationId,
         List<String> UrlPictures,
-        List<MultipartFile> Pictures,
+        List<MultipartFile> pictures,
         String name,
         String capacity,
         String sport,
