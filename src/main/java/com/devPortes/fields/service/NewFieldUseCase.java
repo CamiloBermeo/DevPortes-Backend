@@ -36,7 +36,7 @@ public class NewFieldUseCase implements INewFieldUseCase {
         List<String> urlPictures = dto.pictures().stream()
                 .map(iCloudinaryClient::saveImg)
                 .toList();
- */
+*/
         for(int i=0; i < dto.pictures().size() ;i++){
             urlImg = iCloudinaryClient.saveImg(dto.pictures().get(i));
             urlPictures.add(urlImg); }
