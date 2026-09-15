@@ -1,3 +1,7 @@
+# Stage 1 - build
+FROM maven:3.9-amazoncorretto-21 AS builder
+WORKDIR /app
+
 # Primero solo el pom.xml para cachear dependencias
 COPY pom.xml .
 COPY .mvn .mvn
