@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict czosg0LudVawVeIFIPqfa2zBv0gh1RLCJjRaNm7zMJgDtHyQgkzcCAPbGrqmpGr
+\restrict FZMni3W4Z4e8QFgDP9ihse3Ta2PHRbmngmaOUSsx9UsxXAaZ429WCZ1Xyn4Xts9
 
 -- Dumped from database version 18.6
 -- Dumped by pg_dump version 18.6
@@ -395,5 +395,5 @@ ALTER TABLE ONLY public.pagos
 -- PostgreSQL database dump complete
 --
 
-\unrestrict czosg0LudVawVeIFIPqfa2zBv0gh1RLCJjRaNm7zMJgDtHyQgkzcCAPbGrqmpGr
+\unrestrict FZMni3W4Z4e8QFgDP9ihse3Ta2PHRbmngmaOUSsx9UsxXAaZ429WCZ1Xyn4Xts9
 
