@@ -31,7 +31,6 @@ spring:
   flyway:
     enabled: true
     locations: classpath:db/migrations
-    baseline-on-migrate: true
 
 api:
   security:
