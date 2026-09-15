@@ -31,7 +31,7 @@ public class ClientEntity {
     @Column(name = "password_hash", nullable = false)
     private String passwordHash;
 
-    @Column(name = "reservation_amount",nullable = false, unique = true)
+    @Column(name = "reservation_amount",nullable = false)
     private int reservationAmount;
 
     @Enumerated(EnumType.STRING)
