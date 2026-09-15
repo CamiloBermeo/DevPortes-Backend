@@ -6,11 +6,11 @@ WORKDIR /app
 COPY pom.xml .
 COPY .mvn .mvn
 COPY mvnw .
-RUN chmod +x mvnw && ./mvnw dependency:go-offline -B
+RUN chmod +x mvnw && MAVEN_OPTS="-Xmx256m" ./mvnw dependency:go-offline -B
 
 # Luego el código fuente
 COPY src ./src
-RUN ./mvnw package -DskipTests
+RUN MAVEN_OPTS="-Xmx256m" ./mvnw package -DskipTests
 
 # Stage 2 — runtime
 FROM eclipse-temurin:21-jre-jammy AS runtime
