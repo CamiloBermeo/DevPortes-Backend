@@ -1,5 +1,5 @@
 # Stage 1 - build
-FROM eclipse-temurin:21-jdk-alpine AS builder
+FROM eclipse-temurin:21-jdk-jammy AS builder
 WORKDIR /app
 
 # Primero solo el pom.xml para cachear dependencias
@@ -13,7 +13,7 @@ COPY src ./src
 RUN ./mvnw package -DskipTests
 
 # Stage 2 — runtime
-FROM eclipse-temurin:21-jre-alpine AS runtime
+FROM eclipse-temurin:21-jre-jammy AS runtime
 WORKDIR /app
 
 # Usuario no-root
