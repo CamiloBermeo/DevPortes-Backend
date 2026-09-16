@@ -39,6 +39,7 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.PUT, "/api/v1/location/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PATCH, "/api/v1/location/**").hasRole("ADMIN")
                         .requestMatchers("/api/v1/location/new-location").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/v1/field/all").permitAll()
                         .requestMatchers("/api/v1/location/locations").permitAll()
                         .requestMatchers("/api/v1/auth/register").permitAll()
                         .requestMatchers("/api/v1/auth/login").permitAll()
