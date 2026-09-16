@@ -29,7 +29,7 @@ public class FieldController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @PutMapping("edit/{id}")
+    @PutMapping(value = "edit/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<FieldsCompleteResponseDto> editField( @PathVariable Long id,
                                                                 @Valid @ModelAttribute EditFieldRequestDto dto) {
         FieldsCompleteResponseDto response = iEditField.execute(id, dto);

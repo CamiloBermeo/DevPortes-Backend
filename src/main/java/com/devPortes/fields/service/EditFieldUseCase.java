@@ -37,6 +37,13 @@ public class EditFieldUseCase implements IEditFieldUseCase{
 
         //debo revisar si vienen nuevas imagenes
         if (dto.pictures()!= null){
+            if (dto.UrlPictures() == null) {
+                dto = new EditFieldRequestDto(
+                    dto.locationId(), new ArrayList<>(), dto.pictures(), dto.name(),
+                    dto.capacity(), dto.sport(), dto.surface(), dto.description(),
+                    dto.details(), dto.hourlyRate(), dto.state()
+                );
+            }
             for(int i=0; i < dto.pictures().size() ;i++){
                 urlImg = iCloudinaryClient.saveImg(dto.pictures().get(i));
                 dto.UrlPictures().add(urlImg); }
