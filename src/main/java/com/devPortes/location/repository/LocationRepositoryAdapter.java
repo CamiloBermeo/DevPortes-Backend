@@ -17,7 +17,7 @@ public class LocationRepositoryAdapter {
     private final ILocationJpaRepository jpa;
 
     public Optional<Location> findByName(String name){
-        Optional<LocationEntity> entity = jpa.findByName(name);
+        Optional<LocationEntity> entity = jpa.findByNameIgnoreCase(name);
         return entity.map(LocationOutMapper::toModel);
     }
 
