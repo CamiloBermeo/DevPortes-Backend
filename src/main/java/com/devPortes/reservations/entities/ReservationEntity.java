@@ -1,6 +1,7 @@
 package com.devPortes.reservations.entities;
 
 import com.devPortes.fields.entities.FieldEntity;
+import com.devPortes.payments.entities.PaymentEntity;
 import com.devPortes.users.entities.ClientEntity;
 import jakarta.persistence.*;
 import lombok.*;
