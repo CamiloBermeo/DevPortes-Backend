@@ -2,6 +2,7 @@ package com.devPortes.gallery.repository;
 
 
 import com.devPortes.gallery.entities.PostEntity;
+import com.devPortes.gallery.exceptions.PostNotFoundException;
 import com.devPortes.gallery.mapper.PostOutMapper;
 import com.devPortes.gallery.model.Post;
 import lombok.RequiredArgsConstructor;

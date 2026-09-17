@@ -22,7 +22,7 @@ public class NewPostUseCase implements INewPostUseCase {
     private final PostJpaRepositoryAdapter postJpaRepository;
 
     @Override
-    public PostsCompleteResponseDto execute(NewPostRequestDto dto) {
+    public NewPostResponseDto execute(NewPostRequestDto dto) {
 
         List<String> urlPictures = new ArrayList<>();
 
@@ -33,6 +33,8 @@ public class NewPostUseCase implements INewPostUseCase {
 
         Post post = PostInMapper.toModel(dto, urlPictures);
 
-        return PostInMapper.toPostsCompleteResponseDto(postJpaRepository.save(post));
+        Post savedPost = postJpaRepository.save(post);
+
+        return PostInMapper.toNewPostResponseDto(savedPost);
     }
 }

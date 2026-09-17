@@ -6,5 +6,5 @@ import com.devPortes.gallery.dto.PostsCompleteResponseDto;
 
 public interface INewPostUseCase {
 
-    PostsCompleteResponseDto execute(NewPostRequestDto dto);
+    NewPostResponseDto execute(NewPostRequestDto dto);
 }
