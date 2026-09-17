@@ -11,7 +11,7 @@ public class Post {
     private LocalDate eventDate;
     public Post() {
     }
-
+//prueba
     public Post(Long id, String name, String description, List<String> urlPictures, LocalDate eventDate) {
         this.id = id;
         this.name = name;
