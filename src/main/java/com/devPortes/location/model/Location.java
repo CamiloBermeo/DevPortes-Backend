@@ -24,13 +24,10 @@ public class Location {
     }
 
     public static Location create(String name, String headquarters, String address, String urlQrAddress, String description){
-        String nameEdit = name.toLowerCase().trim();
-
-        return new Location(null ,nameEdit,headquarters, address, urlQrAddress, description,  true);
+        return new Location(null, name.trim(), headquarters, address, urlQrAddress, description, true);
     }
     public static Location edit(String name, String headquarters, String address, String urlQrAddress, String description){
-        String nameEdit = name.toLowerCase().trim();
-        return new Location(null, nameEdit, headquarters, address, urlQrAddress, description, true);
+        return new Location(null, name.trim(), headquarters, address, urlQrAddress, description, true);
     }
 
     public static Location changeState(Long id, String name, String headquarters, String address, String urlQrAddress, String description, boolean state){

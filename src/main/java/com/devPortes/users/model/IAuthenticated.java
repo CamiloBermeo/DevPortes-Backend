@@ -6,4 +6,6 @@ public interface IAuthenticated {
     String getEmail();
     String getPasswordHash();
     RoleEnum getRole();
+    String getIdentityDocument();
+    String getPhoneNumber();
 }
