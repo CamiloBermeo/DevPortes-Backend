@@ -2,6 +2,7 @@ package com.devPortes.reservations.service;
 
 import com.devPortes.reservations.dto.NewReservationRequestDto;
 import com.devPortes.reservations.dto.NewReservationResponseDto;
+import com.devPortes.reservations.repository.ReservationJpaRepositoryAdapter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
