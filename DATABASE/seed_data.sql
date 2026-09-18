@@ -1,8 +1,9 @@
--- Seed data: locations + canchas (fields)
+-- Seed data: locations + canchas (fields) + posts (galeria)
 -- Ejecutar contra la base de datos golaya_db
 -- Re-ejecutable: limpia datos anteriores antes de insertar
 
 -- Limpiar datos existentes
+DELETE FROM posts;
 DELETE FROM fields;
 DELETE FROM locations;
 
@@ -168,3 +169,45 @@ VALUES (
   ARRAY['https://raw.githubusercontent.com/CamiloBermeo/devPortes/refs/heads/main/assets/img/canchas/tenis-las-palmas.webp'],
   (SELECT id FROM locations WHERE name = 'Sede Usaquen')
 );
+
+-- ============================================
+-- POSTS (6 publicaciones de galería)
+-- ============================================
+INSERT INTO posts (name, description, url_pictures, event_date)
+VALUES
+  (
+    'Torneo tapitas',
+    'Torneo realizado el 2025 de abril a las 18:00 horas donde el campeon fue el equipo "Los Campeones"',
+    ARRAY['https://raw.githubusercontent.com/CamiloBermeo/devPortes/refs/heads/main/assets/img/torneodefutbol.jpg'],
+    '2025-04-20'
+  ),
+  (
+    'Eliminaciones FutbolClub',
+    'En las eliminaciones del FutbolClub se enfrentaron los mejores equipos de la nacion.',
+    ARRAY['https://raw.githubusercontent.com/CamiloBermeo/devPortes/refs/heads/main/assets/img/eliminacionesfutbolclub.jpg'],
+    '2025-05-12'
+  ),
+  (
+    'Torneo de tenis 2026',
+    'El torneo de tenis 2026 se reunieron los mejores jugadores del país y solo un jugador logró la victoria y fue del país de Estados Unidos.',
+    ARRAY['https://raw.githubusercontent.com/CamiloBermeo/devPortes/refs/heads/main/assets/img/torneotenis.jpg'],
+    '2026-03-10'
+  ),
+  (
+    'Torneo de pádel 2024',
+    'Torneo de pádel compitiendo por el primer lugar entre muchos participantes.',
+    ARRAY['https://raw.githubusercontent.com/CamiloBermeo/devPortes/refs/heads/main/assets/img/padeljugando.jpg'],
+    '2024-11-18'
+  ),
+  (
+    'Zona de Entrenamiento',
+    'Prepárate y mejora tus habilidades en nuestras modernas instalaciones.',
+    ARRAY['https://raw.githubusercontent.com/CamiloBermeo/devPortes/refs/heads/main/assets/img/entrenandoengym.jpg'],
+    '2026-01-15'
+  ),
+  (
+    'Torneo de Baloncesto',
+    'En este torneo los mejores deportistas y estrellas del país compitieron en un entorno de alto nivel para ganar su primer lugar y título a nivel nacional.',
+    ARRAY['https://raw.githubusercontent.com/CamiloBermeo/devPortes/refs/heads/main/assets/img/torneodebaloncesto.jpg'],
+    '2026-04-15'
+  );
