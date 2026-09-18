@@ -32,14 +32,22 @@ public class EditFieldUseCase implements IEditFieldUseCase{
         Field saveField = fieldRepository.findById(id)
                 .orElseThrow(() -> new FieldNotFoundException(id));
         //reviso que la location tambien exista
-        Location location = iFindLocationById.execute(dto.locationId())
-                .orElseThrow(()-> new LocationNotFoundException(dto.locationId()));
+        Long locationId = dto.locationId();
+        Location location = iFindLocationById.execute(locationId)
+                .orElseThrow(()-> new LocationNotFoundException(locationId));
 
         //debo revisar si vienen nuevas imagenes
         if (dto.pictures()!= null){
+            List<String> urlPictures = dto.UrlPictures() != null ? new ArrayList<>(dto.UrlPictures()) : new ArrayList<>();
             for(int i=0; i < dto.pictures().size() ;i++){
                 urlImg = iCloudinaryClient.saveImg(dto.pictures().get(i));
-                dto.UrlPictures().add(urlImg); }
+                urlPictures.add(urlImg);
+            }
+            dto = new EditFieldRequestDto(
+                locationId, urlPictures, dto.pictures(), dto.name(),
+                dto.capacity(), dto.sport(), dto.surface(), dto.description(),
+                dto.details(), dto.hourlyRate(), dto.state()
+            );
         }
 
         //reemplazo los datos

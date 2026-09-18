@@ -34,6 +34,12 @@ public class LoginUseCase implements ILoginUseCase{
         }
         String token = tokenService.generateNewToken(new CustomUserDetails(saveUser));
 
-        return new TokenDataDto(token);
+        return new TokenDataDto(
+                token,
+                saveUser.getName(),
+                saveUser.getEmail(),
+                saveUser.getIdentityDocument(),
+                saveUser.getPhoneNumber()
+        );
     }
 }

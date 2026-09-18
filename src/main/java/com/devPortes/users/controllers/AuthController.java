@@ -4,6 +4,7 @@ import com.devPortes.users.dto.*;
 import com.devPortes.users.mapper.UserInMapper;
 import com.devPortes.users.security.CustomUserDetails;
 import com.devPortes.users.services.ILoginUseCase;
+import com.devPortes.users.services.IListUsersUseCase;
 import com.devPortes.users.services.INewUserUseCase;
 import com.devPortes.users.services.LoginUseCase;
 import com.devPortes.users.services.NewUserUseCase;
@@ -14,12 +15,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/v1/auth")
 @RequiredArgsConstructor
 public class AuthController {
     private final INewUserUseCase iNewUserUseCase;
     private final ILoginUseCase iLoginUseCase;
+    private final IListUsersUseCase iListUsersUseCase;
 
     @PostMapping("register")
     public ResponseEntity<NewUserResponseDto> register(@Valid @RequestBody NewUserRequestDto dto) {
@@ -38,6 +42,11 @@ public class AuthController {
     @GetMapping("profile")
     public ResponseEntity<NewUserResponseDto> myProfile(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
         return ResponseEntity.ok(UserInMapper.toDtoProfile(customUserDetails.getUser()));
+    }
+
+    @GetMapping("users")
+    public ResponseEntity<List<ListUsersResponseDto>> getUsers() {
+        return ResponseEntity.ok(iListUsersUseCase.execute());
     }
 
 }

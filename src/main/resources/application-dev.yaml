@@ -7,9 +7,9 @@ spring:
       max-request-size: 10MB
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/golaya_db
-    username: postgres
-    password: ${POSTGRES_PASSWORD:Chitiva_09}
+    url: ${URL_DB}
+    username: ${USERNAME_DB}
+    password: ${PASSWORD_DB}
     driver-class-name: org.postgresql.Driver
     hikari:
       maximum-pool-size: 10

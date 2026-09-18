@@ -4,6 +4,7 @@ import com.devPortes.users.entities.AdminEntity;
 import com.devPortes.users.model.Admin;
 import com.devPortes.users.model.Client;
 import com.devPortes.users.entities.ClientEntity;
+import com.devPortes.users.dto.ListUsersResponseDto;
 import com.devPortes.users.model.IAuthenticated;
 import com.devPortes.users.model.RoleEnum;
 
@@ -47,6 +48,19 @@ public class UserOutMapper {
                 entity.getEmail(),
                 entity.getPasswordHash(),
                 entity.getRole(),
+                entity.isState()
+        );
+    }
+
+    public static ListUsersResponseDto toUserDto(ClientEntity entity) {
+        return new ListUsersResponseDto(
+                entity.getId(),
+                entity.getName(),
+                entity.getEmail(),
+                entity.getIdentityDocument(),
+                entity.getPhoneNumber(),
+                entity.getRole().name(),
+                entity.getClassification() != null ? entity.getClassification().name() : null,
                 entity.isState()
         );
     }
