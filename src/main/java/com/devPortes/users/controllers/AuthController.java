@@ -23,7 +23,7 @@ import java.util.List;
 public class AuthController {
     private final INewUserUseCase iNewUserUseCase;
     private final ILoginUseCase iLoginUseCase;
-    private final IListUsersUseCase iListUsersUseCase;
+
 
     @PostMapping("register")
     public ResponseEntity<NewUserResponseDto> register(@Valid @RequestBody NewUserRequestDto dto) {
@@ -44,9 +44,6 @@ public class AuthController {
         return ResponseEntity.ok(UserInMapper.toDtoProfile(customUserDetails.getUser()));
     }
 
-    @GetMapping("users")
-    public ResponseEntity<List<ListUsersResponseDto>> getUsers() {
-        return ResponseEntity.ok(iListUsersUseCase.execute());
-    }
+
 
 }

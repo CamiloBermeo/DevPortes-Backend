@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
@@ -30,7 +31,10 @@ public class ReservationEntity {
     private FieldEntity fieldEntity;
 
     @Column(name = "reservation_date", nullable = false)
-    private LocalDateTime reservationDate;
+    private LocalDate reservationDate;
+
+    @OneToMany(mappedBy = "reservation") // Nombre del campo Java dentro de Payment
+    private PaymentEntity payment;
 
     @Column(name = "start_time", nullable = false)
     private LocalTime startTime;

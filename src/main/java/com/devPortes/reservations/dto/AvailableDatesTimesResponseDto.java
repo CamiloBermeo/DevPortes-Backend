@@ -4,6 +4,6 @@ import java.time.LocalTime;
 import java.util.List;
 
 public record AvailableDatesTimesResponseDto(
-        List<LocalTime> hour
+        List<LocalTime> reservationHours
 ) {
 }
