@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class AvailableDatesTimesUseCase implements IAvailableDatesTimesUseCase{
     @Override
-    public AvailableDatesTimesResponseDto execute(LocalDateTime date) {
+    public AvailableDatesTimesResponseDto execute(LocalDate date) {
         return null;
     }
 }

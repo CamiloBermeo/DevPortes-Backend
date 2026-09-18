@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @RestController
@@ -29,8 +30,8 @@ public class ReservationController {
     }
 
     @GetMapping("available-dates-times/{date}")
-public ResponseEntity<AvailableDatesTimesResponseDto> showAvailableDatesTimes (@PathVariable LocalDateTime date){
-
+public ResponseEntity<AvailableDatesTimesResponseDto> showAvailableDatesTimes (@PathVariable LocalDate date){
+        AvailableDatesTimesResponseDto response = iAvailableDatesTimes.execute(date);
         return ResponseEntity.status(HttpStatus.OK).body(response);
 }
 }
