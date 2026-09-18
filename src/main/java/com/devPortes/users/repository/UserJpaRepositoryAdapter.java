@@ -9,6 +9,7 @@ import com.devPortes.users.model.IAuthenticated;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -16,6 +17,10 @@ import java.util.Optional;
 public class UserJpaRepositoryAdapter {
     private final IClientJpaRepository clientJpa;
     private final IAdminJpaRepository adminJpa;
+
+    public List<ClientEntity> findAllClients() {
+        return clientJpa.findAll();
+    }
 
     public Optional<IAuthenticated> findByEmail(String email) {
         Optional<Client> client = clientJpa.findByEmail(email).map(UserOutMapper::toClientCompleteModel);
