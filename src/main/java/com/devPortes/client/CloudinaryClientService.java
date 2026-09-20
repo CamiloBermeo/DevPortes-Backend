@@ -33,4 +33,17 @@ public class CloudinaryClientService implements ICloudinaryClient {
             throw new ExternalServiceException(nameApi, e.getMessage());
         }
     }
+
+    @Override
+    public String saveQrImg(String nameFolder, byte[] qrImg) {
+    try {
+        Map<?, ?> uploadResult = cloudinary.uploader().upload(
+                qrImg,
+                ObjectUtils.asMap("folder", nameFolder)
+        );
+        return uploadResult.get("secure_url").toString();
+    }catch(IOException e){
+        throw new ExternalServiceException(nameApi, e.getMessage());
+    }
+    }
 }

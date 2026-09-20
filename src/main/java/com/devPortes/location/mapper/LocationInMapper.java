@@ -10,12 +10,12 @@ import java.util.List;
 
 public class LocationInMapper {
 
-    public static Location toModel (NewLocationRequestDto dto){
+    public static Location toModel (String urlQr,NewLocationRequestDto dto){
         return Location.create(
                 dto.name(),
                 dto.headquarters(),
                 dto.address(),
-                dto.urlQrAddress(),
+                urlQr,
                 dto.description()
         );
     }
