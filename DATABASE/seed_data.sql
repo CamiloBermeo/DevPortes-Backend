@@ -9,6 +9,37 @@ DELETE FROM reservations;
 DELETE FROM posts;
 DELETE FROM fields;
 DELETE FROM locations;
+DELETE FROM clients;
+
+-- ============================================
+-- ADMINISTRADOR DE PRUEBA
+-- Credencial: admin@admin.com / Admin1234.
+-- ============================================
+INSERT INTO admins (
+  name,
+  identity_document,
+  phone_number,
+  email,
+  password_hash,
+  role,
+  state
+)
+VALUES (
+  'Administrador',
+  '123456789',
+  '321123456',
+  'admin@admin.com',
+  '$2a$10$enk/3.V5v36Mnm4sNJDxJOU5AcbKwdBx1klpAoTWTjqTWW7oB9BLC',
+  'ADMIN',
+  true
+)
+ON CONFLICT (email) DO UPDATE SET
+  name = EXCLUDED.name,
+  identity_document = EXCLUDED.identity_document,
+  phone_number = EXCLUDED.phone_number,
+  password_hash = EXCLUDED.password_hash,
+  role = EXCLUDED.role,
+  state = EXCLUDED.state;
 
 -- ============================================
 -- CLIENTES DE PRUEBA (2)
@@ -71,11 +102,47 @@ VALUES
 -- ============================================
 -- LOCATIONS (3 sedes)
 -- ============================================
-INSERT INTO locations (name, headquarters, address, description, state)
+INSERT INTO locations (
+  name,
+  headquarters,
+  address,
+  url_qr_address,
+  url_address,
+  description,
+  state,
+  visible
+)
 VALUES
-  ('Sede Chapinero', 'Sede Principal', 'Cra 7 #45-12, Bogota', 'Complejo deportivo ubicado en el corazon de Chapinero, con multiples canchas y zonas de descanso.', true),
-  ('Sede Usaquen', 'Sede Norte', 'Cra 19 #145-30, Bogota', 'Espacio deportivo en la zona norte de la ciudad, ideal para familias y grupos de amigos.', true),
-  ('Sede Norte', 'Sede Deportiva', 'Cra 15 #80-20, Bogota', 'Centro deportivo con instalaciones techadas y al aire libre para toda clase de deportes.', true);
+  (
+    'Sede Chapinero',
+    'Sede Principal',
+    'Cra 7 #45-12, Bogota',
+    'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https%3A%2F%2Fmaps.app.goo.gl%2FpCpq1o52AK65H3Gq9',
+    'https://maps.app.goo.gl/pCpq1o52AK65H3Gq9',
+    'Complejo deportivo ubicado en el corazon de Chapinero, con multiples canchas y zonas de descanso.',
+    true,
+    true
+  ),
+  (
+    'Sede Usaquen',
+    'Sede Norte',
+    'Cra 19 #145-30, Bogota',
+    'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https%3A%2F%2Fmaps.app.goo.gl%2F1enRUeajQB1WzYRSA',
+    'https://maps.app.goo.gl/1enRUeajQB1WzYRSA',
+    'Espacio deportivo en la zona norte de la ciudad, ideal para familias y grupos de amigos.',
+    true,
+    true
+  ),
+  (
+    'Sede Norte',
+    'Sede Deportiva',
+    'Cra 15 #80-20, Bogota',
+    'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fsearch%2F%3Fapi%3D1%26query%3DCra%2B15%2B%252380-20%252C%2BBogota',
+    'https://www.google.com/maps/search/?api=1&query=Cra+15+%2380-20%2C+Bogota',
+    'Centro deportivo con instalaciones techadas y al aire libre para toda clase de deportes.',
+    true,
+    true
+  );
 
 -- ============================================
 -- FIELDS (10 canchas)
@@ -137,16 +204,16 @@ VALUES (
   40000,
   'DISPONIBLE',
   ARRAY['Estructura panoramica de alta visibilidad', 'Iluminacion LED antideslumbrante orientada al cielo', 'Zona de descanso integrada para hidratacion'],
-  ARRAY['https://raw.githubusercontent.com/CamiloBermeo/devPortes/refs/heads/main/assets/img/canchas/padel-arena.webp'],
+  ARRAY['https://res.cloudinary.com/skohqf7m/image/upload/v1789941319/canchas/qv0savwxsdrposawltde.avif'],
   (SELECT id FROM locations WHERE name = 'Sede Chapinero')
 );
 
--- Cancha 5: Zona de Entrenamiento - Cancha Indoor (Norte)
+-- Cancha 5: Zona de Entrenamiento - Indoor (Norte)
 INSERT INTO fields (name, capacity, sport, surface, description, hourly_rate, state, details, url_pictures, location_id)
 VALUES (
   'Zona de Entrenamiento',
   '12',
-  'Cancha Indoor',
+  'Indoor',
   'Piso de Concreto',
   'Disenada especialmente para sesiones enfocadas en la tecnica.',
   25000,
@@ -167,7 +234,7 @@ VALUES (
   30000,
   'DISPONIBLE',
   ARRAY['Tableros homologados con red reglamentaria', 'Iluminacion LED de alta intensidad', 'Marcador electronico digital integrado'],
-  ARRAY['https://raw.githubusercontent.com/CamiloBermeo/devPortes/refs/heads/main/assets/img/canchas/baloncesto-coliseo.webp'],
+  ARRAY['https://res.cloudinary.com/skohqf7m/image/upload/v1789941820/canchas/kusxalb9wtoxch9a8yc0.avif'],
   (SELECT id FROM locations WHERE name = 'Sede Norte')
 );
 
@@ -182,7 +249,7 @@ VALUES (
   28000,
   'DISPONIBLE',
   ARRAY['Arena sintetica certificada para competencia', 'Red ajustable para playa o indoor', 'Sector de calentamiento lateral'],
-  ARRAY['https://raw.githubusercontent.com/CamiloBermeo/devPortes/refs/heads/main/assets/img/canchas/padel-arena.webp'],
+  ARRAY['https://res.cloudinary.com/skohqf7m/image/upload/v1789941428/canchas/vquc9y0okipged6gzzkm.avif'],
   (SELECT id FROM locations WHERE name = 'Sede Norte')
 );
 
@@ -325,3 +392,54 @@ FROM (
 ) AS datos(email, reservation_date, start_time, field_name)
 JOIN clients c ON c.email = datos.email
 JOIN fields f ON f.name = datos.field_name;
+
+-- ============================================
+-- 20 RESERVAS ADICIONALES: ESTADIO PRINCIPAL
+-- Septiembre de 2026, sin solapamientos en la misma cancha.
+-- ============================================
+INSERT INTO reservations (
+  user_id,
+  field_id,
+  reservation_date,
+  start_time,
+  end_time,
+  total_hours,
+  total_pay,
+  remaining_payment,
+  state
+)
+SELECT
+  c.id,
+  f.id,
+  datos.reservation_date::date,
+  datos.start_time::time,
+  (datos.start_time::time + INTERVAL '1 hour')::time,
+  1,
+  f.hourly_rate,
+  ROUND(f.hourly_rate * 0.5, 2),
+  'PENDIENTE'
+FROM (
+  VALUES
+    ('cliente.reservas.1@test.com', '2026-09-01', '08:00'),
+    ('cliente.reservas.2@test.com', '2026-09-02', '09:00'),
+    ('cliente.reservas.1@test.com', '2026-09-04', '10:00'),
+    ('cliente.reservas.2@test.com', '2026-09-05', '16:00'),
+    ('cliente.reservas.1@test.com', '2026-09-06', '17:00'),
+    ('cliente.reservas.2@test.com', '2026-09-07', '18:00'),
+    ('cliente.reservas.1@test.com', '2026-09-08', '19:00'),
+    ('cliente.reservas.2@test.com', '2026-09-09', '20:00'),
+    ('cliente.reservas.1@test.com', '2026-09-10', '21:00'),
+    ('cliente.reservas.2@test.com', '2026-09-11', '08:00'),
+    ('cliente.reservas.1@test.com', '2026-09-12', '09:00'),
+    ('cliente.reservas.2@test.com', '2026-09-13', '10:00'),
+    ('cliente.reservas.1@test.com', '2026-09-14', '16:00'),
+    ('cliente.reservas.2@test.com', '2026-09-15', '17:00'),
+    ('cliente.reservas.1@test.com', '2026-09-16', '18:00'),
+    ('cliente.reservas.2@test.com', '2026-09-17', '19:00'),
+    ('cliente.reservas.1@test.com', '2026-09-18', '20:00'),
+    ('cliente.reservas.2@test.com', '2026-09-19', '21:00'),
+    ('cliente.reservas.1@test.com', '2026-09-20', '08:00'),
+    ('cliente.reservas.2@test.com', '2026-09-21', '09:00')
+) AS datos(email, reservation_date, start_time)
+JOIN clients c ON c.email = datos.email
+JOIN fields f ON f.name = 'Estadio Principal';
