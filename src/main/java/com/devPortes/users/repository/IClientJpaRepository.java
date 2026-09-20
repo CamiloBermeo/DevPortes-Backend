@@ -11,4 +11,6 @@ public interface IClientJpaRepository extends JpaRepository<ClientEntity, Long> 
 
     Optional<ClientEntity> findByEmail (String email);
 
+    Optional<ClientEntity> findByIdentityDocument(String identityDocument);
+
 }

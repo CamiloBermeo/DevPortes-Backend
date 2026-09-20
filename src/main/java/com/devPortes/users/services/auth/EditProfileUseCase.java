@@ -2,6 +2,7 @@ package com.devPortes.users.services.auth;
 
 import com.devPortes.users.dto.auth.EditProfileRequestDto;
 import com.devPortes.users.dto.auth.NewUserResponseDto;
+import com.devPortes.users.exceptions.ExistingUserDataBaseException;
 import com.devPortes.users.exceptions.UserNotFoundException;
 import com.devPortes.users.mapper.UserInMapper;
 import com.devPortes.users.model.Client;
@@ -25,6 +26,17 @@ public class EditProfileUseCase implements IEditProfileUseCase {
     public NewUserResponseDto execute(Long userId, EditProfileRequestDto dto) {
         Client existingClient = clientRepository.finById(userId)
                 .orElseThrow(() -> new UserNotFoundException(String.valueOf(userId)));
+
+        if (clientRepository.existsByEmailForAnotherUser(dto.email(), userId)) {
+            throw new ExistingUserDataBaseException(dto.email());
+        }
+
+        if (clientRepository.existsByIdentityDocumentForAnotherClient(dto.identityDocument(), userId)) {
+            throw new ExistingUserDataBaseException(
+                    "identityDocument",
+                    "La cédula " + dto.identityDocument() + " ya está registrada."
+            );
+        }
 
         Client editClient = UserInMapper.toEditProfileModel(existingClient, dto);
         Client savedClient = clientRepository.saveEdit(userId, editClient);

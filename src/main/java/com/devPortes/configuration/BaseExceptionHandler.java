@@ -6,7 +6,11 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public abstract class BaseExceptionHandler {
-    public record ErrorDetails(int status, String message) {}
+    public record ErrorDetails(int status, String message, String field) {
+        public ErrorDetails(int status, String message) {
+            this(status, message, null);
+        }
+    }
     public record ValidationErrorDetails(int status, List<String> messages) {}
 
     protected ResponseEntity<ErrorDetails> buildResponse(Exception exception, HttpStatus status) {

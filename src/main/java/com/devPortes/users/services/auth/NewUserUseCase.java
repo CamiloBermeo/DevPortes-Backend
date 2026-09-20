@@ -25,9 +25,16 @@ public class NewUserUseCase implements INewUserUseCase {
 
         //Verifico si el admin existe en la base de datos con el mismo email
         //verifico que el usuario no este registrado previamente
-        if(iFindUserByEmail.findAdminByEmail(dto.email()).isPresent() &&
-                iFindUserByEmail.findClientByEmail(dto.email()).isPresent()){
+        if (iFindUserByEmail.findAdminByEmail(dto.email()).isPresent() ||
+                iFindUserByEmail.findClientByEmail(dto.email()).isPresent()) {
             throw new ExistingUserDataBaseException(dto.email());
+        }
+
+        if (userRepository.existsByIdentityDocument(dto.identityDocument())) {
+            throw new ExistingUserDataBaseException(
+                    "identityDocument",
+                    "La cédula " + dto.identityDocument() + " ya está registrada."
+            );
         }
 
         String passwordHash = bCryptPasswordEncoder.encodePassword(dto.password());

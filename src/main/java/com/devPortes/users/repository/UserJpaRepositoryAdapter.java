@@ -38,6 +38,24 @@ public class UserJpaRepositoryAdapter {
     public Optional<Client> findClientByEmail(String email) {
         return clientJpa.findByEmail(email).map(UserOutMapper::toClientCompleteModel);
     }
+
+    public boolean existsByIdentityDocument(String identityDocument) {
+        return clientJpa.findByIdentityDocument(identityDocument).isPresent();
+    }
+
+    public boolean existsByIdentityDocumentForAnotherClient(String identityDocument, Long clientId) {
+        return clientJpa.findByIdentityDocument(identityDocument)
+                .map(client -> !client.getId().equals(clientId))
+                .orElse(false);
+    }
+
+    public boolean existsByEmailForAnotherUser(String email, Long clientId) {
+        boolean anotherClientExists = clientJpa.findByEmail(email)
+                .map(client -> !client.getId().equals(clientId))
+                .orElse(false);
+        return anotherClientExists || adminJpa.findByEmail(email).isPresent();
+    }
+
     public Optional<Admin> findAdminByEmail(String email) {
         return adminJpa.findByEmail(email).map(UserOutMapper::toAdminCompleteModel);
     }
