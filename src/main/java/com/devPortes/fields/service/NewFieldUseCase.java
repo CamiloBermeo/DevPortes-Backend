@@ -38,7 +38,7 @@ public class NewFieldUseCase implements INewFieldUseCase {
                 .toList();
 */
         for(int i=0; i < dto.pictures().size() ;i++){
-            urlImg = iCloudinaryClient.saveImg(dto.pictures().get(i));
+            urlImg = iCloudinaryClient.saveImg("canchas",dto.pictures().get(i));
             urlPictures.add(urlImg); }
 
         Field field = FieldInMapper.toModel(dto, location, urlPictures);

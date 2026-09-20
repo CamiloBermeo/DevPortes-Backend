@@ -23,7 +23,7 @@ public class EditClientUseCase implements IEditClientUseCase {
     public ListUsersResponseDto execute(Long id, EditClientRequestDto dto) {
         Client saveClient = clientRepository.finById(id)
                 .orElseThrow(() -> new FieldNotFoundException(id));
-        String urlPicture = iCloudinaryClient.saveImg(dto.picture());
+        String urlPicture = iCloudinaryClient.saveImg("usuarios",dto.picture());
         Client editClient = UserInMapper.toEditModel(saveClient,dto, urlPicture);
 
         return UserInMapper.toUserDto(clientRepository.saveEdit(id,editClient));

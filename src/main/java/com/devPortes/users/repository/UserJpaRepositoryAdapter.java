@@ -19,8 +19,8 @@ public class UserJpaRepositoryAdapter {
     private final IClientJpaRepository clientJpa;
     private final IAdminJpaRepository adminJpa;
 
-    public List<ClientEntity> findAllClients() {
-        return clientJpa.findAll();
+    public List<Client> findAllClients() {
+        return UserOutMapper.toClientModelList(clientJpa.findAll());
     }
 
     public Optional<Client> finById(Long id){

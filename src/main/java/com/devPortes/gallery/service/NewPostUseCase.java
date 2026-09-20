@@ -27,7 +27,7 @@ public class NewPostUseCase implements INewPostUseCase {
         List<String> urlPictures = new ArrayList<>();
 
         for (MultipartFile picture : dto.pictures()) {
-            String urlImg = iCloudinaryClient.saveImg(picture);
+            String urlImg = iCloudinaryClient.saveImg("galería",picture);
             urlPictures.add(urlImg);
         }
 

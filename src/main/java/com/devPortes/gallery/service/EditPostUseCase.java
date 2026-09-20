@@ -31,7 +31,7 @@ public class EditPostUseCase implements IEditPostUseCase {
 
         if (dto.pictures() != null) {
             for (MultipartFile picture : dto.pictures()) {
-                String urlImg = iCloudinaryClient.saveImg(picture);
+                String urlImg = iCloudinaryClient.saveImg("galería", picture);
                 urlPictures.add(urlImg);
             }
         }

@@ -6,6 +6,8 @@ import com.devPortes.users.model.Client;
 import com.devPortes.users.entities.ClientEntity;
 import com.devPortes.users.dto.client.ListUsersResponseDto;
 
+import java.util.List;
+
 public class UserOutMapper {
 
     public static ClientEntity toClientEntity(Client model){
@@ -64,7 +66,12 @@ public static ClientEntity toEditClientEntity(ClientEntity entity, Client model)
                 entity.isState()
         );
     }
+public static List<Client> toClientModelList(List<ClientEntity> clients){
+        return clients.stream()
+                .map(UserOutMapper::toClientCompleteModel)
+                .toList();
 
+}
 
 
 }

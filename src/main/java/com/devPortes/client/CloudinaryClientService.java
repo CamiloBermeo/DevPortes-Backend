@@ -12,16 +12,18 @@ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
-public class CloudinaryClientService implements ICloudinaryClient{
+public class CloudinaryClientService implements ICloudinaryClient {
     private final Cloudinary cloudinary;
-    private final String nameApi="cloudinary ";
+    private final String nameApi = "cloudinary ";
+
     @Override
-    public String saveImg(MultipartFile img) {
+    public String saveImg(String nameFolder, MultipartFile img) {
+
         try {
             // Sube los bytes de la imagen a Cloudinary
             Map<?, ?> uploadResult = cloudinary.uploader().upload(
                     img.getBytes(),
-                    ObjectUtils.asMap("folder", "canchas") // Nombre de la carpeta en Cloudinary (opcional)
+                    ObjectUtils.asMap("folder", nameFolder) // Nombre de la carpeta en Cloudinary (opcional)
             );
 
             // Retorna la URL pública HTTPS de la imagen guardada

@@ -53,7 +53,7 @@ public class UserInMapper {
                 ""
         );
     }
-    public static ListUsersResponseDto toUserDto(ClientEntity entity) {
+    public static ListUsersResponseDto toUserDto(Client entity) {
         return new ListUsersResponseDto(
                 entity.getId(),
                 entity.getUrlPicture(),
