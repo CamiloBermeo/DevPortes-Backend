@@ -26,7 +26,13 @@ public class AvailableDatesTimesUseCase implements IAvailableDatesTimesUseCase {
 
         List<LocalTime> hours = new ArrayList<>();
         for (Reservation reservation : reservations) {
-            hours.add(reservation.getStartTime());
+            LocalTime start = reservation.getStartTime();
+            LocalTime end = reservation.getEndTime();
+            for (LocalTime h = start; h.isBefore(end); h = h.plusHours(1)) {
+                if (!hours.contains(h)) {
+                    hours.add(h);
+                }
+            }
         }
         return ReservationInMapper.toAvailableDatesTimesResponseDto(hours);
     }

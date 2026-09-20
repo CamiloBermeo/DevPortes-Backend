@@ -24,7 +24,6 @@ public class UserOutMapper {
         return entity;
     }
 public static ClientEntity toEditClientEntity(ClientEntity entity, Client model){
-    entity.setId(model.getId());
     entity.setUrlPicture(model.getUrlPicture());
     entity.setName(model.getName());
     entity.setIdentityDocument(model.getIdentityDocument());

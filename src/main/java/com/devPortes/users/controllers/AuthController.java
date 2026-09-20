@@ -1,11 +1,13 @@
 package com.devPortes.users.controllers;
 
+import com.devPortes.users.dto.auth.EditProfileRequestDto;
 import com.devPortes.users.dto.auth.LoginDataRequestDto;
 import com.devPortes.users.dto.auth.NewUserRequestDto;
 import com.devPortes.users.dto.auth.NewUserResponseDto;
 import com.devPortes.users.dto.auth.TokenDataDto;
 import com.devPortes.users.mapper.UserInMapper;
 import com.devPortes.users.security.CustomUserDetails;
+import com.devPortes.users.services.auth.IEditProfileUseCase;
 import com.devPortes.users.services.auth.ILoginUseCase;
 import com.devPortes.users.services.auth.INewUserUseCase;
 import jakarta.validation.Valid;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
     private final INewUserUseCase iNewUserUseCase;
     private final ILoginUseCase iLoginUseCase;
+    private final IEditProfileUseCase iEditProfileUseCase;
 
 
     @PostMapping("register")
@@ -40,6 +43,15 @@ public class AuthController {
     @GetMapping("profile")
     public ResponseEntity<NewUserResponseDto> myProfile(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
         return ResponseEntity.ok(UserInMapper.toDtoProfile(customUserDetails.getUser()));
+    }
+
+    @PutMapping("profile")
+    public ResponseEntity<NewUserResponseDto> updateProfile(
+            @AuthenticationPrincipal CustomUserDetails customUserDetails,
+            @Valid @RequestBody EditProfileRequestDto dto) {
+        Long userId = customUserDetails.getUser().getId();
+        NewUserResponseDto response = iEditProfileUseCase.execute(userId, dto);
+        return ResponseEntity.ok(response);
     }
 
 

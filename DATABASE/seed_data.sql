@@ -1,11 +1,24 @@
--- Seed data: locations + canchas (fields) + posts (galeria)
+-- Seed data: locations + canchas (fields) + posts (galeria) + metodos de pago
 -- Ejecutar contra la base de datos golaya_db
 -- Re-ejecutable: limpia datos anteriores antes de insertar
 
--- Limpiar datos existentes
+-- Limpiar datos existentes (respetar orden de FK)
+DELETE FROM pagos;
+DELETE FROM metodos_pago;
+DELETE FROM reservations;
 DELETE FROM posts;
 DELETE FROM fields;
 DELETE FROM locations;
+
+-- ============================================
+-- MÉTODOS DE PAGO (4)
+-- ============================================
+INSERT INTO metodos_pago (name, description, state)
+VALUES
+  ('NEQUI', 'Pago móvil a través de Nequi', true),
+  ('Daviplata', 'Pago móvil a través de Daviplata', true),
+  ('Transferencia', 'Transferencia bancaria a cuenta de GOLAYA', true),
+  ('Efectivo', 'Pago en efectivo directo en sede', true);
 
 -- ============================================
 -- LOCATIONS (3 sedes)

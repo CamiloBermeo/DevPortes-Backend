@@ -1,5 +1,6 @@
 package com.devPortes.users.mapper;
 
+import com.devPortes.users.dto.auth.EditProfileRequestDto;
 import com.devPortes.users.dto.auth.NewUserRequestDto;
 import com.devPortes.users.dto.auth.NewUserResponseDto;
 import com.devPortes.users.dto.client.EditClientRequestDto;
@@ -53,6 +54,21 @@ public class UserInMapper {
                 ""
         );
     }
+    public static Client toEditProfileModel(Client existing, EditProfileRequestDto dto) {
+        return Client.edit(
+                existing.getUrlPicture(),
+                dto.name(),
+                dto.identityDocument(),
+                dto.phoneNumber(),
+                dto.email(),
+                existing.getPasswordHash(),
+                existing.getClassification(),
+                existing.getReservationAmount(),
+                existing.getRole(),
+                existing.isState()
+        );
+    }
+
     public static ListUsersResponseDto toUserDto(Client entity) {
         return new ListUsersResponseDto(
                 entity.getId(),

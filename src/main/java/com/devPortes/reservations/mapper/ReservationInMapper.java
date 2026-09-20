@@ -1,6 +1,7 @@
 package com.devPortes.reservations.mapper;
 
 import com.devPortes.fields.model.Field;
+import com.devPortes.reservations.dto.AvailableDatesResponseDto;
 import com.devPortes.reservations.dto.AvailableDatesTimesResponseDto;
 import com.devPortes.reservations.dto.CompleteReservationResponseDto;
 import com.devPortes.reservations.dto.NewReservationRequestDto;
@@ -51,6 +52,10 @@ public class ReservationInMapper {
 
     public static AvailableDatesTimesResponseDto toAvailableDatesTimesResponseDto(List<LocalTime> hours) {
         return new AvailableDatesTimesResponseDto(hours);
+    }
+
+    public static AvailableDatesResponseDto toAvailableDatesResponseDto(List<String> availableDates, List<String> fullDates, List<String> datesWithReservations) {
+        return new AvailableDatesResponseDto(availableDates, fullDates, datesWithReservations);
     }
 
 }
