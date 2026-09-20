@@ -10,6 +10,8 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "reservations")
@@ -33,8 +35,8 @@ public class ReservationEntity {
     @Column(name = "reservation_date", nullable = false)
     private LocalDate reservationDate;
 
-    @OneToMany(mappedBy = "reservation") // Nombre del campo Java dentro de Payment
-    private PaymentEntity payment;
+    @OneToMany(mappedBy = "reservation", fetch = FetchType.LAZY)
+    private List<PaymentEntity> payments = new ArrayList<>();
 
     @Column(name = "start_time", nullable = false)
     private LocalTime startTime;

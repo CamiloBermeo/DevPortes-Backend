@@ -15,6 +15,7 @@ import com.devPortes.users.repository.IClientJpaRepository;
 import com.devPortes.users.repository.UserJpaRepositoryAdapter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.swing.text.html.parser.Entity;
 import java.time.LocalDate;
@@ -28,10 +29,11 @@ public class ReservationJpaRepositoryAdapter {
     private final IFieldJpaRepository fieldRepository;
 
     public List<Reservation> findByReservationDate(LocalDate date) {
-        List<ReservationEntity> reservationEntities = jpa.findByReservationDateBetween(date);
+        List<ReservationEntity> reservationEntities = jpa.findByReservationDate(date);
         return ReservationOutMapper.toModelList(reservationEntities);
     }
 
+    @Transactional
     public Reservation save(Reservation model) {
         ClientEntity client = clientRepository.findById(model.getUser().getId())
                 .orElseThrow(() -> new UserNotFoundException(String.valueOf(model.getUser().getId())));

@@ -38,7 +38,7 @@ public class ReservationInMapper {
                 model.getId(),
                 model.getUser().getId(),
                 model.getField().getId(),
-                model.getPayment().getId(),
+                model.getPayments().stream().map(p -> p.getId()).toList(),
                 model.getReservationDate(),
                 model.getStartTime(),
                 model.getEndTime(),

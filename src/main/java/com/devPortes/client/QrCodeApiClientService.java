@@ -2,12 +2,14 @@ package com.devPortes.client;
 
 
 import com.devPortes.fields.exceptions.ExternalServiceException;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
+@Service
 public class QrCodeApiClientService implements IQrCodeApiClient {
 
     RestClient restClient = RestClient.create();

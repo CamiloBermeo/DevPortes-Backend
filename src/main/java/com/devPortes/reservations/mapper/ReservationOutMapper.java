@@ -39,7 +39,9 @@ public class ReservationOutMapper {
                 reservation.getId(),
                 UserOutMapper.toClientCompleteModel(reservation.getClientEntity()),
                 FieldOutMapper.toModel(reservation.getFieldEntity()),
-                PaymentOutMapper.toModel(reservation.getPayment()),
+                reservation.getPayments().stream()
+                        .map(PaymentOutMapper::toModel)
+                        .toList(),
                 reservation.getReservationDate(),
                 reservation.getStartTime(),
                 reservation.getEndTime(),

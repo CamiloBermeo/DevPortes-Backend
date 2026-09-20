@@ -5,12 +5,13 @@ import com.devPortes.reservations.model.EstadoReservationEnum;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 public record CompleteReservationResponseDto(
         Long id,
         Long userId,
         Long fieldId,
-        Long paymentId,
+        List<Long> paymentIds,
         LocalDate reservationDate,
         LocalTime startTime,
         LocalTime endTime,

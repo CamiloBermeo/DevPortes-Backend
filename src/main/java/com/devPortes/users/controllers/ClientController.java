@@ -22,7 +22,7 @@ public class ClientController {
     private final IListClientsUseCase iListClientsUseCase;
     private final IEditClientUseCase iEditClientUseCase;
 
-    @PutMapping(value = "edit", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PutMapping(value = "edit/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ListUsersResponseDto> editClient(@Valid
                                                                @PathVariable Long id,
                                                                @ModelAttribute EditClientRequestDto dto) {

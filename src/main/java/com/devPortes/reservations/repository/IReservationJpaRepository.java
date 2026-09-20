@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface IReservationJpaRepository extends JpaRepository<ReservationEntity, Long> {
-    List<ReservationEntity> findByReservationDateBetween(LocalDate date);
+    List<ReservationEntity> findByReservationDate(LocalDate date);
 }

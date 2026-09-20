@@ -19,7 +19,7 @@ public class ClientEntity {
     @Column(nullable = false)
     private String name;
 
-    @Column(name="url_picture")
+    @Column(name="url_pictures")
     private String urlPicture;
 
     @Column(name = "identity_document", nullable = false, unique = true)
