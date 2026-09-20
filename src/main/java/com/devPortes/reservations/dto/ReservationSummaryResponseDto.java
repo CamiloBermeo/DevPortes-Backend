@@ -12,7 +12,11 @@ public record ReservationSummaryResponseDto(
         java.math.BigDecimal totalPay,
         java.math.BigDecimal remainingPayment,
         String clientName,
-        String clientEmail
+        String clientEmail,
+        String locationName,
+        String locationAddress,
+        String locationQrUrl,
+        String locationUrl
 ) {
     public ReservationSummaryResponseDto(
             Long id,
@@ -22,6 +26,6 @@ public record ReservationSummaryResponseDto(
             String matchType,
             String status
     ) {
-        this(id, fieldName, date, startTime, matchType, status, null, null, null, null, null, null);
+        this(id, fieldName, date, startTime, matchType, status, null, null, null, null, null, null, null, null, null, null);
     }
 }

@@ -7,6 +7,6 @@ import java.time.LocalDateTime;
 
 public interface IAvailableDatesTimesUseCase {
 
-    AvailableDatesTimesResponseDto execute(LocalDate date);
+    AvailableDatesTimesResponseDto execute(Long fieldId, LocalDate date);
 
 }

@@ -40,7 +40,7 @@ public class UserStatisticsService {
                         .filter(reservation -> reservation.getState() != EstadoReservationEnum.CANCELADA)
                         .count(),
                 playedHours,
-                favorite == null ? "Sin datos" : favorite.getKey(),
+                favorite == null ? "N/A" : favorite.getKey(),
                 favorite == null ? 0 : favorite.getValue()
         );
     }

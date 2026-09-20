@@ -29,15 +29,21 @@ public class ReservationJpaRepositoryAdapter {
     private final IFieldJpaRepository fieldRepository;
 
     @Transactional(readOnly = true)
-    public List<Reservation> findByReservationDate(LocalDate date) {
-        List<ReservationEntity> reservationEntities = jpa.findByReservationDateAndStateNot(date, EstadoReservationEnum.CANCELADA);
+    public List<Reservation> findByReservationDate(Long fieldId, LocalDate date) {
+        List<ReservationEntity> reservationEntities = jpa.findByFieldEntity_IdAndReservationDateAndStateNot(fieldId, date, EstadoReservationEnum.CANCELADA);
         return ReservationOutMapper.toModelList(reservationEntities);
     }
 
     @Transactional(readOnly = true)
-    public List<Reservation> findByDateRange(LocalDate startDate, LocalDate endDate) {
-        List<ReservationEntity> reservationEntities = jpa.findByReservationDateBetweenAndStateNot(startDate, endDate, EstadoReservationEnum.CANCELADA);
+    public List<Reservation> findByDateRange(Long fieldId, LocalDate startDate, LocalDate endDate) {
+        List<ReservationEntity> reservationEntities = jpa.findByFieldEntity_IdAndReservationDateBetweenAndStateNot(fieldId, startDate, endDate, EstadoReservationEnum.CANCELADA);
         return ReservationOutMapper.toModelList(reservationEntities);
+    }
+
+    @Transactional(readOnly = true)
+    public boolean existsOverlapping(Long fieldId, LocalDate date, java.time.LocalTime startTime, java.time.LocalTime endTime) {
+        return jpa.existsByFieldEntity_IdAndReservationDateAndStateNotAndStartTimeLessThanAndEndTimeGreaterThan(
+                fieldId, date, EstadoReservationEnum.CANCELADA, endTime, startTime);
     }
 
     @Transactional

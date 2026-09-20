@@ -15,6 +15,7 @@ public class LocationOutMapper {
         entity.setHeadquarters(model.getHeadquarters());
         entity.setAddress(model.getAddress());
         entity.setUrlQrAddress(model.getUrlQrAddress());
+        entity.setUrlAddress(model.getUrlAddress());
         entity.setDescription(model.getDescription());
         entity.setState(model.isState());
         entity.setVisible(model.isVisible());
@@ -26,6 +27,7 @@ public class LocationOutMapper {
         saveEntity.setHeadquarters(model.getHeadquarters());
         saveEntity.setAddress(model.getAddress());
         saveEntity.setUrlQrAddress(model.getUrlQrAddress());
+        saveEntity.setUrlAddress(model.getUrlAddress());
         saveEntity.setDescription(model.getDescription());
         saveEntity.setState(model.isState());
         return saveEntity;
@@ -37,6 +39,7 @@ public class LocationOutMapper {
                 entity.getHeadquarters(),
                 entity.getAddress(),
                 entity.getUrlQrAddress(),
+                entity.getUrlAddress(),
                 entity.getDescription(),
                 entity.isState(),
                 entity.isVisible()

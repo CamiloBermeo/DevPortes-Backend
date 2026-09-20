@@ -8,6 +8,7 @@ import com.devPortes.reservations.dto.NewReservationResponseDto;
 import com.devPortes.reservations.mapper.ReservationInMapper;
 import com.devPortes.reservations.model.Reservation;
 import com.devPortes.reservations.repository.ReservationJpaRepositoryAdapter;
+import com.devPortes.reservations.exceptions.ReservationScheduleConflictException;
 import com.devPortes.users.exceptions.UserNotFoundException;
 import com.devPortes.users.model.Client;
 import com.devPortes.users.repository.UserJpaRepositoryAdapter;
@@ -30,6 +31,10 @@ public class NewReservationUseCase implements INewReservationUseCase {
         //verificar que la cancha exista
         Field field = fieldRepository.findById(dto.fieldId())
                 .orElseThrow(() -> new FieldRepositoryNotFoundException(dto.fieldId()));
+
+        if (repository.existsOverlapping(dto.fieldId(), dto.reservationDate(), dto.startTime(), dto.endTime())) {
+            throw new ReservationScheduleConflictException();
+        }
 
         Reservation reservation = ReservationInMapper.toModel(client, field, dto);
 

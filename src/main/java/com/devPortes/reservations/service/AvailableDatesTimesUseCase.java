@@ -20,9 +20,9 @@ public class AvailableDatesTimesUseCase implements IAvailableDatesTimesUseCase {
     private final ReservationJpaRepositoryAdapter repository;
 
     @Override
-    public AvailableDatesTimesResponseDto execute(LocalDate date) {
+    public AvailableDatesTimesResponseDto execute(Long fieldId, LocalDate date) {
 
-        List<Reservation> reservations = repository.findByReservationDate(date);
+        List<Reservation> reservations = repository.findByReservationDate(fieldId, date);
 
         List<LocalTime> hours = new ArrayList<>();
         for (Reservation reservation : reservations) {

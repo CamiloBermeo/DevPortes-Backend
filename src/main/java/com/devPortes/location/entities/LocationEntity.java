@@ -25,6 +25,8 @@ public class LocationEntity {
     private String address;
     @Column(name = "url_qr_address")
     private String urlQrAddress;
+    @Column(name = "url_address")
+    private String urlAddress;
     @Column
     private String description;
     @Column

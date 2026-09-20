@@ -16,6 +16,7 @@ public class LocationInMapper {
                 dto.headquarters(),
                 dto.address(),
                 urlQr,
+                dto.urlQrAddress(),
                 dto.description()
         );
     }
@@ -24,6 +25,7 @@ public class LocationInMapper {
                 dto.name(),
                 dto.headquarters(),
                 dto.address(),
+                dto.urlQrAddress(),
                 dto.urlQrAddress(),
                 dto.description()
         );
@@ -40,6 +42,7 @@ public class LocationInMapper {
                 model.getHeadquarters(),
                 model.getAddress(),
                 model.getUrlQrAddress(),
+                model.getUrlAddress(),
                 model.getDescription(),
                 model.isState()
         );

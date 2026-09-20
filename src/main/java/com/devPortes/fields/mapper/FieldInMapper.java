@@ -45,6 +45,8 @@ public class FieldInMapper {
                model.getLocation().getId(),
                model.getLocation().getName(),
                model.getLocation().getAddress(),
+               model.getLocation().getUrlQrAddress(),
+               model.getLocation().getUrlAddress(),
                model.getUrlPictures(),
                model.getName(),
                model.getCapacity(),

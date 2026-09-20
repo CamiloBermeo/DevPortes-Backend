@@ -33,7 +33,11 @@ public class GetAllReservationsUseCase implements IGetAllReservationsUseCase {
                 reservation.getTotalPay(),
                 reservation.getRemainingPayment(),
                 reservation.getUser().getName(),
-                reservation.getUser().getEmail()
+                reservation.getUser().getEmail(),
+                reservation.getField().getLocation().getName(),
+                reservation.getField().getLocation().getAddress(),
+                reservation.getField().getLocation().getUrlQrAddress()
+                ,reservation.getField().getLocation().getUrlAddress()
         );
     }
 }

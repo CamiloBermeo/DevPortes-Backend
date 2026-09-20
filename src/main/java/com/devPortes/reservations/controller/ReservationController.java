@@ -29,16 +29,16 @@ public class ReservationController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @GetMapping("available-dates-times/{date}")
-    public ResponseEntity<AvailableDatesTimesResponseDto> showAvailableDatesTimes(@PathVariable LocalDate date) {
-        AvailableDatesTimesResponseDto response = iAvailableDatesTimes.execute(date);
+    @GetMapping("available-dates-times/{fieldId}/{date}")
+    public ResponseEntity<AvailableDatesTimesResponseDto> showAvailableDatesTimes(@PathVariable Long fieldId, @PathVariable LocalDate date) {
+        AvailableDatesTimesResponseDto response = iAvailableDatesTimes.execute(fieldId, date);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @GetMapping("available-dates/{year}/{month}")
+    @GetMapping("available-dates/{fieldId}/{year}/{month}")
     public ResponseEntity<AvailableDatesResponseDto> showAvailableDates(
-            @PathVariable int year, @PathVariable int month) {
-        AvailableDatesResponseDto response = iAvailableDates.execute(year, month);
+            @PathVariable Long fieldId, @PathVariable int year, @PathVariable int month) {
+        AvailableDatesResponseDto response = iAvailableDates.execute(fieldId, year, month);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

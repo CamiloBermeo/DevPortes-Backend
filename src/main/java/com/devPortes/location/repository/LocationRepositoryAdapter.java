@@ -46,6 +46,7 @@ public class LocationRepositoryAdapter {
                 locationModel.getHeadquarters(),
                 locationModel.getAddress(),
                 locationModel.getUrlQrAddress(),
+                locationModel.getUrlAddress(),
                 locationModel.getDescription(),
                 locationModel.isState()
         );

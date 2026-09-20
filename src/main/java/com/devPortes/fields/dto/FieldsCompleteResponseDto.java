@@ -12,6 +12,8 @@ public record FieldsCompleteResponseDto(
         Long locationId,
         String locationName,
         String locationAddress,
+        String locationQrUrl,
+        String locationUrl,
         List<String> urlPictures,
         String name,
         String capacity,

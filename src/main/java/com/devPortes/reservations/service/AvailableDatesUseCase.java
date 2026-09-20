@@ -34,12 +34,12 @@ public class AvailableDatesUseCase implements IAvailableDatesUseCase {
     );
 
     @Override
-    public AvailableDatesResponseDto execute(int year, int month) {
+    public AvailableDatesResponseDto execute(Long fieldId, int year, int month) {
         YearMonth yearMonth = YearMonth.of(year, month);
         LocalDate startDate = yearMonth.atDay(1);
         LocalDate endDate = yearMonth.atEndOfMonth();
 
-        List<Reservation> reservations = repository.findByDateRange(startDate, endDate);
+        List<Reservation> reservations = repository.findByDateRange(fieldId, startDate, endDate);
 
         List<String> availableDates = new ArrayList<>();
         List<String> fullDates = new ArrayList<>();

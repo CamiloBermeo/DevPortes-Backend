@@ -34,7 +34,11 @@ public class GetReservationHistoryUseCase implements IGetReservationHistoryUseCa
                         r.getTotalPay(),
                         r.getRemainingPayment(),
                         r.getUser().getName(),
-                        r.getUser().getEmail()
+                        r.getUser().getEmail(),
+                        r.getField().getLocation().getName(),
+                        r.getField().getLocation().getAddress(),
+                        r.getField().getLocation().getUrlQrAddress()
+                        ,r.getField().getLocation().getUrlAddress()
                 ))
                 .toList();
     }

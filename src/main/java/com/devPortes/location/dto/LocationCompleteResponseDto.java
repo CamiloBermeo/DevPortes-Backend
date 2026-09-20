@@ -6,6 +6,7 @@ public record LocationCompleteResponseDto(
         String headquarters,
         String address,
         String urlQrAddress,
+        String urlAddress,
         String description,
         boolean state
 ) {

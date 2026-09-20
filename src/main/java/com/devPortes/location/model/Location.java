@@ -7,6 +7,7 @@ public class Location {
     private String headquarters;
     private String address;
     private String urlQrAddress;
+    private String urlAddress;
     private String description;
     private boolean state;
     private boolean visible;
@@ -14,38 +15,39 @@ public class Location {
     public Location() {
     }
 
-    public Location(Long id, String name,String headquarters, String address, String urlQrAddress, String description, boolean state) {
-        this(id, name, headquarters, address, urlQrAddress, description, state, true);
+    public Location(Long id, String name,String headquarters, String address, String urlQrAddress, String urlAddress, String description, boolean state) {
+        this(id, name, headquarters, address, urlQrAddress, urlAddress, description, state, true);
     }
 
-    public Location(Long id, String name,String headquarters, String address, String urlQrAddress, String description, boolean state, boolean visible) {
+    public Location(Long id, String name,String headquarters, String address, String urlQrAddress, String urlAddress, String description, boolean state, boolean visible) {
         this.id = id;
         this.name = name;
         this.headquarters = headquarters;
         this.address = address;
         this.urlQrAddress = urlQrAddress;
+        this.urlAddress = urlAddress;
         this.description = description;
         this.state = state;
         this.visible = visible;
     }
 
-    public static Location create(String name, String headquarters, String address, String urlQrAddress, String description){
-        return new Location(null, name.trim(), headquarters, address, urlQrAddress, description, true);
+    public static Location create(String name, String headquarters, String address, String urlQrAddress, String urlAddress, String description){
+        return new Location(null, name.trim(), headquarters, address, urlQrAddress, urlAddress, description, true);
     }
-    public static Location edit(String name, String headquarters, String address, String urlQrAddress, String description){
-        return new Location(null, name.trim(), headquarters, address, urlQrAddress, description, true);
-    }
-
-    public static Location changeState(Long id, String name, String headquarters, String address, String urlQrAddress, String description, boolean state){
-        return new Location(id, name, headquarters, address, urlQrAddress, description, !state);
+    public static Location edit(String name, String headquarters, String address, String urlQrAddress, String urlAddress, String description){
+        return new Location(null, name.trim(), headquarters, address, urlQrAddress, urlAddress, description, true);
     }
 
-    public static Location reconstitute(Long id,String name ,String headquarters, String address, String urlQrAddress, String description, boolean state){
-        return new Location(id ,name,headquarters, address, urlQrAddress, description,  state);
+    public static Location changeState(Long id, String name, String headquarters, String address, String urlQrAddress, String urlAddress, String description, boolean state){
+        return new Location(id, name, headquarters, address, urlQrAddress, urlAddress, description, !state);
     }
 
-    public static Location reconstitute(Long id,String name ,String headquarters, String address, String urlQrAddress, String description, boolean state, boolean visible){
-        return new Location(id ,name,headquarters, address, urlQrAddress, description, state, visible);
+    public static Location reconstitute(Long id,String name ,String headquarters, String address, String urlQrAddress, String urlAddress, String description, boolean state){
+        return new Location(id ,name,headquarters, address, urlQrAddress, urlAddress, description, state);
+    }
+
+    public static Location reconstitute(Long id,String name ,String headquarters, String address, String urlQrAddress, String urlAddress, String description, boolean state, boolean visible){
+        return new Location(id ,name,headquarters, address, urlQrAddress, urlAddress, description, state, visible);
     }
 
     public Long getId() {
@@ -66,6 +68,10 @@ public class Location {
 
     public String getUrlQrAddress() {
         return urlQrAddress;
+    }
+
+    public String getUrlAddress() {
+        return urlAddress;
     }
 
     public String getDescription() {
