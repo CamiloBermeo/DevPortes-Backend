@@ -1,7 +1,7 @@
-package com.devPortes.users.services;
+package com.devPortes.users.services.auth;
 
-import com.devPortes.users.dto.NewUserRequestDto;
-import com.devPortes.users.dto.NewUserResponseDto;
+import com.devPortes.users.dto.auth.NewUserRequestDto;
+import com.devPortes.users.dto.auth.NewUserResponseDto;
 import com.devPortes.users.mapper.UserInMapper;
 import com.devPortes.users.repository.UserJpaRepositoryAdapter;
 import com.devPortes.users.security.BCryptPasswordEncoderAdapter;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class NewUserUseCase implements INewUserUseCase{
+public class NewUserUseCase implements INewUserUseCase {
     private final IFindUserByEmailUseCase iFindUserByEmail;
     private final BCryptPasswordEncoderAdapter bCryptPasswordEncoder;
     private final UserJpaRepositoryAdapter userRepository;

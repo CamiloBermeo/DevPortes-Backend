@@ -1,4 +1,4 @@
-package com.devPortes.users.dto;
+package com.devPortes.users.dto.auth;
 
 public record TokenDataDto(
         String token,

@@ -1,4 +1,4 @@
-package com.devPortes.users.services;
+package com.devPortes.users.services.auth;
 
 import com.devPortes.users.model.Admin;
 import com.devPortes.users.model.Client;
@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class FindUserByEmailUseCase implements IFindUserByEmailUseCase{
+public class FindUserByEmailUseCase implements IFindUserByEmailUseCase {
     private final UserJpaRepositoryAdapter userRepository;
 
     @Override

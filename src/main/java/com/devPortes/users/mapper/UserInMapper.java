@@ -1,7 +1,10 @@
 package com.devPortes.users.mapper;
 
-import com.devPortes.users.dto.NewUserRequestDto;
-import com.devPortes.users.dto.NewUserResponseDto;
+import com.devPortes.users.dto.auth.NewUserRequestDto;
+import com.devPortes.users.dto.auth.NewUserResponseDto;
+import com.devPortes.users.dto.client.EditClientRequestDto;
+import com.devPortes.users.dto.client.ListUsersResponseDto;
+import com.devPortes.users.entities.ClientEntity;
 import com.devPortes.users.model.Client;
 import com.devPortes.users.model.IAuthenticated;
 
@@ -18,6 +21,21 @@ public class UserInMapper {
         );
 
     }
+    public static Client toEditModel( Client saveClient,EditClientRequestDto dto, String urlPicture){
+        return Client.edit(
+                urlPicture,
+                dto.name(),
+                saveClient.getIdentityDocument(),
+                dto.phoneNumber(),
+                saveClient.getEmail(),
+                saveClient.getPasswordHash(),
+                saveClient.getClassification(),
+                dto.reservationAmount(),
+                saveClient.getRole(),
+                saveClient.isState()
+
+        );
+    }
     public static NewUserResponseDto toNewUserDto (Client user, String token){
         return new NewUserResponseDto(
                 user.getId(),
@@ -33,6 +51,19 @@ public class UserInMapper {
                 user.getName(),
                 user.getEmail(),
                 ""
+        );
+    }
+    public static ListUsersResponseDto toUserDto(ClientEntity entity) {
+        return new ListUsersResponseDto(
+                entity.getId(),
+                entity.getUrlPicture(),
+                entity.getName(),
+                entity.getEmail(),
+                entity.getIdentityDocument(),
+                entity.getPhoneNumber(),
+                entity.getRole().name(),
+                entity.getClassification() != null ? entity.getClassification().name() : null,
+                entity.isState()
         );
     }
 }

@@ -1,7 +1,7 @@
 package com.devPortes.users.controllers;
 
-import com.devPortes.users.dto.ListUsersResponseDto;
-import com.devPortes.users.services.IListUsersUseCase;
+import com.devPortes.users.dto.client.ListUsersResponseDto;
+import com.devPortes.users.services.client.IListClientsUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,10 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("api/v1/admin")
 public class AdminController {
-    private final IListUsersUseCase iListUsersUseCase;
 
-    @GetMapping("clients")
-    public ResponseEntity<List<ListUsersResponseDto>> getUsers() {
-        return ResponseEntity.ok(iListUsersUseCase.execute());
-    }
+
+
 }

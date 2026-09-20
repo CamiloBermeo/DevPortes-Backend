@@ -1,21 +1,19 @@
 package com.devPortes.users.controllers;
 
-import com.devPortes.users.dto.*;
+import com.devPortes.users.dto.auth.LoginDataRequestDto;
+import com.devPortes.users.dto.auth.NewUserRequestDto;
+import com.devPortes.users.dto.auth.NewUserResponseDto;
+import com.devPortes.users.dto.auth.TokenDataDto;
 import com.devPortes.users.mapper.UserInMapper;
 import com.devPortes.users.security.CustomUserDetails;
-import com.devPortes.users.services.ILoginUseCase;
-import com.devPortes.users.services.IListUsersUseCase;
-import com.devPortes.users.services.INewUserUseCase;
-import com.devPortes.users.services.LoginUseCase;
-import com.devPortes.users.services.NewUserUseCase;
+import com.devPortes.users.services.auth.ILoginUseCase;
+import com.devPortes.users.services.auth.INewUserUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/auth")

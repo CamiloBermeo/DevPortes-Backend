@@ -1,9 +1,8 @@
-package com.devPortes.users.services;
+package com.devPortes.users.services.auth;
 
-import com.devPortes.users.dto.LoginDataRequestDto;
-import com.devPortes.users.dto.TokenDataDto;
+import com.devPortes.users.dto.auth.LoginDataRequestDto;
+import com.devPortes.users.dto.auth.TokenDataDto;
 import com.devPortes.users.exceptions.InvalidCredentialException;
-import com.devPortes.users.model.Client;
 import com.devPortes.users.model.IAuthenticated;
 import com.devPortes.users.repository.UserJpaRepositoryAdapter;
 import com.devPortes.users.security.BCryptPasswordEncoderAdapter;
@@ -15,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class LoginUseCase implements ILoginUseCase{
+public class LoginUseCase implements ILoginUseCase {
     private final BCryptPasswordEncoderAdapter bCryptPasswordEncoder;
     private final UserJpaRepositoryAdapter userRepository;
     private final TokenImpl tokenService;

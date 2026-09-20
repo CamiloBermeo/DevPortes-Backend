@@ -1,6 +1,7 @@
 package com.devPortes.users.repository;
 
 import com.devPortes.users.entities.AdminEntity;
+import com.devPortes.users.exceptions.UserNotFoundException;
 import com.devPortes.users.model.Admin;
 import com.devPortes.users.model.Client;
 import com.devPortes.users.entities.ClientEntity;
@@ -22,6 +23,10 @@ public class UserJpaRepositoryAdapter {
         return clientJpa.findAll();
     }
 
+    public Optional<Client> finById(Long id){
+
+        return clientJpa.findById(id).map(UserOutMapper::toClientCompleteModel);
+    }
     public Optional<IAuthenticated> findByEmail(String email) {
         Optional<Client> client = clientJpa.findByEmail(email).map(UserOutMapper::toClientCompleteModel);
         if (client.isPresent()) {
@@ -37,7 +42,14 @@ public class UserJpaRepositoryAdapter {
         return adminJpa.findByEmail(email).map(UserOutMapper::toAdminCompleteModel);
     }
 
+    public Client saveEdit(Long id,Client editClient){
+        ClientEntity savedEntity = clientJpa.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(String.valueOf(id)));
 
+        ClientEntity editEntity = UserOutMapper.toEditClientEntity(savedEntity, editClient);
+
+        return UserOutMapper.toClientCompleteModel(clientJpa.save(editEntity));
+    }
     public Client save(Client user) {
         ClientEntity entity = UserOutMapper.toClientEntity(user);
         return UserOutMapper.toClientCompleteModel(clientJpa.save(entity));

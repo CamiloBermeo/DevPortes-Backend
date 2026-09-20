@@ -2,7 +2,6 @@ package com.devPortes.reservations.model;
 
 import com.devPortes.fields.model.Field;
 import com.devPortes.payments.model.Payment;
-import com.devPortes.reservations.entities.EstadoReservationEnum;
 import com.devPortes.users.model.Client;
 
 import java.math.BigDecimal;
@@ -11,22 +10,23 @@ import java.time.LocalTime;
 
 public class Reservation {
 
+
     private Long id;
     private Client user;
     private Field field;
     private Payment payment;
     private LocalDate reservationDate;
-    private LocalTime  startTime;
+    private LocalTime startTime;
     private LocalTime endTime;
     private int totalHours;
     private BigDecimal totalPay;
     private BigDecimal remainingPayment;
     private EstadoReservationEnum state;
 
-    public Reservation(){
+    public Reservation() {
     }
 
-    public Reservation(Long id, Client user, Field field,Payment payment, LocalDate reservationDate, LocalTime startTime, LocalTime endTime, int totalHours, BigDecimal totalPay, BigDecimal remainingPayment, EstadoReservationEnum state) {
+    public Reservation(Long id, Client user, Field field, Payment payment, LocalDate reservationDate, LocalTime startTime, LocalTime endTime, int totalHours, BigDecimal totalPay, BigDecimal remainingPayment, EstadoReservationEnum state) {
         this.id = id;
         this.user = user;
         this.field = field;
@@ -36,17 +36,17 @@ public class Reservation {
         this.endTime = endTime;
         this.totalHours = totalHours;
         this.totalPay = totalPay;
-        this.remainingPayment=remainingPayment;
+        this.remainingPayment = remainingPayment;
         this.state = state;
     }
 
-    public Reservation create (Client user, Field field, Payment payment,LocalDate reservationDate, LocalTime startTime, LocalTime endTime, int totalHours, BigDecimal totalPay, BigDecimal remainingPayment, EstadoReservationEnum state){
-
-
-        return new Reservation(null,user, field, payment, reservationDate, startTime, endTime, totalHours, totalPay, remainingPayment, state);
+    public static Reservation create(Client user, Field field, LocalDate reservationDate, LocalTime startTime, LocalTime endTime, int totalHours, BigDecimal totalPay, BigDecimal remainingPayment) {
+        EstadoReservationEnum state = EstadoReservationEnum.PENDIENTE;
+        return new Reservation(null, user, field, null, reservationDate, startTime, endTime, totalHours, totalPay, remainingPayment, state);
     }
-    public Reservation reconstitute(Long id, Client user, Field field,Payment payment, LocalDate reservationDate, LocalTime startTime, LocalTime endTime, int totalHours, BigDecimal totalPay, BigDecimal remainingPayment, EstadoReservationEnum state){
-        return new Reservation (id, user,field,payment, reservationDate, startTime, endTime, totalHours, totalPay, remainingPayment, state);
+
+    public static Reservation reconstitute(Long id, Client user, Field field, Payment payment, LocalDate reservationDate, LocalTime startTime, LocalTime endTime, int totalHours, BigDecimal totalPay, BigDecimal remainingPayment, EstadoReservationEnum state) {
+        return new Reservation(id, user, field, payment, reservationDate, startTime, endTime, totalHours, totalPay, remainingPayment, state);
     }
 
     public Long getId() {

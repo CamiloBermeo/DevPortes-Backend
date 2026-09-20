@@ -1,4 +1,4 @@
-package com.devPortes.reservations.entities;
+package com.devPortes.reservations.model;
 
 public enum EstadoReservationEnum {
     COMPLETADA,

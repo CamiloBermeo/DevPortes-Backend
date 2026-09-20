@@ -1,4 +1,4 @@
-package com.devPortes.users.dto;
+package com.devPortes.users.dto.auth;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

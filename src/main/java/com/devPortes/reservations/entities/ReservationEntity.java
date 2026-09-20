@@ -2,13 +2,13 @@ package com.devPortes.reservations.entities;
 
 import com.devPortes.fields.entities.FieldEntity;
 import com.devPortes.payments.entities.PaymentEntity;
+import com.devPortes.reservations.model.EstadoReservationEnum;
 import com.devPortes.users.entities.ClientEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity

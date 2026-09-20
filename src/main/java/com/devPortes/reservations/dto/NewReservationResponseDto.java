@@ -1,4 +1,6 @@
 package com.devPortes.reservations.dto;
 
-public record NewReservationResponseDto() {
+public record NewReservationResponseDto(
+        Long id
+) {
 }

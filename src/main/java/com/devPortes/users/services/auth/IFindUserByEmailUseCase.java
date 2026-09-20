@@ -1,4 +1,4 @@
-package com.devPortes.users.services;
+package com.devPortes.users.services.auth;
 
 
 import com.devPortes.users.model.Admin;

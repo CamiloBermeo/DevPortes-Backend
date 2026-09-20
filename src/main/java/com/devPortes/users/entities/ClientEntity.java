@@ -19,6 +19,9 @@ public class ClientEntity {
     @Column(nullable = false)
     private String name;
 
+    @Column(name="url_picture")
+    private String urlPicture;
+
     @Column(name = "identity_document", nullable = false, unique = true)
     private String identityDocument;
 

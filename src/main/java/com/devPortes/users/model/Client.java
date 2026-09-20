@@ -6,6 +6,7 @@ import com.devPortes.users.exceptions.PasswordHashInvalidException;
 
 public class Client implements IAuthenticated{
     private Long id;
+    private String urlPicture;
     private String name;
     private String identityDocument;
     private String phoneNumber;
@@ -19,8 +20,9 @@ public class Client implements IAuthenticated{
     public Client() {
     }
 
-    private Client(Long id, String name, String identityDocument, String phoneNumber, String email, String passwordHash, ClasificationEnum classification, int reservationAmount, RoleEnum role, boolean state) {
+    private Client(Long id, String urlPicture,String name, String identityDocument, String phoneNumber, String email, String passwordHash, ClasificationEnum classification, int reservationAmount, RoleEnum role, boolean state) {
         this.id = id;
+        this.urlPicture=urlPicture;
         this.name = name;
         this.identityDocument = identityDocument;
         this.phoneNumber = phoneNumber;
@@ -33,7 +35,7 @@ public class Client implements IAuthenticated{
     }
 
     //Este metodo crea un nuevo model el cual sera usado como principal, hace validaciones y logica pura de Java
-    public static Client create(String name, String identityDocument, String phoneNumber, String email, String passwordHash, RoleEnum role) {
+    public static Client create(String name,String identityDocument, String phoneNumber, String email, String passwordHash, RoleEnum role) {
 
         if (identityDocument.length() < 10) {
             identityDocument = identityDocument.toLowerCase();
@@ -54,12 +56,15 @@ public class Client implements IAuthenticated{
             role = RoleEnum.CLIENTE;
         }
 
-        return new Client(null,name, identityDocument, phoneNumber, email,passwordHash, ClasificationEnum.ESTANDAR,0, role, true);
+        return new Client(null,"",name, identityDocument, phoneNumber, email,passwordHash, ClasificationEnum.ESTANDAR,0, role, true);
     }
 
+    public static Client edit( String urlPicture,String name, String identityDocument, String phoneNumber, String email, String passwordHash, ClasificationEnum classification, int reservationAmount, RoleEnum role, boolean state) {
+        return new Client(null,urlPicture, name, identityDocument, phoneNumber, email, passwordHash,  classification,  reservationAmount, role, state);
+    }
     //Este metodo construye un model que viene de base de datos, ya que no necesita validaciones ni nada porque se supone que ya esta bien construido y guardado en db
-    public static Client reconstitute(Long id, String name, String identityDocument, String phoneNumber, String email, String passwordHash, ClasificationEnum classification, int reservationAmount, RoleEnum role, boolean state) {
-        return new Client(id, name, identityDocument, phoneNumber, email, passwordHash,  classification,  reservationAmount, role, state);
+    public static Client reconstitute(Long id,  String urlPicture,String name, String identityDocument, String phoneNumber, String email, String passwordHash, ClasificationEnum classification, int reservationAmount, RoleEnum role, boolean state) {
+        return new Client(id,urlPicture, name, identityDocument, phoneNumber, email, passwordHash,  classification,  reservationAmount, role, state);
     }
     @Override
     public Long getId() {
@@ -81,6 +86,10 @@ public class Client implements IAuthenticated{
     @Override
     public String getName() {
         return name;
+    }
+
+    public String getUrlPicture() {
+        return urlPicture;
     }
 
     public String getIdentityDocument() {

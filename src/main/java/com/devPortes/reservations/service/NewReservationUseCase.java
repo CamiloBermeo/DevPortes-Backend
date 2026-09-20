@@ -1,22 +1,39 @@
 package com.devPortes.reservations.service;
 
+import com.devPortes.fields.exceptions.FieldRepositoryNotFoundException;
+import com.devPortes.fields.model.Field;
+import com.devPortes.fields.repository.FieldJpaRepositoryAdapter;
 import com.devPortes.reservations.dto.NewReservationRequestDto;
 import com.devPortes.reservations.dto.NewReservationResponseDto;
+import com.devPortes.reservations.mapper.ReservationInMapper;
+import com.devPortes.reservations.model.Reservation;
 import com.devPortes.reservations.repository.ReservationJpaRepositoryAdapter;
+import com.devPortes.users.exceptions.UserNotFoundException;
+import com.devPortes.users.model.Client;
+import com.devPortes.users.repository.UserJpaRepositoryAdapter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class NewReservationUseCase implements INewReservationUseCase{
+public class NewReservationUseCase implements INewReservationUseCase {
     private final ReservationJpaRepositoryAdapter repository;
+    private final UserJpaRepositoryAdapter clientRepository;
+    private final FieldJpaRepositoryAdapter fieldRepository;
 
     @Override
     public NewReservationResponseDto execute(NewReservationRequestDto dto) {
 
+        //verificar que el cliente asociado exista
+        Client client = clientRepository.finById(dto.userId())
+                .orElseThrow(() -> new UserNotFoundException(String.valueOf(dto.userId())));
+        //verificar que la cancha exista
+        Field field = fieldRepository.findById(dto.fieldId())
+                .orElseThrow(() -> new FieldRepositoryNotFoundException(dto.fieldId()));
 
+        Reservation reservation = ReservationInMapper.toModel(client, field, dto);
 
-
-        return null;
+        Reservation saveReservation = repository.save(reservation);
+        return ReservationInMapper.toReservationResponse(saveReservation);
     }
 }

@@ -25,7 +25,7 @@ public class AvailableDatesTimesUseCase implements IAvailableDatesTimesUseCase {
         List<Reservation> reservations = repository.findByReservationDate(date);
 
         List<LocalTime> hours = new ArrayList<>();
-        for(Reservation reservation : reservations){
+        for (Reservation reservation : reservations) {
             hours.add(reservation.getStartTime());
         }
         return ReservationInMapper.toAvailableDatesTimesResponseDto(hours);
