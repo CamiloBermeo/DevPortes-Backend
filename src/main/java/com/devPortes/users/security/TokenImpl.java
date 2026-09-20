@@ -38,7 +38,7 @@ public class TokenImpl {
     }
 
     private Instant expirationDate() {
-        return LocalDateTime.now().plusSeconds(10)
+        return LocalDateTime.now().plusMinutes(5)
                 .toInstant(ZoneOffset.systemDefault().getRules().getOffset(LocalDateTime.now()));
     }
 }
