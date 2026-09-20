@@ -44,6 +44,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/api/v1/location/new-location").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/v1/field/all").permitAll()
                         .requestMatchers("/api/v1/location/locations").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/statistics/public").permitAll()
                         .requestMatchers("/api/v1/auth/register").permitAll()
                         .requestMatchers("/api/v1/auth/login").permitAll()
                         .requestMatchers(HttpMethod.OPTIONS).permitAll()
