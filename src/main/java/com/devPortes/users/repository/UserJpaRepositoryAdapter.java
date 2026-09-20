@@ -37,6 +37,9 @@ public class UserJpaRepositoryAdapter {
         return adminJpa.findByEmail(email).map(UserOutMapper::toAdminCompleteModel);
     }
 
+    public boolean existsByIdentityDocument(String identityDocument) {
+        return clientJpa.findByIdentityDocument(identityDocument).isPresent();
+    }
 
     public Client save(Client user) {
         ClientEntity entity = UserOutMapper.toClientEntity(user);

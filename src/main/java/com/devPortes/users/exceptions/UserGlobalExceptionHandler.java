@@ -1,6 +1,7 @@
 package com.devPortes.users.exceptions;
 
 import com.devPortes.configuration.BaseExceptionHandler;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -43,8 +44,14 @@ public class UserGlobalExceptionHandler extends BaseExceptionHandler {
     }
 
     @ExceptionHandler(ExistingUserDataBaseException.class)
-    public ResponseEntity<ErrorDetails> handleFindDataBaseExistingException(RuntimeException exception) {
-        return buildResponse(exception, HttpStatus.CONFLICT);
+    public ResponseEntity<ErrorDetails> handleFindDataBaseExistingException(ExistingUserDataBaseException exception) {
+        ErrorDetails details = new ErrorDetails(HttpStatus.CONFLICT.value(), exception.getMessage(), exception.getField());
+        return new ResponseEntity<>(details, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ErrorDetails> handleDataIntegrityViolation(DataIntegrityViolationException exception) {
+        return buildResponse(new Exception("Ya existe un registro con esos datos."), HttpStatus.CONFLICT);
     }
 
 }

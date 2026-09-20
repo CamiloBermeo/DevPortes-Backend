@@ -30,6 +30,11 @@ public class NewUserUseCase implements INewUserUseCase{
             throw new ExistingUserDataBaseException(dto.email());
         }
 
+        //Verifico que la cédula no esté registrada previamente
+        if(userRepository.existsByIdentityDocument(dto.identityDocument())){
+            throw new ExistingUserDataBaseException("identityDocument", "La cédula " + dto.identityDocument() + " ya está registrada.");
+        }
+
         String passwordHash = bCryptPasswordEncoder.encodePassword(dto.password());
 
         Client user = UserInMapper.toModel(dto, passwordHash);

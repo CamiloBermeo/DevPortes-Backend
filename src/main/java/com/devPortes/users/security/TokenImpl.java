@@ -15,9 +15,9 @@ import java.time.ZoneOffset;
 public class TokenImpl {
 
     @Value("${api.security.token.secret}")
-    private String secret ;
+    private String secret;
 
-    public String generateNewToken(CustomUserDetails customUserDetails){
+    public String generateNewToken(CustomUserDetails customUserDetails) {
         Algorithm algorithm = Algorithm.HMAC256(secret);
 
         return JWT.create()
@@ -28,7 +28,7 @@ public class TokenImpl {
 
     }
 
-    public String getSubject(String token){
+    public String getSubject(String token) {
         Algorithm algorithm = Algorithm.HMAC256(secret);
         return JWT.require(algorithm)
                 .withIssuer("devportes")
@@ -37,8 +37,8 @@ public class TokenImpl {
                 .getSubject();
     }
 
-
-    private Instant expirationDate(){
-        return LocalDateTime.now().plusMinutes(30).toInstant(ZoneOffset.systemDefault().getRules().getOffset(LocalDateTime.now()));
+    private Instant expirationDate() {
+        return LocalDateTime.now().plusSeconds(10)
+                .toInstant(ZoneOffset.systemDefault().getRules().getOffset(LocalDateTime.now()));
     }
 }
