@@ -58,6 +58,14 @@ public class LocationRepositoryAdapter {
     }
 
     public List<Location> findAll(){
-        return LocationOutMapper.toModelList(jpa.findAll());
+        return LocationOutMapper.toModelList(jpa.findAllByVisibleTrue());
+    }
+
+    @Transactional
+    public void hide(Long id) {
+        LocationEntity entity = jpa.findById(id)
+                .orElseThrow(() -> new com.devPortes.location.exceptions.LocationRepositoryNotFoundException(id));
+        entity.setVisible(false);
+        jpa.save(entity);
     }
 }

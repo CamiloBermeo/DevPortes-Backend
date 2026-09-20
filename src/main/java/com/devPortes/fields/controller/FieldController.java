@@ -5,6 +5,8 @@ import com.devPortes.fields.dto.FieldsCompleteResponseDto;
 import com.devPortes.fields.dto.NewFieldRequestDto;
 import com.devPortes.fields.service.IAllFieldsUseCase;
 import com.devPortes.fields.service.IEditFieldUseCase;
+import com.devPortes.fields.service.IChangeFieldStateUseCase;
+import com.devPortes.fields.service.DeleteFieldUseCase;
 import com.devPortes.fields.service.INewFieldUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +24,8 @@ public class FieldController {
     private final IAllFieldsUseCase iAllFieldsUseCase;
     private final INewFieldUseCase iNewFieldUseCase;
     private final IEditFieldUseCase iEditField;
+    private final IChangeFieldStateUseCase iChangeFieldStateUseCase;
+    private final DeleteFieldUseCase deleteFieldUseCase;
 
     @PostMapping(value = "new", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<FieldsCompleteResponseDto> newField(@Valid @ModelAttribute NewFieldRequestDto dto) {
@@ -41,6 +45,17 @@ public class FieldController {
         List<FieldsCompleteResponseDto> fields = iAllFieldsUseCase.execute();
         return ResponseEntity.status(HttpStatus.OK)
                 .body(fields);
+    }
+
+    @PatchMapping("{id}/state")
+    public ResponseEntity<FieldsCompleteResponseDto> changeState(@PathVariable Long id) {
+        return ResponseEntity.ok(iChangeFieldStateUseCase.execute(id));
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteField(@PathVariable Long id) {
+        deleteFieldUseCase.execute(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

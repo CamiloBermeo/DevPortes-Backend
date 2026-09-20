@@ -29,5 +29,7 @@ public class LocationEntity {
     private String description;
     @Column
     private boolean state;
+    @Column(nullable = false)
+    private boolean visible = true;
 
 }

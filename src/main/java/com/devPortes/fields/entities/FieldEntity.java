@@ -45,5 +45,7 @@ public class FieldEntity {
     @Column(nullable = false)
     private FieldStateEnum state;
 
+    @Column(nullable = false)
+    private boolean visible = true;
 
 }

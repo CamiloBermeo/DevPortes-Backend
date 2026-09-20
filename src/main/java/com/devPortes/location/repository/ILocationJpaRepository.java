@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ILocationJpaRepository extends JpaRepository<LocationEntity, Long> {
+    java.util.List<LocationEntity> findAllByVisibleTrue();
     @Query("SELECT l FROM LocationEntity l ORDER BY l.id ASC")
     List<LocationEntity> findAll();
 

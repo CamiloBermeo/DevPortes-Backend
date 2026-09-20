@@ -11,6 +11,54 @@ DELETE FROM fields;
 DELETE FROM locations;
 
 -- ============================================
+-- CLIENTES DE PRUEBA (2)
+-- ============================================
+-- Hash BCrypt reutilizado del usuario de prueba existente.
+-- Credencial de ambos clientes: Clave1234.
+INSERT INTO clients (
+  name,
+  identity_document,
+  phone_number,
+  email,
+  password_hash,
+  reservation_amount,
+  classification,
+  role,
+  state
+)
+VALUES
+  (
+    'Valentina Torres',
+    'TEST-RES-1001',
+    '3000001001',
+    'cliente.reservas.1@test.com',
+    '$2a$10$enk/3.V5v36Mnm4sNJDxJOU5AcbKwdBx1klpAoTWTjqTWW7oB9BLC',
+    0,
+    'ESTANDAR',
+    'CLIENTE',
+    true
+  ),
+  (
+    'Mateo Ramirez',
+    'TEST-RES-1002',
+    '3000001002',
+    'cliente.reservas.2@test.com',
+    '$2a$10$enk/3.V5v36Mnm4sNJDxJOU5AcbKwdBx1klpAoTWTjqTWW7oB9BLC',
+    0,
+    'ESTANDAR',
+    'CLIENTE',
+    true
+  )
+ON CONFLICT (email) DO UPDATE SET
+  name = EXCLUDED.name,
+  identity_document = EXCLUDED.identity_document,
+  phone_number = EXCLUDED.phone_number,
+  password_hash = EXCLUDED.password_hash,
+  classification = EXCLUDED.classification,
+  role = EXCLUDED.role,
+  state = EXCLUDED.state;
+
+-- ============================================
 -- MÉTODOS DE PAGO (4)
 -- ============================================
 INSERT INTO metodos_pago (name, description, state)
@@ -224,3 +272,56 @@ VALUES
     ARRAY['https://raw.githubusercontent.com/CamiloBermeo/devPortes/refs/heads/main/assets/img/torneodebaloncesto.jpg'],
     '2026-04-15'
   );
+
+-- ============================================
+-- RESERVAS DE PRUEBA (20)
+-- Septiembre y octubre de 2026, 10 por cliente
+-- ============================================
+-- Horarios válidos para la interfaz de reservas:
+-- 08:00, 09:00, 10:00, 16:00, 17:00, 18:00, 19:00, 20:00 y 21:00.
+INSERT INTO reservations (
+  user_id,
+  field_id,
+  reservation_date,
+  start_time,
+  end_time,
+  total_hours,
+  total_pay,
+  remaining_payment,
+  state
+)
+SELECT
+  c.id,
+  f.id,
+  datos.reservation_date::date,
+  datos.start_time::time,
+  (datos.start_time::time + INTERVAL '1 hour')::time,
+  1,
+  f.hourly_rate,
+  ROUND(f.hourly_rate * 0.5, 2),
+  'PENDIENTE'
+FROM (
+  VALUES
+    ('cliente.reservas.1@test.com', '2026-09-03', '08:00', 'Estadio Principal'),
+    ('cliente.reservas.1@test.com', '2026-09-10', '16:00', 'Coliseo Multi-deporte'),
+    ('cliente.reservas.1@test.com', '2026-09-17', '18:00', 'Club de Tenis Las Palmas'),
+    ('cliente.reservas.1@test.com', '2026-09-24', '19:00', 'Padel Arena Celeste'),
+    ('cliente.reservas.1@test.com', '2026-09-29', '20:00', 'La Catedral del Basket'),
+    ('cliente.reservas.1@test.com', '2026-10-02', '09:00', 'Zona de Entrenamiento'),
+    ('cliente.reservas.1@test.com', '2026-10-09', '17:00', 'Los Cristales Padel Club'),
+    ('cliente.reservas.1@test.com', '2026-10-16', '10:00', 'Olas del Norte'),
+    ('cliente.reservas.1@test.com', '2026-10-23', '21:00', 'Estadio Principal'),
+    ('cliente.reservas.1@test.com', '2026-10-30', '08:00', 'Padel Arena Celeste'),
+    ('cliente.reservas.2@test.com', '2026-09-05', '09:00', 'Coliseo Multi-deporte'),
+    ('cliente.reservas.2@test.com', '2026-09-12', '17:00', 'Zona de Entrenamiento'),
+    ('cliente.reservas.2@test.com', '2026-09-19', '19:00', 'Los Cristales Padel Club'),
+    ('cliente.reservas.2@test.com', '2026-09-26', '20:00', 'Estadio Principal'),
+    ('cliente.reservas.2@test.com', '2026-09-30', '10:00', 'Club de Tenis Las Palmas'),
+    ('cliente.reservas.2@test.com', '2026-10-04', '16:00', 'Padel Arena Celeste'),
+    ('cliente.reservas.2@test.com', '2026-10-11', '18:00', 'Olas del Norte'),
+    ('cliente.reservas.2@test.com', '2026-10-18', '21:00', 'Coliseo Multi-deporte'),
+    ('cliente.reservas.2@test.com', '2026-10-25', '08:00', 'La Catedral del Basket'),
+    ('cliente.reservas.2@test.com', '2026-10-28', '09:00', 'Estadio Principal')
+) AS datos(email, reservation_date, start_time, field_name)
+JOIN clients c ON c.email = datos.email
+JOIN fields f ON f.name = datos.field_name;

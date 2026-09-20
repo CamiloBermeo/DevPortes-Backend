@@ -13,5 +13,7 @@ public interface IReservationJpaRepository extends JpaRepository<ReservationEnti
     List<ReservationEntity> findByReservationDateAndStateNot(LocalDate date, EstadoReservationEnum state);
     List<ReservationEntity> findByReservationDateBetweenAndStateNot(LocalDate startDate, LocalDate endDate, EstadoReservationEnum state);
     List<ReservationEntity> findByClientEntity_IdAndState(Long userId, EstadoReservationEnum state);
+    List<ReservationEntity> findByClientEntity_IdAndStateIn(Long userId, List<EstadoReservationEnum> states);
     List<ReservationEntity> findByClientEntity_IdOrderByReservationDateDesc(Long userId);
+    List<ReservationEntity> findAllByOrderByReservationDateDescStartTimeAsc();
 }

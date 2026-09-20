@@ -18,7 +18,8 @@ public class GetReservationHistoryUseCase implements IGetReservationHistoryUseCa
     @Override
     public List<ReservationSummaryResponseDto> execute(Long userId) {
         List<Reservation> reservations = repository.findAllByUserId(userId).stream()
-                .filter(r -> r.getState() != EstadoReservationEnum.PENDIENTE)
+                .filter(r -> r.getState() != EstadoReservationEnum.PENDIENTE
+                        && r.getState() != EstadoReservationEnum.PENDIENTE_PRIMER_PAGO)
                 .toList();
         return reservations.stream()
                 .map(r -> new ReservationSummaryResponseDto(
@@ -27,7 +28,13 @@ public class GetReservationHistoryUseCase implements IGetReservationHistoryUseCa
                         r.getReservationDate().toString(),
                         r.getStartTime().toString(),
                         "Individual",
-                        r.getState().name()
+                        r.getState().name(),
+                        r.getEndTime().toString(),
+                        r.getTotalHours(),
+                        r.getTotalPay(),
+                        r.getRemainingPayment(),
+                        r.getUser().getName(),
+                        r.getUser().getEmail()
                 ))
                 .toList();
     }

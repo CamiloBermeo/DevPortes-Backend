@@ -14,7 +14,11 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("api/v1/admin")
 public class AdminController {
+    private final IListClientsUseCase listClientsUseCase;
 
-
+    @GetMapping("clients")
+    public ResponseEntity<List<ListUsersResponseDto>> getClients() {
+        return ResponseEntity.ok(listClientsUseCase.execute());
+    }
 
 }

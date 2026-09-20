@@ -51,7 +51,8 @@ public class FieldInMapper {
                model.getDescription(),
                model.getDetails(),
                model.getHourlyRate(),
-               model.getState()
+               model.getState(),
+               model.isVisible()
        );
 
     }

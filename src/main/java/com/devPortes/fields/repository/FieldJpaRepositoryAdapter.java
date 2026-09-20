@@ -4,6 +4,7 @@ import com.devPortes.fields.entities.FieldEntity;
 import com.devPortes.fields.exceptions.FieldRepositoryNotFoundException;
 import com.devPortes.fields.mapper.FieldOutMapper;
 import com.devPortes.fields.model.Field;
+import com.devPortes.fields.model.FieldStateEnum;
 import com.devPortes.location.entities.LocationEntity;
 import com.devPortes.location.exceptions.LocationNotFoundException;
 import com.devPortes.location.exceptions.LocationRepositoryNotFoundException;
@@ -54,5 +55,21 @@ public class FieldJpaRepositoryAdapter {
         FieldEntity saveFieldEdit = jpa.save(editEntity);
 
         return FieldOutMapper.toModel(saveFieldEdit);
+    }
+
+    @Transactional
+    public Field changeState(Long id, FieldStateEnum state) {
+        FieldEntity entity = jpa.findById(id)
+                .orElseThrow(() -> new FieldRepositoryNotFoundException(id));
+        entity.setState(state);
+        return FieldOutMapper.toModel(jpa.save(entity));
+    }
+
+    @Transactional
+    public void hide(Long id) {
+        FieldEntity entity = jpa.findById(id)
+                .orElseThrow(() -> new FieldRepositoryNotFoundException(id));
+        entity.setVisible(false);
+        jpa.save(entity);
     }
 }

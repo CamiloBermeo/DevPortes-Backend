@@ -9,6 +9,7 @@ import com.devPortes.location.service.IChangeLocationStateUseCase;
 import com.devPortes.location.service.IListLocationsUseCase;
 import com.devPortes.location.service.INewLocationUseCase;
 import com.devPortes.location.service.IUpdateLocationUseCase;
+import com.devPortes.location.service.DeleteLocationUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,7 @@ public class LocationController {
     private final IListLocationsUseCase iListLocationsUseCase;
     private final IUpdateLocationUseCase iUpdateLocationUseCase;
     private final IChangeLocationStateUseCase iChangeLocationStateUseCase;
+    private final DeleteLocationUseCase deleteLocationUseCase;
 
     @PostMapping("new-location")
     public ResponseEntity<NewLocationResponseDto> newLocation (@Valid @RequestBody NewLocationRequestDto dto){
@@ -48,5 +50,11 @@ public class LocationController {
     public ResponseEntity<LocationCompleteResponseDto> changeState(@PathVariable Long id){
         LocationCompleteResponseDto response = iChangeLocationStateUseCase.execute(id);
         return ResponseEntity.ok().body(response);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteLocation(@PathVariable Long id) {
+        deleteLocationUseCase.execute(id);
+        return ResponseEntity.noContent().build();
     }
 }

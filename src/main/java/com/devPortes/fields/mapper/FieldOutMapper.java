@@ -23,6 +23,7 @@ public class FieldOutMapper {
         entity.setUrlPictures(model.getUrlPictures());
         entity.setLocation(locationEntity);
         entity.setState(model.getState());
+        entity.setVisible(model.isVisible());
         return entity;
     }
     public static FieldEntity toEditEntity(FieldEntity saveEntity, LocationEntity locationEntity,Field model){
@@ -51,7 +52,8 @@ public class FieldOutMapper {
                 entity.getDescription(),
                 entity.getDetails(),
                 entity.getHourlyRate(),
-                entity.getState()
+                entity.getState(),
+                entity.isVisible()
         );
     }
 

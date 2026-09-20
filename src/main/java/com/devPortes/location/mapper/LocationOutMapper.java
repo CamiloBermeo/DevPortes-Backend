@@ -17,6 +17,7 @@ public class LocationOutMapper {
         entity.setUrlQrAddress(model.getUrlQrAddress());
         entity.setDescription(model.getDescription());
         entity.setState(model.isState());
+        entity.setVisible(model.isVisible());
         return entity;
 
     }
@@ -37,7 +38,8 @@ public class LocationOutMapper {
                 entity.getAddress(),
                 entity.getUrlQrAddress(),
                 entity.getDescription(),
-                entity.isState()
+                entity.isState(),
+                entity.isVisible()
         );
     }
     public static List<Location> toModelList(List<LocationEntity> entities){

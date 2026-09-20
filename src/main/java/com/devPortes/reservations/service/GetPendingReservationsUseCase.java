@@ -24,7 +24,13 @@ public class GetPendingReservationsUseCase implements IGetPendingReservationsUse
                         r.getReservationDate().toString(),
                         r.getStartTime().toString(),
                         "Individual",
-                        r.getState().name()
+                        r.getState().name(),
+                        r.getEndTime().toString(),
+                        r.getTotalHours(),
+                        r.getTotalPay(),
+                        r.getRemainingPayment(),
+                        r.getUser().getName(),
+                        r.getUser().getEmail()
                 ))
                 .toList();
     }

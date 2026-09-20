@@ -9,11 +9,16 @@ public class Location {
     private String urlQrAddress;
     private String description;
     private boolean state;
+    private boolean visible;
 
     public Location() {
     }
 
     public Location(Long id, String name,String headquarters, String address, String urlQrAddress, String description, boolean state) {
+        this(id, name, headquarters, address, urlQrAddress, description, state, true);
+    }
+
+    public Location(Long id, String name,String headquarters, String address, String urlQrAddress, String description, boolean state, boolean visible) {
         this.id = id;
         this.name = name;
         this.headquarters = headquarters;
@@ -21,6 +26,7 @@ public class Location {
         this.urlQrAddress = urlQrAddress;
         this.description = description;
         this.state = state;
+        this.visible = visible;
     }
 
     public static Location create(String name, String headquarters, String address, String urlQrAddress, String description){
@@ -36,6 +42,10 @@ public class Location {
 
     public static Location reconstitute(Long id,String name ,String headquarters, String address, String urlQrAddress, String description, boolean state){
         return new Location(id ,name,headquarters, address, urlQrAddress, description,  state);
+    }
+
+    public static Location reconstitute(Long id,String name ,String headquarters, String address, String urlQrAddress, String description, boolean state, boolean visible){
+        return new Location(id ,name,headquarters, address, urlQrAddress, description, state, visible);
     }
 
     public Long getId() {
@@ -64,5 +74,9 @@ public class Location {
 
     public boolean isState() {
         return state;
+    }
+
+    public boolean isVisible() {
+        return visible;
     }
 }

@@ -18,7 +18,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.swing.text.html.parser.Entity;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -56,7 +55,10 @@ public class ReservationJpaRepositoryAdapter {
 
     @Transactional(readOnly = true)
     public List<Reservation> findPendingByUserId(Long userId) {
-        List<ReservationEntity> entities = jpa.findByClientEntity_IdAndState(userId, EstadoReservationEnum.PENDIENTE);
+        List<ReservationEntity> entities = jpa.findByClientEntity_IdAndStateIn(
+                userId,
+                List.of(EstadoReservationEnum.PENDIENTE, EstadoReservationEnum.PENDIENTE_PRIMER_PAGO)
+        );
         return ReservationOutMapper.toModelList(entities);
     }
 
@@ -64,6 +66,11 @@ public class ReservationJpaRepositoryAdapter {
     public List<Reservation> findAllByUserId(Long userId) {
         List<ReservationEntity> entities = jpa.findByClientEntity_IdOrderByReservationDateDesc(userId);
         return ReservationOutMapper.toModelList(entities);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Reservation> findAll() {
+        return ReservationOutMapper.toModelList(jpa.findAllByOrderByReservationDateDescStartTimeAsc());
     }
 
     @Transactional

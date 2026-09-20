@@ -99,6 +99,7 @@ Controller → Service (Use Case) → Repository (Adapter) → JPA Repository
 | POST | `/api/v1/location/new-location` | ADMIN | Crear nueva sede |
 | PUT | `/api/v1/location/{id}` | ADMIN | Actualizar sede |
 | PATCH | `/api/v1/location/{id}/state` | ADMIN | Activar/desactivar sede |
+| PATCH | `/api/v1/field/{id}/state` | ADMIN | Activar/desactivar cancha |
 
 ## Base de datos
 

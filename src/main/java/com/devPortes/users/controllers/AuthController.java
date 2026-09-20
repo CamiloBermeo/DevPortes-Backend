@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("api/v1/auth")
@@ -52,6 +53,14 @@ public class AuthController {
         Long userId = customUserDetails.getUser().getId();
         NewUserResponseDto response = iEditProfileUseCase.execute(userId, dto);
         return ResponseEntity.ok(response);
+    }
+
+    @PutMapping(value = "profile/picture", consumes = "multipart/form-data")
+    public ResponseEntity<NewUserResponseDto> updateProfilePicture(
+            @RequestPart("picture") MultipartFile picture,
+            @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        Long userId = customUserDetails.getUser().getId();
+        return ResponseEntity.ok(iEditProfileUseCase.executePicture(userId, picture));
     }
 
 

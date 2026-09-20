@@ -42,6 +42,7 @@ public class UserInMapper {
                 user.getId(),
                 user.getName(),
                 user.getEmail(),
+                user.getUrlPicture(),
                 token
         );
     }
@@ -51,6 +52,7 @@ public class UserInMapper {
                 user.getId(),
                 user.getName(),
                 user.getEmail(),
+                user instanceof Client client ? client.getUrlPicture() : null,
                 ""
         );
     }

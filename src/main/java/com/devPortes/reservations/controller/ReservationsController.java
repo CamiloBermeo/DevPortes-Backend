@@ -4,6 +4,7 @@ import com.devPortes.reservations.dto.CancelReservationResponseDto;
 import com.devPortes.reservations.dto.ReservationSummaryResponseDto;
 import com.devPortes.reservations.service.ICancelReservationUseCase;
 import com.devPortes.reservations.service.IGetPendingReservationsUseCase;
+import com.devPortes.reservations.service.IGetAllReservationsUseCase;
 import com.devPortes.reservations.service.IGetReservationHistoryUseCase;
 import com.devPortes.users.security.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,13 @@ public class ReservationsController {
 
     private final IGetPendingReservationsUseCase getPendingReservationsUseCase;
     private final IGetReservationHistoryUseCase getReservationHistoryUseCase;
+    private final IGetAllReservationsUseCase getAllReservationsUseCase;
     private final ICancelReservationUseCase cancelReservationUseCase;
+
+    @GetMapping("all")
+    public ResponseEntity<List<ReservationSummaryResponseDto>> getAllReservations() {
+        return ResponseEntity.ok(getAllReservationsUseCase.execute());
+    }
 
     @GetMapping("pending")
     public ResponseEntity<List<ReservationSummaryResponseDto>> getPendingReservations(

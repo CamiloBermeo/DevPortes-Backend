@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface IFieldJpaRepository extends JpaRepository<FieldEntity, Long> {
     @Override
-    @Query("SELECT f FROM FieldEntity f ORDER BY f.id ASC")
+    @Query("SELECT f FROM FieldEntity f WHERE f.visible = true AND f.location.visible = true ORDER BY f.id ASC")
     List<FieldEntity> findAll();
 }

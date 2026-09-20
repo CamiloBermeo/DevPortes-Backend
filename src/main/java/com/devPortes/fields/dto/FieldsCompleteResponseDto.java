@@ -18,7 +18,8 @@ public record FieldsCompleteResponseDto(
         String description,
         List<String> details,
         BigDecimal hourlyRate,
-        FieldStateEnum state
+        FieldStateEnum state,
+        boolean visible
 
 ) {
 }
