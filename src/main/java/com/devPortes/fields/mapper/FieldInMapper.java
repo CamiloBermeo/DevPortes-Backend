@@ -43,6 +43,8 @@ public class FieldInMapper {
        return new FieldsCompleteResponseDto(
                model.getId(),
                model.getLocation().getId(),
+               model.getLocation().getName(),
+               model.getLocation().getAddress(),
                model.getUrlPictures(),
                model.getName(),
                model.getCapacity(),

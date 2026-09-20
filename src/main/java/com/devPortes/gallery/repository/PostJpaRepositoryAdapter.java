@@ -31,7 +31,7 @@ public class PostJpaRepositoryAdapter {
     }
 
     public List<Post> findAll() {
-        return PostOutMapper.toModelList(repository.findAll());
+        return PostOutMapper.toModelList(repository.findAllByOrderByEventDateDesc());
     }
 
     public Post editPost(Post model, Long id) {

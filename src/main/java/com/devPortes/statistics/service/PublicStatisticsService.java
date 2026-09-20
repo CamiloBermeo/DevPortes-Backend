@@ -22,6 +22,7 @@ public class PublicStatisticsService {
                 .filter(field -> field.getState() == FieldStateEnum.DISPONIBLE)
                 .count();
         long sports = fields.stream()
+                .filter(field -> field.getState() == FieldStateEnum.DISPONIBLE)
                 .map(field -> field.getSport().trim().toLowerCase(Locale.ROOT))
                 .filter(sport -> !sport.isBlank())
                 .collect(Collectors.toSet())
