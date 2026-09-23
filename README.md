@@ -1,6 +1,6 @@
 # devPortes - Backend
 
-API REST desarrollada con Spring Boot para la administración y gestión de complejos deportivos. Forma parte del proyecto integrador del bootcamp Generation.
+API REST desarrollada con Spring Boot para la administración y gestión de complejos deportivos.
 
 ## Deployments
 
